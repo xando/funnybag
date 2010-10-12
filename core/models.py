@@ -3,17 +3,19 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
 class Record(models.Model):
-    content_type = models.ForeignKey(ContentType)
+    data_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
-    data = generic.GenericForeignKey('content_type', 'object_id')
+    data = generic.GenericForeignKey('data_type', 'object_id')
 
     created_time = models.TimeField(auto_now_add=True)
 
     @models.permalink
     def get_absolute_url(self):
-        return ('joke.views.details', [str(self.id)])
+        return ('core.views.details', [str(self.id)])
 
-
+    def __unicode__(self):
+        return "%s: %s" % (self.data_type,
+                           self.data.__unicode__())
 
 class RecordBase(models.Model):
 
@@ -23,7 +25,7 @@ class RecordBase(models.Model):
     def save(self, *args, **kwargs):
         super(RecordBase, self).save(*args, **kwargs)
         try:
-            Record.objects.get(content_type=ContentType.objects.get_for_model(self._meta.model),
+            Record.objects.get(data_type=ContentType.objects.get_for_model(self.__class__),
                                object_id=self.id)
         except Record.DoesNotExist:
             Record.objects.create(data=self)
