@@ -13,8 +13,12 @@ class Record(models.Model):
     def get_absolute_url(self):
         return ('core.views.details', [str(self.id)])
 
+    @property
+    def template(self):
+        return "core/%s.html" % self.data_type.name
+
     def __unicode__(self):
-        return "%s: %s" % (self.data_type,
+        return "%s: %s" % (self.data_type.name,
                            self.data.__unicode__())
 
 class RecordBase(models.Model):
