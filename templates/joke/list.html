@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block application %}
+<div class="container_12">
+  <div class="grid_10 prefix_1 suffix_1">
+    <div id="jokes" class="application">
+      {% for record in records %}
+      <!-- <div class="joke" style="margin-top: 2em"> -->
+      <!-- 	{{ joke.content|linebreaks }} -->
+      <!-- 	{{ joke.created_time|time:"H:i:s"}} <a href="{{ joke.get_absolute_url }}">link</a> -->
+      <!-- </div> -->
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}
