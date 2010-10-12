@@ -58,7 +58,7 @@ class Joke(RecordBase):
 
 
 class Wideo(RecordBase):
-    content = models.TextField()
+    title = models.CharField(max_length=512)
 
     def __unicode__(self):
-        return "%s ..." % self.content[:100]
+        return self.title
