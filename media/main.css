@@ -3,6 +3,12 @@ body {
     font-size:1em;
 }
 
+
+.list-element {
+    border-bottom: 1px solid #555;
+}
+
+
 .joke {
 
 }
