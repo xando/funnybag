@@ -1,0 +1,34 @@
+[
+  {
+    "pk": 1, 
+    "model": "core.record", 
+    "fields": {
+      "created_time": "08:54:57", 
+      "object_id": 1, 
+      "data_type": 12
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "core.record", 
+    "fields": {
+      "created_time": "08:55:50", 
+      "object_id": 2, 
+      "data_type": 12
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "core.joke", 
+    "fields": {
+      "content": "Wchodzi facet do autobusu. Patrzy murzyn siedzi. Po chwili wchodzi kobieta w ci\u0105\u017cy. Murzyn ust\u0119puje jej miejsca, jednak na wolne miejsce wciska si\u0119 moher. Zdenerwowany murzyn m\u00f3wi do mohera:\r\n-Przepraszam, ale ust\u0105pi\u0142em miejsca kobiecie w ci\u0105\u017cy, \u017ceby sobie usiad\u0142a.\r\nNa to moher odpowiada:\r\n-Nie wiem jak u was w plemieniu, ale u nas ust\u0119puje si\u0119 miejsca starszym.\r\nNa to murzyn:\r\nNie wiem jak u was, ale u nas w plemieniu takie stare kurwy jemy na kolacje."
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "core.joke", 
+    "fields": {
+      "content": "Lekarz pi\u0142 przez ca\u0142y weekend. Do roboty poszed\u0142, \u0142eb mu p\u0119ka, najch\u0119tniej nie widzia\u0142by \u017cadnego pacjenta, a tu wchodzi taki jeden. \r\n- Panie doktorze,jak tam moje wyniki? \r\nWkurzony lekarz: \r\n- Ma pan raka! \r\n- Jak to raka? Przecie\u017c wcze\u015bniej m\u00f3wi\u0142 pan, \u017ce to tylko kamienie! \r\n- Kamienie, kamienie! A podka\u017cdym kamieniem rak!\r\n "
+    }
+  }
+]
