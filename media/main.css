@@ -71,6 +71,23 @@ body {
     background: white;
 }
 
+.comment-form {
+    padding-left: 10px;
+    padding-right: 10px;
+    background: white;
+}
+
+.comment-form .submit {
+    text-align:right;
+}
+
+
+.comment-form textarea {
+    display:block;
+    width:100%;
+}
+
+
 .list {
     /* border-bottom: 1px solid #555; */
     /* padding:10px; */

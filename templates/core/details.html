@@ -2,6 +2,10 @@
 {% load i18n %}
 {% load comments %}
 
+{% block js-settings %}
+RECORD_URL = "{{ record.get_absolute_url }}";
+{% endblock %}
+
 {% block application %}
 <div class="container_12">
   <div class="grid_8 prefix_1 suffix_3 main">
@@ -10,28 +14,10 @@
       {% include record.template %}
     </div>
 
-    {% get_comment_form for record as form %}
-    <form action="{% comment_form_target %}" method="post">{% csrf_token %}
-      {% for field in form %}
-      {% if field.is_hidden %}
-      <div>{{ field }}</div>
-      {% else %}
-      {% if field.errors %}{{ field.errors }}{% endif %}
-      <p
-         {% if field.errors %} class="error"{% endif %}
-         {% ifequal field.name "honeypot" %} style="display:none;"{% endifequal %}>
-        {{ field.label_tag }} {{ field }}
-      </p>
-      {% endif %}
-      {% endfor %}
-      <p class="submit">
-	<input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
-      </p>
-    </form>
-
-
-    <!-- {% render_comment_form for record %} -->
-    {% render_comment_list for record %}
+    <div class="comment-form">
+      {% render_comment_list for record %}
+      {% render_comment_form for record %}
+    </div>
 
   </div>
 </div>

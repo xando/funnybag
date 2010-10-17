@@ -1,0 +1,15 @@
+{% load comments %}
+{% load i18n %}
+<!-- <div class="errors" style="text-align:center; color:red"></div> -->
+<form action="{% comment_form_target %}" method="post">{% csrf_token %}
+  <!-- <input type="hidden" name="next" value="{{ record.get_absolute_url }}" /> -->
+
+  {% for hidden in form.hidden_fields %}
+  {{ hidden }}
+  {% endfor %}
+  {{ form.comment.label_tag }} {{ form.comment }}
+  <span style="display:none;">{{ form.honeypot }}</span>
+  <div class="submit">
+    <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
+  </div>
+</form>
