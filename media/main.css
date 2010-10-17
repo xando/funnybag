@@ -1,23 +1,90 @@
+/* /\* Reset css *\/ */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, dialog, figure, footer, header, hgroup, nav, section {
+    border:0 none;
+    font-family:inherit;
+    /* font-size: 9px; */
+    font-style:inherit;
+    font-weight:inherit;
+    margin:0;
+    padding:0;
+    vertical-align:baseline;
+}
+
+/* Global css */
 body {
     font-family:georgia,arial;
-    font-size:1em;
+    font-size: 11px;
+}
+
+.main {
+    background-image: url("background.png");
+}
+
+.footer {
+    padding-bottom:200px;
+    background-color: black;
+}
+
+.header {
+    padding-bottom:100px;
+    background-color: black;
 }
 
 
 .list-element {
-    border-bottom: 1px solid #555;
-    padding:10px;
+    /* border-bottom: 1px solid #F0F0F0; */
+    font-size: 14px;
+    padding:40px 0px 5px 10px;
 }
 
+.list-element h1 {
+    font-size: 20px;
+    font-family:georgia;
+    margin-bottom: 10px;
+}
+
+.list-element img {
+    margin-left: 1em;
+}
+
+.list-element-footer {
+    /* margin-bottom: 15px; */
+    border-bottom: 1px solid #eee;
+    background: #f7f7f7;
+    text-align: right;
+    padding:2px 20px;
+    /* for webkit browsers */
+    background: -webkit-gradient(linear, left top, left bottom,to(#fff),  from(#f0f0f0));
+    /* for firefox 3.6+ */
+    background: -moz-linear-gradient(top, #fff, #f0f0f0);
+}
+
+.list-element-footer a {
+    color:#555555;
+    font-weight:bold;
+    text-decoration:underline;
+}
+
+.element-details {
+    font-size: 14px;
+    padding:40px 0px 5px 10px;
+    background: white;
+}
+
+.list {
+    /* border-bottom: 1px solid #555; */
+    /* padding:10px; */
+}
 
 .joke {
-
+    font-family: helvetica, verdana;
 }
 
 .quote {
 }
 
-.image {
+.image img {
+    text-align:center;
 }
 
 .wideo {
