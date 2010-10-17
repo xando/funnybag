@@ -7,7 +7,7 @@ class Record(models.Model):
     object_id = models.PositiveIntegerField()
     data = generic.GenericForeignKey('data_type', 'object_id')
 
-    created_time = models.TimeField(auto_now_add=True)
+    created_time = models.DateTimeField(auto_now_add=True)
 
     @models.permalink
     def get_absolute_url(self):
