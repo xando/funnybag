@@ -5,7 +5,6 @@ $(document).ready(function() {
 	    clearForm: true,
 	    success: function() {
 		document.location.reload()
-		// document.location =  document.location.reload();
 	    }
 	});
 	return false;

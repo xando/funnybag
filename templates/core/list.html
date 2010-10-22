@@ -2,22 +2,16 @@
 {% load i18n %}
 
 {% block application %}
-<div class="container_12">
-  <div class="grid_8 prefix_1 suffix_3 main">
-    <div class="list">
-      {% for record in records %}
-
-      <div class="list-element">
-	<!-- {{ record.get_absolute_url }} -->
-	{% include record.template %}
-      </div>
-      <div class="list-element-footer">
-	[<a href="{{ record.get_absolute_url }}">link</a>] [<a href="#">{% trans "source" %}</a>]
-	{{ record.created_time|date:"D d M Y" }}
-      </div>
-      {% endfor %}
-    </div>
+<div class="list">
+  {% for record in records %}
+  <div class="list-element">
+    <!-- {{ record.get_absolute_url }} -->
+    {% include record.template %}
   </div>
+  <div class="list-element-footer">
+    [<a href="{{ record.get_absolute_url }}">link</a>] [<a href="#">{% trans "source" %}</a>]
+    {{ record.created_time|date:"D d M Y" }}
+  </div>
+  {% endfor %}
 </div>
-
 {% endblock %}

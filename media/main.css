@@ -1,14 +1,14 @@
 /* /\* Reset css *\/ */
-html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, dialog, figure, footer, header, hgroup, nav, section {
-    border:0 none;
-    font-family:inherit;
-    /* font-size: 9px; */
-    font-style:inherit;
-    font-weight:inherit;
-    margin:0;
-    padding:0;
-    vertical-align:baseline;
-}
+/* html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, dialog, figure, footer, header, hgroup, nav, section { */
+/*     border:0 none; */
+/*     font-family:inherit; */
+/*     /\* font-size: 9px; *\/ */
+/*     font-style:inherit; */
+/*     font-weight:inherit; */
+/*     margin:0; */
+/*     padding:0; */
+/*     vertical-align:baseline; */
+/* } */
 
 /* Global css */
 body {
@@ -16,29 +16,58 @@ body {
     font-size: 11px;
 }
 
-.main {
-    background-image: url("background.png");
-}
-
 .footer {
-    padding-bottom:200px;
-    background-color: black;
+    min-height:200px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
 }
 
-.header {
-    padding-bottom:100px;
-    background-color: black;
+.logo {
+    font-family:arial;
+    font-size:40px;
+    text-decoration: none;
+}
+
+.logo .sub {
+    font-size:20px;
+}
+
+.menu {
+    padding-top:26px;
+}
+
+.list {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.element-details {
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
+}
+
+.element-new textarea {
+    width: 920px;
+}
+
+.element-new input:not([type=submit]) {
+    width: 300px;
+}
+
+.element-new  {
+    border-left: 1px solid;
+    border-right: 1px solid;
+    padding: 0px 5px;
 }
 
 
 .list-element {
-    /* border-bottom: 1px solid #F0F0F0; */
     font-size: 14px;
-    padding:40px 0px 5px 10px;
+    padding:20px 10px;
 }
 
 .list-element h1 {
-    font-size: 20px;
+    font-size: 15px;
     font-family:georgia;
     margin-bottom: 10px;
 }
@@ -65,11 +94,6 @@ body {
     text-decoration:underline;
 }
 
-.element-details {
-    font-size: 14px;
-    padding:40px 0px 5px 10px;
-    background: white;
-}
 
 .comment-form {
     padding-left: 10px;
@@ -87,14 +111,8 @@ body {
     width:100%;
 }
 
-
-.list {
-    /* border-bottom: 1px solid #555; */
-    /* padding:10px; */
-}
-
 .joke {
-    font-family: helvetica, verdana;
+    font-family: 'Droid Sans', arial, serif;
 }
 
 .quote {
