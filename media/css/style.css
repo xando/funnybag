@@ -94,21 +94,57 @@ body{
         width: 100%; }
 
 /* Project specifics =========================================================== */
+body {
+    background:#f7f4eb
+}
+
+article {
+    background:#fbfaf5
+}
+
 .logo {
-    color:black;
+    color: #ddd;
 }
 
 header {
     border-bottom: 2px solid #000;
+    background: #333333;
+
 }
+
+nav {
+    font-family: 'Aguardiente';
+    line-height: 140%;
+    text-rendering: optimizeLegibility;
+    font-size: 30px;
+    color: #f0f0f0;
+    border-top: 1px solid #555;
+}
+
+nav a{
+    color: #f0f0f0;
+    padding: 10px;
+}
+
+nav a:hover{
+    color: #dddddd;
+}
+
 
 footer {
     border-top: 2px solid #000;
 }
 
+.record {
+    margin: 30px 0 2px;
+    border-bottom: 1px solid #555;
+}
 
 .joke {
-    font-family: 'Droid Sans', arial, serif;
+    font-family: 'Josefin';
+    line-height: 140%;
+    text-rendering: optimizeLegibility;
+    font-size: 20px;
 }
 
 .quote {
@@ -121,8 +157,21 @@ footer {
 .wideo {
 
 }
+
+.list-element-footer {
+    text-align:right;
+    font-family: 'Josefin';
+}
+
+.list-element-footer a{
+    text-decoration: none;
+    color: #111;
+    font-family: 'Aguardiente';
+}
+
 /* Pour some CSS below ========================================================= */
 
 /* The H1 declarations - for @font-face presentational purposes only */
-h1{ font: 88px 'Lobster1.1Regular', Arial, sans-serif; }
-    h1 span{ font: 88px RalewayThin, Arial, sans-serif; letter-spacing: -4px }
+h1{ font: 50px 'Lobster1.1Regular', Arial, sans-serif; }
+    h1 span{ font: 50px RalewayThin, Arial, sans-serif; letter-spacing: -4px }
+h2{ font: 25px 'Lobster1.1Regular', Arial, sans-serif; }
