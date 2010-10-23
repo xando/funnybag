@@ -94,5 +94,17 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
-    'funnybag.core'
+    'funnybag.core',
+    'registration'
 )
+
+ACCOUNT_ACTIVATION_DAYS = 7
+LOGIN_REDIRECT_URL = "/"
+
+EMAIL_SUBJECT_PREFIX = "FunnyBag"
+
+try:
+    from local_settings.py import *
+except ImportError:
+    pass
+

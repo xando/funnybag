@@ -1,5 +1,8 @@
 from django.views.generic.simple import direct_to_template
 from django.shortcuts import get_object_or_404, get_list_or_404
+from django.contrib.auth.decorators import login_required
+
+from django.contrib.auth import forms as auth_form
 
 from funnybag.core.models import Record
 from funnybag.core.forms import JokeForm, ImageForm, QuoteForm, VideoForm
@@ -10,8 +13,11 @@ def details(request, record_id):
 
 def list(request):
     records = Record.objects.order_by('-created_time')
+    login_form = auth_form.AuthenticationForm()
     return direct_to_template(request, 'core/list.html',
-                              {'records': records })
+                              {'records': records ,
+                               'login_form' : login_form,
+                               'login_next' : "/"})
 
 def new(request):
     if request.method == 'POST':

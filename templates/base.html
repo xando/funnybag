@@ -7,8 +7,8 @@
     <meta name="description" content="FunnyBAG" />
     <link rel="Shortcut Icon" type="image/ico" href="{{ MEDIA_URL }}img/favicon.png" />
 
-    <link href="http://www.kernest.com/fonts/aguardiente.css" media="screen" rel="stylesheet" type="text/css" />
-    <link href="http://www.kernest.com/fonts/josefin.css" media="screen" rel="stylesheet" type="text/css" />
+    <!-- <link href="http://www.kernest.com/fonts/aguardiente.css" media="screen" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="http://www.kernest.com/fonts/josefin.css" media="screen" rel="stylesheet" type="text/css" /> -->
 
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/reset.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css" media="screen" />
@@ -24,36 +24,24 @@
   </head>
   <body>
     <div id="wrap">
-      <header>
+      <header class="clearfix">
         <div class="inside">
           <a class="logo" href="/">
 	    <h1>Funny<span>bag</span></h1>
 	  </a>
           <nav>
-	    <a href="#">{% trans "latest" %}</a>
+	    <a href="/">{% trans "latest" %}</a>
 	    <a href="#">{% trans "top" %}</a>
 	    <a href="#">{% trans "all" %}</a>
 	    <a href="/new">{% trans "new" %}</a>
           </nav>
         </div>
       </header>
-      <article>
-        <section>
-          <div class="inside">
-	    {% block application %}
-	    {% endblock %}
-          </div>
-        </section>
-      </article>
-      <aside>
-        <div class="inside">
-        </div>
-      </aside>
+      {% block application %}{% endblock %}
     </div>
     <footer>
       <div class="inside">
       </div>
     </footer>
-
   </body>
 </html>
