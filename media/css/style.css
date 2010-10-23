@@ -5,38 +5,43 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 @font-face {
 	font-family: 'Lobster1.1Regular';
 	src: url('../fonts/Lobster_1.1_-webfont.eot');
-	src: local('☺'), url('../fonts/Lobster_1.1_-webfont.woff') format('woff'), url('../fonts/Lobster_1.1_-webfont.ttf') format('truetype'), url('../fonts/Lobster_1.1_-webfont.svg#webfont30G9S4nm') format('svg');
+	src: local('.'), url('../fonts/Lobster_1.1_-webfont.woff') format('woff'), url('../fonts/Lobster_1.1_-webfont.ttf') format('truetype'), url('../fonts/Lobster_1.1_-webfont.svg#webfont30G9S4nm') format('svg');
 	font-weight: normal;
 	font-style: normal; }
 
 @font-face {
 	font-family: 'RalewayThin';
 	src: url('../fonts/raleway_thin-webfont.eot');
-	src: local('☺'), url('../fonts/raleway_thin-webfont.woff') format('woff'), url('../fonts/raleway_thin-webfont.ttf') format('truetype'), url('../fonts/raleway_thin-webfont.svg#webfont') format('svg');
+	src: local('.'), url('../fonts/raleway_thin-webfont.woff') format('woff'), url('../fonts/raleway_thin-webfont.ttf') format('truetype'), url('../fonts/raleway_thin-webfont.svg#webfont') format('svg');
 	font-weight: normal;
 	font-style: normal; }
 
 /* Site-wide properties ======================================================== */
 body{
-    font: normal normal 10px/10px Tahoma, Arial, Helvetica, Verdana, sans-serif; }
+    font: normal normal 10px/10px Tahoma, Arial, Helvetica, Verdana, sans-serif;
+    height:100%;
+}
 
     /* Fibonacci based heading scale ratio */
     h1{
 	font-size: 4.4em;
 	font-weight: normal;
+	margin: 10px 0;
     }
     h2{
 	font-size: 2.8em;
 	font-weight: bold;
-	margin-bottom: 10px;
+	margin: 10px 0;
     }
     h3{
 	font-size: 1.6em;
 	font-weight: bold;
+	margin: 10px 0;
     }
     h4{
 	font-size: 1.2em;
 	font-weight: bold;
+	margin: 10px 0;
     }
 
 /* Reusable classes ============================================================ */
@@ -71,27 +76,41 @@ body{
 #wrap{
     margin: 0 auto;
     position: relative;
-    width: 960px; }
+    width: 960px;
+    height: 100%;
 
-    /* Header */
-    header{
-        float: left;
-        width: 100%; }
+}
 
-    /* Content */
-    article{
-        float: left;
-        width: 66.7%; }
+/* Header */
+header{
+    float: left;
+    width: 100%; }
 
-    /* Sidebar */
-    aside{
-        float: left;
-        width: 33.3%; }
+/* Content */
+article{
+    float: left;
+    width: 66.7%; }
 
-    /* Footer */
-    footer{
-        float: left;
-        width: 100%; }
+/* Sidebar */
+aside{
+    float: left;
+    width: 33.3%;
+    height: 100%;
+    margin:auto;
+}
+
+/* Footer */
+footer{
+    float: left;
+    width: 100%; }
+
+.clearfix:after {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
 
 /* Project specifics =========================================================== */
 body {
@@ -135,8 +154,13 @@ footer {
     border-top: 2px solid #000;
 }
 
+aside .inside{
+    border-right: 1px solid #333;
+}
+
+
 .record {
-    margin: 30px 0 2px;
+    /* margin: 0 0 20px 0; */
     border-bottom: 1px solid #555;
 }
 
@@ -161,6 +185,7 @@ footer {
 .list-element-footer {
     text-align:right;
     font-family: 'Josefin';
+    margin: 0 0 30px 0;
 }
 
 .list-element-footer a{
@@ -169,9 +194,40 @@ footer {
     font-family: 'Aguardiente';
 }
 
+
+#registration input:not([type=submit]){
+    width: 400px;
+}
+
+#login input:not([type=submit]){
+    width: 500px;
+}
+
+.login-form a{
+    color:#AF3300;
+    outline:medium none;
+}
+
+.login-form ul,
+.login-form li {
+    list-style:none outside none;
+    font-size: 1.20em;
+    padding:0 0 7px 10px;
+    padding:6px 0 3px 2px;
+}
+
+ul, li {
+        list-style:none outside none;
+}
+
+.errors {
+    color:#993333;
+    font-weight: bold;
+}
 /* Pour some CSS below ========================================================= */
 
 /* The H1 declarations - for @font-face presentational purposes only */
 h1{ font: 50px 'Lobster1.1Regular', Arial, sans-serif; }
     h1 span{ font: 50px RalewayThin, Arial, sans-serif; letter-spacing: -4px }
-h2{ font: 25px 'Lobster1.1Regular', Arial, sans-serif; }
+h2{ font-family: 'Lobster1.1Regular', Arial, sans-serif; }
+h3{ font-family: 'Lobster1.1Regular', Arial, sans-serif; }
