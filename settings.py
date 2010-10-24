@@ -104,7 +104,7 @@ LOGIN_REDIRECT_URL = "/"
 EMAIL_SUBJECT_PREFIX = "FunnyBag"
 
 try:
-    from local_settings.py import *
+    from local_settings import *
 except ImportError:
     pass
 

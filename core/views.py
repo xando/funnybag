@@ -24,7 +24,7 @@ def new(request):
         form = JokeForm(request.POST)
         if form.is_valid():
             record = form.save()
-            return HttpResponseRedirect(record.get_absolute_url)
+            return HttpResponseRedirect(record.get_absolute_url())
     else:
         joke_form = JokeForm()
         image_form = ImageForm()
