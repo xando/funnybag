@@ -165,7 +165,7 @@ aside .inside{
 }
 
 .joke {
-    font-family: 'Josefin';
+    font-family: 'RalewayThin';
     line-height: 140%;
     text-rendering: optimizeLegibility;
     font-size: 20px;
@@ -220,9 +220,18 @@ ul, li {
         list-style:none outside none;
 }
 
-.errors {
+/* comments  */
+.comment .errors {
     color:#993333;
     font-weight: bold;
+}
+
+.comment fieldset {
+    border: 1px solid;
+}
+
+.comment textarea {
+    width: 100%;
 }
 /* Pour some CSS below ========================================================= */
 
