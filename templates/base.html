@@ -4,42 +4,59 @@
   <head>
     <title>Funnybag!</title>
     <meta charset="utf-8" />
-    <meta name="description" content="FunnyBAG" />
+    <meta name="description" content="FUNNYbag" />
     <link rel="Shortcut Icon" type="image/ico" href="{{ MEDIA_URL }}img/favicon.png" />
   
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.2.0/build/cssreset/reset-context-min.css">
     <!-- <link rel="stylesheet" href="{{ MEDIA_URL }}css/reset.css" type="text/css" media="screen" /> -->
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css" media="screen" />
-    <link rel="stylesheet" href="{{ MEDIA_URL }}css/queries/netbooks-tablets.css" type="text/css" media="screen and (max-width: 1007px)" />
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/grid.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="{{ MEDIA_URL }}css/querxies/netbooks-tablets.css" type="text/css" media="screen and (max-width: 1007px)" />
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/html5.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/custom.js"></script>
-
+    {% block js-include %}{% endblock %}
     <!--[if IE 7]><link rel="stylesheet" href="css/ie/ie7.css" type="text/css" media="screen"><![endif]-->
     <!--[if lt IE 7]><link rel="stylesheet" href="css/ie/ie6.css" type="text/css" media="screen"><![endif]-->
-
+    
   </head>
   <body>
-    <div id="wrap">
-      <header class="clearfix">
-        <div class="inside">
-          <a class="logo" href="/">
+    <div class="container_12">
+      
+      <div class="grid_12 clearfix">
+        <div id="header">
+          <a id="logo" href="/">
 	    <h1>Funny<span>bag</span></h1>
-	  </a>
-          <nav>
-	    <a href="/">{% trans "latest" %}</a>
-	    <a href="#">{% trans "top" %}</a>
-	    <a href="#">{% trans "all" %}</a>
-	    <a href="/new">{% trans "new" %}</a>
-          </nav>
+          </a>
         </div>
-      </header>
-      {% block application %}{% endblock %}
-    </div>
-    <footer>
-      <div class="inside">
       </div>
-    </footer>
+      
+      <div class="grid_12 clearfix">
+        <div id="nav">
+          <a href="/">{% trans "latest" %}</a>
+	  <a href="#">{% trans "top" %}</a>
+	  <a href="#">{% trans "all" %}</a>
+	  <a href="/new">{% trans "add" %}</a>
+          <a href="/accounts/login/">{% trans "login" %}</a>
+        </div>
+      </div>
+      
+      <div class="grid_12 clearfix">
+        <div id="subheader">
+          loged as {{ user }} <a href="/accounts/logout/">logout</a>
+        </div>
+      </div>
+      
+      <div class="grid_12 clearfix">
+        {% block application %}{% endblock %}
+      </div>
+      
+      <div class="grid_12 clearfix">
+        <div id="footer">
+        </div>
+      </div>
+      
+    </div>
   </body>
 </html>

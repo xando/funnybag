@@ -1,7 +1,3 @@
-/* Getting the new tags to behave */
-article, aside, audio, canvas, command, datalist, details, embed, figcaption, figure, footer, header, hgroup, keygen, meter, nav, output, progress, section, source, video{ display: block; }
-mark, rp, rt, ruby, summary, time{ display: inline }
-
 @font-face {
 	font-family: 'Lobster1.1Regular';
 	src: url('../fonts/Lobster_1.1_-webfont.eot');
@@ -17,99 +13,21 @@ mark, rp, rt, ruby, summary, time{ display: inline }
 	font-style: normal; }
 
 /* Site-wide properties ======================================================== */
-body{
+body {
     font: normal normal 10px/10px Tahoma, Arial, Helvetica, Verdana, sans-serif;
     height:100%;
 }
 
-    /* Fibonacci based heading scale ratio */
-    h1{
-	font-size: 4.4em;
-	font-weight: normal;
-	margin: 10px 0;
-    }
-    h2{
-	font-size: 2.8em;
-	font-weight: bold;
-	margin: 10px 0;
-    }
-    h3{
-	font-size: 1.6em;
-	font-weight: bold;
-	margin: 10px 0;
-    }
-    h4{
-	font-size: 1.2em;
-	font-weight: bold;
-	margin: 10px 0;
-    }
-
-/* Reusable classes ============================================================ */
-
-/* Left & Right alignment */
-.left{
-    float: left;
+.inside { 
+    padding: 20px; 
 }
-.right{
-    float: right;
-}
-
-/* The inside class provides consistent padding. To be used often! */
-.inside{ padding: 20px; }
-
-/* The fraction classes are useful for column lists */
-.half, .third, .quarter, .fifth, .sixth{ width: 100%; }
-.half li, .third li, .quarter li, .fifth li, .sixth li{ float: left; }
-.half li{ padding-right: 5%; width: 45% }
-.third li{  padding-right: 5%; width: 28.3% }
-.quarter li{  padding-right: 5%; width: 20% }
-.fifth li{  padding-right: 5%; width: 15% }
 
 /* For when a <br /> just ain't enough */
-.separator{
+.separator {
     clear: both;
     float: left;
     height: 1px;
-    width: 100%; }
-
-/* Basic Structure ============================================================= */
-#wrap{
-    margin: 0 auto;
-    position: relative;
-    width: 960px;
-    height: 100%;
-
-}
-
-/* Header */
-header{
-    float: left;
-    width: 100%; }
-
-/* Content */
-article{
-    float: left;
-    width: 66.7%; }
-
-/* Sidebar */
-aside{
-    float: left;
-    width: 33.3%;
-    height: 100%;
-    margin:auto;
-}
-
-/* Footer */
-footer{
-    float: left;
-    width: 100%; }
-
-.clearfix:after {
-    content: ".";
-    display: block;
-    height: 0;
-    clear: both;
-    visibility: hidden;
+    width: 100%; 
 }
 
 /* Project specifics =========================================================== */
@@ -117,22 +35,17 @@ body {
     background:#f7f4eb
 }
 
-article {
-    background:#fbfaf5
+#header {
+    border-bottom: 2px solid #000;
+    background: #333333;
 }
-
-.logo {
+#logo {
     color: #ddd;
 }
 
-header {
-    border-bottom: 2px solid #000;
-    background: #333333;
-
-}
-
-nav {
-    font-family: 'Aguardiente';
+#nav {
+    background: #bb4444;
+    font-family: 'RalewayThin';
     line-height: 140%;
     text-rendering: optimizeLegibility;
     font-size: 30px;
@@ -140,24 +53,22 @@ nav {
     border-top: 1px solid #555;
 }
 
-nav a{
+#nav a{
     color: #f0f0f0;
     padding: 10px;
 }
 
-nav a:hover{
-    color: #dddddd;
+#nav a:hover{
+    color: #aaaaaa;
 }
 
+#subheader {
+    margin-bottom:10px;
+}
 
-footer {
+#footer {
     border-top: 2px solid #000;
 }
-
-aside .inside{
-    border-right: 1px solid #333;
-}
-
 
 .record {
     /* margin: 0 0 20px 0; */
@@ -194,7 +105,107 @@ aside .inside{
     font-family: 'Aguardiente';
 }
 
+ul, li {
+        list-style:none outside none;
+}
+/* The H1 declarations - for @font-face presentational purposes only */
+/* Fibonacci based heading scale ratio */
+h1 {
+    font-size: 4.4em;
+    font-weight: normal;
+    margin: 10px 0;
+}
 
+h1 span { 
+    font: 50px RalewayThin, Arial, sans-serif; 
+    letter-spacing: -4px 
+}
+
+h2 {
+    font-size: 2.8em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+h3 {
+    font-size: 1.6em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+h4{
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+h1, h2, h3, h4 {
+    font-family: 'Lobster1.1Regular', Arial, sans-serif;
+}
+
+/* comments  */
+.comment .errors {
+    color:#993333;
+    font-weight: bold;
+}
+
+.comment fieldset {
+    border: 1px solid;
+}
+
+.comment textarea {
+    width: 100%;
+}
+
+/* record-new */
+#record-new textarea {
+    width: 940px;
+}
+
+#record-new input {
+    width: 460px;
+}
+
+#record-new input.submit {
+    width: 150px;
+}
+
+#record-new ul,
+#record-new li {
+    display: inline;
+    font-family: 'Lobster1.1Regular', Arial, sans-serif;
+    font-size: 1.3em;
+    margin-right:5px;
+    margin-left: 2px;
+}
+
+#record-new ul {
+    padding: 0px;
+    margin-top: 5px;
+    display: block;
+}
+
+#record-new li a {
+    color: #aaa;
+}
+
+#record-new li a:hover {
+    color: #555;
+}
+
+#record-new a.active {
+    color:black;
+}
+
+#record-new .form {
+    display:none;
+}
+
+/* #record-new .form.active { */
+/*     display:block; */
+/* } */
+
+/* login registartion forms */
 #registration input:not([type=submit]){
     width: 400px;
 }
@@ -215,28 +226,3 @@ aside .inside{
     padding:0 0 7px 10px;
     padding:6px 0 3px 2px;
 }
-
-ul, li {
-        list-style:none outside none;
-}
-
-/* comments  */
-.comment .errors {
-    color:#993333;
-    font-weight: bold;
-}
-
-.comment fieldset {
-    border: 1px solid;
-}
-
-.comment textarea {
-    width: 100%;
-}
-/* Pour some CSS below ========================================================= */
-
-/* The H1 declarations - for @font-face presentational purposes only */
-h1{ font: 50px 'Lobster1.1Regular', Arial, sans-serif; }
-    h1 span{ font: 50px RalewayThin, Arial, sans-serif; letter-spacing: -4px }
-h2{ font-family: 'Lobster1.1Regular', Arial, sans-serif; }
-h3{ font-family: 'Lobster1.1Regular', Arial, sans-serif; }

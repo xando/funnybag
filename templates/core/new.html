@@ -1,27 +1,45 @@
 {% extends 'base.html' %}
 {% load i18n %}
 
+{% block js-include %}
+<script type="text/javascript" src="{{ MEDIA_URL }}js/core/new.js"></script>
+{% endblock %}
+
 {% block application %}
-<div class="element-new">
-  <h2>New Item</h2>
-  <form>
-    {% trans "joke" %}:
-    <div>{{ joke_form.content }}</div>
+<div class="grid_16 alpha">
+  <div id="record-new">
+    <h2>New Item</h2>
 
-    {% trans "pic" %}:
-    <div>{{ image_form.title }}</div>
-    <div>{{ image_form.image }}</div>
-    <div>{{ image_form.url }}</div>
+    <ul>
+      <li><a id="joke-link" class="active" href="#">{% trans "joke" %}</a></li>
+      <li><a id="image-link" href="#">{% trans "pic" %}</a></li>
+      <li><a id="quote-link" href="#">{% trans "quote" %}</a></li>
+      <li><a id="video-link" href="#">{% trans "video" %}</a></li>
+    </ul>
+    <form>
 
-    {% trans "quote" %}:
-    <div>{{ quote_form.content }}</div>
+      <div id="joke-form" class="form">
+        {{ joke_form.content }}
+      </div>
 
-    {% trans "video" %}:
-    <div>{{ video_form.title }}</div>
+      <div id="image-form" class="form">
+        <div>{{ image_form.title }}</div>
+        <div>{{ image_form.image }}</div>
+        <div>{{ image_form.url }}</div>
+      </div>
 
-    <div style="text-align:right">
-      <input type="submit" value="{% trans 'Send'%}" />
-    </div>
-  </form>
+      <div id="quote-form" class="form">
+        {{ quote_form.content }}
+      </div>
+
+      <div id="video-form" class="form">
+        {{ video_form.title }}
+      </div>
+
+      <div style="text-align:right">
+        <input type="submit" class="submit" value="{% trans "Create"%}" />
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock %}

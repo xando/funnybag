@@ -2,27 +2,24 @@
 {% load i18n %}
 
 {% block application %}
-<article>
-  <section>
-    <div class="inside">
-      <div class="list">
-	{% for record in records %}
-	<div class="list-element">
-	  <!-- {{ record.get_absolute_url }} -->
-	  {% include record.template %}
-	</div>
-	<div class="list-element-footer">
-	  [<a href="{{ record.get_absolute_url }}">link</a>] [<a href="#">{% trans "source" %}</a>]
-	  {{ record.created_time|date:"D d M Y" }}
-	</div>
-	{% endfor %}
-      </div>
+<div class="grid_8 alpha">
+  <div id="record-list">
+    {% for record in records %}
+    <div class="list-element">
+      <!-- {{ record.get_absolute_url }} -->
+      {% include record.template %}
     </div>
-  </section>
-</article>
-<aside>
+    <div class="list-element-footer">
+    [<a <a href="{{ record.get_absolute_url }}">link</a>] [<a href="#">{% trans "source" %}</a>]
+    {{ record.created_time|date:"D d M Y" }}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="grid_4 omega">
   <div class="inside">
     {% include "core/login.html" %}
   </div>
-</aside>
+</div>
 {% endblock %}
