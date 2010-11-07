@@ -1,58 +1,64 @@
 {% load i18n %}
-<!DOCTYPE html>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html lang="en">
   <head>
     <title>Funnybag!</title>
     <meta charset="utf-8" />
     <meta name="description" content="FUNNYbag" />
     <link rel="Shortcut Icon" type="image/ico" href="{{ MEDIA_URL }}img/favicon.png" />
-  
+    
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.2.0/build/cssreset/reset-context-min.css">
+    <link rel="stylesheet" type="text/css" href="http://www.blueprintcss.org/blueprint/src/forms.css">
     <!-- <link rel="stylesheet" href="{{ MEDIA_URL }}css/reset.css" type="text/css" media="screen" /> -->
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/grid.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/querxies/netbooks-tablets.css" type="text/css" media="screen and (max-width: 1007px)" />
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/html5.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
+
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.form-2.43.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/custom.js"></script>
     {% block js-include %}{% endblock %}
+    
     <!--[if IE 7]><link rel="stylesheet" href="css/ie/ie7.css" type="text/css" media="screen"><![endif]-->
     <!--[if lt IE 7]><link rel="stylesheet" href="css/ie/ie6.css" type="text/css" media="screen"><![endif]-->
     
+    <link href="http://www.kernest.com/fonts/cmu-typewriter.css" media="screen" rel="stylesheet" type="text/css" />
+
   </head>
   <body>
-    <div class="container_12">
+    <div class="container_12" style="height: 100%">
       
-      <div class="grid_12 clearfix">
+      <div class="grid_12 clearfix alpha omega">
         <div id="header">
           <a id="logo" href="/">
-	    <h1>Funny<span>bag</span></h1>
+	    Funny<span>bag</span>
           </a>
         </div>
       </div>
       
-      <div class="grid_12 clearfix">
-        <div id="nav">
-          <a href="/">{% trans "latest" %}</a>
-	  <a href="#">{% trans "top" %}</a>
-	  <a href="#">{% trans "all" %}</a>
-	  <a href="/new">{% trans "add" %}</a>
-          <a href="/accounts/login/">{% trans "login" %}</a>
+      <div id="subheader" class="grid_12 clearfix alpha omega">
+        <div class="grid_6 alpha">
+          <div id="nav">
+            <a href="/">{% trans "latest" %}</a>
+	    <a href="/new/">{% trans "add" %}</a>
+            <a href="/accounts/login/">{% trans "login" %}</a>
+          </div>
+        </div>
+
+        <div class="grid_6 omega" >
+          <div id="user-info">
+            {% if user.is_authenticated %}
+            logged as {{ user }} <a href="/accounts/logout/">logout</a>
+            {% endif %}
+          </div>
         </div>
       </div>
       
-      <div class="grid_12 clearfix">
-        <div id="subheader">
-          loged as {{ user }} <a href="/accounts/logout/">logout</a>
-        </div>
-      </div>
+      {% block application %}{% endblock %}
       
-      <div class="grid_12 clearfix">
-        {% block application %}{% endblock %}
-      </div>
-      
-      <div class="grid_12 clearfix">
+      <div class="grid_12 clearfix alpha omega">
         <div id="footer">
         </div>
       </div>

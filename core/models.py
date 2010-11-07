@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
+from django.contrib.auth.models import User
 
 class Record(models.Model):
     data_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     data = generic.GenericForeignKey('data_type', 'object_id')
-
+    user = models.ForeignKey(User)
+    
     created_time = models.DateTimeField(auto_now_add=True)
 
     @models.permalink
@@ -27,12 +29,14 @@ class RecordBase(models.Model):
         abstract = True
 
     def save(self, *args, **kwargs):
+        user = kwargs.pop('user')
         super(RecordBase, self).save(*args, **kwargs)
         try:
             Record.objects.get(data_type=ContentType.objects.get_for_model(self.__class__),
                                object_id=self.id)
         except Record.DoesNotExist:
-            Record.objects.create(data=self)
+            Record.objects.create(data=self,
+                                  user=user)
 
 
 class Image(RecordBase):
@@ -59,6 +63,7 @@ class Joke(RecordBase):
 
 class Wideo(RecordBase):
     title = models.CharField(max_length=512)
+    embed = models.TextField()
 
     def __unicode__(self):
         return self.title

@@ -2,18 +2,22 @@
 {% load i18n %}
 
 {% block application %}
-<div id="registration">
-  <h2>{% trans "Register" %}</h2>
-  <form action="/accounts/register/" method="post">
-    {% csrf_token %}
-    {% for field in form %}
-    <div class="fieldWrapper">
-      <h3>{{ field.label_tag }}</h3>
-      <div class="errors">{{ field.errors }}</div>
-      {{ field }}
+<div class="grid_12 alpha omega clearfix">
+  <div id="registration">
+    <div class="view-header">
+      <h1>{% trans "Register" %}</h1>
     </div>
-    {% endfor %}
-    <p><input type="submit" value="Register" /></p>
-  </form>
+    <form action="/accounts/register/" method="post">
+      {% csrf_token %}
+      {% for field in form %}
+      <h3>{{ field.label_tag }}</h3>
+      <span class="errors">{{ field.errors }}</span>
+      {{ field }}
+      {% endfor %}
+      <div style="text-align:right">
+        <input type="submit" value="Register" />
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock %}

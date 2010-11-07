@@ -3,19 +3,25 @@
 	src: url('../fonts/Lobster_1.1_-webfont.eot');
 	src: local('.'), url('../fonts/Lobster_1.1_-webfont.woff') format('woff'), url('../fonts/Lobster_1.1_-webfont.ttf') format('truetype'), url('../fonts/Lobster_1.1_-webfont.svg#webfont30G9S4nm') format('svg');
 	font-weight: normal;
-	font-style: normal; }
+	font-style: normal; 
+}
 
 @font-face {
 	font-family: 'RalewayThin';
 	src: url('../fonts/raleway_thin-webfont.eot');
 	src: local('.'), url('../fonts/raleway_thin-webfont.woff') format('woff'), url('../fonts/raleway_thin-webfont.ttf') format('truetype'), url('../fonts/raleway_thin-webfont.svg#webfont') format('svg');
 	font-weight: normal;
-	font-style: normal; }
+	font-style: normal; 
+}
 
 /* Site-wide properties ======================================================== */
+html {
+    height:100%;
+}
 body {
     font: normal normal 10px/10px Tahoma, Arial, Helvetica, Verdana, sans-serif;
     height:100%;
+    background:#f7f4eb
 }
 
 .inside { 
@@ -30,90 +36,16 @@ body {
     width: 100%; 
 }
 
-/* Project specifics =========================================================== */
-body {
-    background:#f7f4eb
+.errors {
+    color:#aa2211;
 }
 
-#header {
-    border-bottom: 2px solid #000;
-    background: #333333;
-}
-#logo {
-    color: #ddd;
-}
-
-#nav {
-    background: #bb4444;
-    font-family: 'RalewayThin';
-    line-height: 140%;
-    text-rendering: optimizeLegibility;
-    font-size: 30px;
-    color: #f0f0f0;
-    border-top: 1px solid #555;
-}
-
-#nav a{
-    color: #f0f0f0;
-    padding: 10px;
-}
-
-#nav a:hover{
-    color: #aaaaaa;
-}
-
-#subheader {
-    margin-bottom:10px;
-}
-
-#footer {
-    border-top: 2px solid #000;
-}
-
-.record {
-    /* margin: 0 0 20px 0; */
-    border-bottom: 1px solid #555;
-}
-
-.joke {
-    font-family: 'RalewayThin';
-    line-height: 140%;
-    text-rendering: optimizeLegibility;
-    font-size: 20px;
-}
-
-.quote {
-}
-
-.image img {
-    text-align:center;
-}
-
-.wideo {
-
-}
-
-.list-element-footer {
-    text-align:right;
-    font-family: 'Josefin';
-    margin: 0 0 30px 0;
-}
-
-.list-element-footer a{
-    text-decoration: none;
-    color: #111;
-    font-family: 'Aguardiente';
-}
-
-ul, li {
-        list-style:none outside none;
-}
 /* The H1 declarations - for @font-face presentational purposes only */
 /* Fibonacci based heading scale ratio */
 h1 {
     font-size: 4.4em;
     font-weight: normal;
-    margin: 10px 0;
+    margin: 10px 0 30px;
 }
 
 h1 span { 
@@ -124,13 +56,13 @@ h1 span {
 h2 {
     font-size: 2.8em;
     font-weight: bold;
-    margin: 10px 0;
+    margin: 10px 0 10px;
 }
 
 h3 {
     font-size: 1.6em;
     font-weight: bold;
-    margin: 10px 0;
+    margin: 10px 0 2px;
 }
 
 h4{
@@ -143,23 +75,141 @@ h1, h2, h3, h4 {
     font-family: 'Lobster1.1Regular', Arial, sans-serif;
 }
 
-/* comments  */
-.comment .errors {
-    color:#993333;
+#header {
+    border-bottom: 2px solid #000;
+    background: #333333;
+    padding:20px 8px 18px;
+}
+
+#logo {
+    color: #ddd;
+    font-size: 4.4em;
+    font-weight: normal;
+    font-family: 'Lobster1.1Regular', Arial, sans-serif;
+}
+
+#subheader {
+    border-top: 1px solid #55;5
+    border-bottom: 1px solid #555;
+    background: #bb4444;
+    color: #f0f0f0;
+}
+
+#nav {
+    background: #bb4444;
+    font-family: 'RalewayThin';
+    line-height: 140%;
+    text-rendering: optimizeLegibility;
+    font-size: 30px;
+    text-align: left;
+}
+
+#nav a{
+    color: #f0f0f0;
+    padding: 10px;
+}
+
+#nav a:hover{
+    color: #aaaaaa;
+}
+
+#user-info {
+    text-align: right;
+    font-size: 1.3em;
+    margin:24px 5px 0;
+}
+#user-info a {
+    color:black;
     font-weight: bold;
 }
 
-.comment fieldset {
-    border: 1px solid;
+#footer {
+    border-top: 2px solid #000;
+    border-left: 1px solid #555;                
+    border-right: 1px solid #555;
+    height: 100%;
 }
 
-.comment textarea {
+.record {
+    border-bottom: 1px dashed #555;
+    text-align: justify;
+}
+
+.joke {
+    font-family: 'RalewayThin';
+    line-height: 140%;
+    text-rendering: optimizeLegibility;
+    font-size: 20px;
+}
+
+.quote {
+    font-family: 'CMU Typewriter';
+    line-height: 140%;
+    text-rendering: optimizeLegibility;
+    font-size: 2em;
+}
+
+.image img {
+    text-align:center;
+}
+
+.wideo {
+
+}
+
+.list-element {
+    margin-top: 30px;
+}
+
+.list-element-footer {
+    text-align:right;
+    font-family: 'Josefin';
+    margin: 0 0 50px 0;
+}
+
+.list-element-footer a{
+    text-decoration: none;
+    color: #111;
+    font-family: 'Aguardiente';
+}
+
+ul, li {
+    list-style:none outside none;
+}
+
+#login,
+#registration,
+#record-list, 
+#record-details,
+#record-new {
+    border-left: 1px solid #555;                
+    border-right: 1px solid #555;
+    padding: 15px 5px;
+}
+
+/* record-list */
+#record-list .empty {
+    font-size: 2em;
+    padding:220px 0 250px 295px;
+    color: #999;
+}
+
+/* login-side */
+#login-side {
+    border-left: 1px solid #555;                
+    border-right: 1px solid #555;
+    padding:0.5em;
+}
+
+#login-side input:not([type=submit]){
     width: 100%;
 }
 
 /* record-new */
 #record-new textarea {
-    width: 940px;
+    width: 925px;
+    height: 120px;
+    display: block;
 }
 
 #record-new input {
@@ -167,7 +217,7 @@ h1, h2, h3, h4 {
 }
 
 #record-new input.submit {
-    width: 150px;
+    width: 120px;
 }
 
 #record-new ul,
@@ -181,7 +231,7 @@ h1, h2, h3, h4 {
 
 #record-new ul {
     padding: 0px;
-    margin-top: 5px;
+    margin: 5px 0 25px 2px;
     display: block;
 }
 
@@ -197,21 +247,47 @@ h1, h2, h3, h4 {
     color:black;
 }
 
-#record-new .form {
-    display:none;
+/* #record-details  */
+.record-comments {
+    border-left: 1px solid #555;                
+    border-right: 1px solid #555;
+    padding-top: 20px;
 }
 
-/* #record-new .form.active { */
-/*     display:block; */
-/* } */
+.record-comments h3 {
+    margin: 0 5px;
+}
+
+.comment .errors {
+    color:#993333;
+    font-weight: bold;
+}
+
+.comment fieldset {
+    border: 0;
+    border-top: 1px solid;
+    padding: 5px;
+    margin:0;
+}
+
+.comment textarea {
+    width: 925px;
+    height: 120px;
+}
 
 /* login registartion forms */
 #registration input:not([type=submit]){
-    width: 400px;
+    width: 935px;
 }
 
-#login input:not([type=submit]){
-    width: 500px;
+#registration ul,
+#registration li {
+    margin: 10px 0 0;
+    padding: 0;
+}
+
+.login-form input:not([type=submit]){
+    width: 935px;
 }
 
 .login-form a{

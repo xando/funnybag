@@ -3,12 +3,20 @@
 {% load comments %}
 
 {% block application %}
-<div class="element-details">
-  {% include record.template %}
+<div class="grid_12 alpha omega clearfix">
+  <div id="record-details">
+    {% include record.template %}
+    <div class="list-element-footer">
+      {{ record.created_time|date:"D d M Y" }}
+    </div>
+  </div>
 </div>
 
-<div class="comment-form">
-  {% render_comment_list for record %}
-  {% render_comment_form for record %}
+<div class="grid_12 alpha omega clearfix">
+  <div class="record-comments">
+    <h3>{% trans "Comments" %}</h3>
+    {% render_comment_list for record %}
+    {% render_comment_form for record %}
+  </div>
 </div>
 {% endblock %}

@@ -2,29 +2,32 @@
 {% load i18n %}
 
 {% block application %}
-<div id="login" class="inside">
-  <h2>Login</h2>
+<div class="grid_12 alpha omega clearfix">
+  <div id="login">
+    <h1>Login</h1>
 
-  {% if form.errors %}
-  <p class="errors">Your username and password didn't match. Please try again.</p>
-  {% endif %}
+    {% if form.errors %}
+    <span class="errors">Your username and password didn't match. Please try again.</span>
+    {% endif %}
 
-  <form class="login-form" method="post" action="{% url django.contrib.auth.views.login %}">
-    {% csrf_token %}
+    <form class="login-form" method="post" action="{% url django.contrib.auth.views.login %}">
+      {% csrf_token %}
+      
+      <h3>{{ form.username.label_tag }}</h3>
+      {{ form.username }}
+      <h3>{{ form.password.label_tag }}</h3>
+      {{ form.password }}
 
-    <h3>{{ form.username.label_tag }}</h3>
-    <div>{{ form.username }}</div>
-    <h3>{{ form.password.label_tag }}</h3>
-    <div>{{ form.password }}</div>
-
-    <div style="text-align:right">
-      <input type="submit" value="login" />
-    </div>
-    <input type="hidden" name="next" value="{{ login_next }}" />
-    <ul>
-      <li><a href="#">Forgot your password?</a></li>
-      <li><a href="/accounts/register/">Register</a></li>
-    </ul>
-  </form>
+      <div style="text-align:right">
+        <input type="submit" value="login" />
+      </div>
+      
+      <input type="hidden" name="next" value="{{ login_next }}" />
+      <ul>
+        <li><a href="#">Forgot your password?</a></li>
+        <li><a href="/accounts/register/">Register</a></li>
+      </ul>
+    </form>
+  </div>
 </div>
 {% endblock %}

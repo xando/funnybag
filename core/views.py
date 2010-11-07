@@ -1,6 +1,8 @@
 from django.views.generic.simple import direct_to_template
 from django.shortcuts import get_object_or_404, get_list_or_404
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect
+
 
 from django.contrib.auth import forms as auth_form
 
@@ -19,20 +21,27 @@ def list(request):
                                'login_form' : login_form,
                                'login_next' : "/"})
 
-def new(request):
-    if request.method == 'POST':
-        form = JokeForm(request.POST)
-        if form.is_valid():
-            record = form.save()
-            return HttpResponseRedirect(record.get_absolute_url())
-    else:
-        joke_form = JokeForm()
-        image_form = ImageForm()
-        quote_form = QuoteForm()
-        video_form = VideoForm()
+@login_required
+def new(request, record_type=None):
+    
+    if not record_type:
+        return direct_to_template(request, 'core/new.html', {})
 
+    form = {'joke' : JokeForm,
+            'image' : ImageForm,
+            'quote' : QuoteForm,
+            'video' : VideoForm}
+    Form = form[record_type]
+
+    if request.method == "POST":
+        form = Form(request.POST)
+        if form.is_valid():
+            record_object = form.save(commit=False)
+            record_object.save(user=request.user)
+            return HttpResponseRedirect("/")
+    else:
+        form = Form()
+    
     return direct_to_template(request, 'core/new.html',
-                              {'joke_form': joke_form,
-                               'image_form': image_form,
-                               'quote_form' : quote_form,
-                               'video_form' : video_form})
+                              {'form': form,
+                               'record_type' : record_type })

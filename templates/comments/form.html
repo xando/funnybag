@@ -3,11 +3,9 @@
 <form class="comment" action="{% comment_form_target %}" method="post">{% csrf_token %}
   {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}   <fieldset>
     <legend>{% trans "Live your" %} {{form.comment.label_tag }}</legend>
-    <div style="padding-right:0.6em">
-      {{ form.comment}}
-    </div>
+    {{ form.comment}}
     <div class="submit" style="text-align:right">
-      <input type="submit" name="post" class="submit-post" value="{% trans "Post" %}" />
+      <input type="submit" name="post" class="submit-post" value="{% trans "Submit" %}" />
     </div>
   </fieldset>
   <span style="display:none;">{{ form.honeypot }}</span>

@@ -3,23 +3,35 @@
 
 {% block application %}
 <div class="grid_8 alpha">
-  <div id="record-list">
+  <div id="record-list" class="clearfix">
     {% for record in records %}
+    
     <div class="list-element">
-      <!-- {{ record.get_absolute_url }} -->
       {% include record.template %}
     </div>
     <div class="list-element-footer">
-    [<a <a href="{{ record.get_absolute_url }}">link</a>] [<a href="#">{% trans "source" %}</a>]
-    {{ record.created_time|date:"D d M Y" }}
+      [<a href="{{ record.get_absolute_url }}">link</a>] [<a href="#">{% trans "source" %}</a>]
+      {{ record.created_time|date:"D d M Y" }}
     </div>
+    {% empty %}
+    <div class="empty">empty</div>
     {% endfor %}
   </div>
 </div>
 
 <div class="grid_4 omega">
-  <div class="inside">
-    {% include "core/login.html" %}
+  <div id="login-side">
+    <h2>Login</h2>
+    <form class="login-form" method="post" action="{% url django.contrib.auth.views.login %}"> 
+      {% csrf_token %}
+      <input type="hidden" name="next" value="/" />
+      
+      <h3>{{ login_form.username.label_tag }}</h3> 
+      {{ login_form.username }} 
+      <h3>{{ login_form.password.label_tag }}</h3> 
+      {{ login_form.password }} 
+      <div style="text-align:right"><input type="submit" value="login" /></div>
+    </form> 
   </div>
 </div>
 {% endblock %}
