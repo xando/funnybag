@@ -1,31 +1,32 @@
 @font-face {
-	font-family: 'Lobster1.1Regular';
-	src: url('../fonts/Lobster_1.1_-webfont.eot');
-	src: local('.'), url('../fonts/Lobster_1.1_-webfont.woff') format('woff'), url('../fonts/Lobster_1.1_-webfont.ttf') format('truetype'), url('../fonts/Lobster_1.1_-webfont.svg#webfont30G9S4nm') format('svg');
-	font-weight: normal;
-	font-style: normal; 
+        font-family: 'Lobster1.1Regular';
+        src: url('../fonts/Lobster_1.1_-webfont.eot');
+        src: local('.'), url('../fonts/Lobster_1.1_-webfont.woff') format('woff'), url('../fonts/Lobster_1.1_-webfont.ttf') format('truetype'), url('../fonts/Lobster_1.1_-webfont.svg#webfont30G9S4nm') format('svg');
+        font-weight: normal;
+        font-style: normal;
 }
 
 @font-face {
-	font-family: 'RalewayThin';
-	src: url('../fonts/raleway_thin-webfont.eot');
-	src: local('.'), url('../fonts/raleway_thin-webfont.woff') format('woff'), url('../fonts/raleway_thin-webfont.ttf') format('truetype'), url('../fonts/raleway_thin-webfont.svg#webfont') format('svg');
-	font-weight: normal;
-	font-style: normal; 
+        font-family: 'RalewayThin';
+        src: url('../fonts/raleway_thin-webfont.eot');
+        src: local('.'), url('../fonts/raleway_thin-webfont.woff') format('woff'), url('../fonts/raleway_thin-webfont.ttf') format('truetype'), url('../fonts/raleway_thin-webfont.svg#webfont') format('svg');
+        font-weight: normal;
+        font-style: normal;
 }
 
 /* Site-wide properties ======================================================== */
 html {
     height:100%;
 }
+
 body {
     font: normal normal 10px/10px Tahoma, Arial, Helvetica, Verdana, sans-serif;
     height:100%;
     background:#f7f4eb
 }
 
-.inside { 
-    padding: 20px; 
+.inside {
+    padding: 20px;
 }
 
 /* For when a <br /> just ain't enough */
@@ -33,7 +34,7 @@ body {
     clear: both;
     float: left;
     height: 1px;
-    width: 100%; 
+    width: 100%;
 }
 
 .errors {
@@ -48,9 +49,9 @@ h1 {
     margin: 10px 0 30px;
 }
 
-h1 span { 
-    font: 50px RalewayThin, Arial, sans-serif; 
-    letter-spacing: -4px 
+h1 span {
+    font: 50px RalewayThin, Arial, sans-serif;
+    letter-spacing: -4px
 }
 
 h2 {
@@ -125,7 +126,7 @@ h1, h2, h3, h4 {
 
 #footer {
     border-top: 2px solid #000;
-    border-left: 1px solid #555;                
+    border-left: 1px solid #555;
     border-right: 1px solid #555;
     height: 100%;
 }
@@ -179,10 +180,10 @@ ul, li {
 
 #login,
 #registration,
-#record-list, 
+#record-list,
 #record-details,
 #record-new {
-    border-left: 1px solid #555;                
+    border-left: 1px solid #555;
     border-right: 1px solid #555;
     padding: 15px 5px;
 }
@@ -196,7 +197,7 @@ ul, li {
 
 /* login-side */
 #login-side {
-    border-left: 1px solid #555;                
+    border-left: 1px solid #555;
     border-right: 1px solid #555;
     padding:0.5em;
 }
@@ -249,7 +250,7 @@ ul, li {
 
 /* #record-details  */
 .record-comments {
-    border-left: 1px solid #555;                
+    border-left: 1px solid #555;
     border-right: 1px solid #555;
     padding-top: 20px;
 }
