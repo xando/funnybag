@@ -16,7 +16,6 @@
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.form-2.43.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.anchor.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.fancybox-1.2.6.pack.js"></script>
 
     {% block js-include %}{% endblock %}
@@ -33,10 +32,10 @@
         <h1><a class="introlink anchorLink" href="/">http://OfObO.com</a></h1>
         <div id="nav">
           <ul>
-            <li><a class="introlink anchorLink" href="/">{% trans "latest" %}</a></li>
-            <li><a class="portfoliolink anchorLink" href="/new/">{% trans "add" %}</a></li>
-            <li><a class="aboutlink anchorLink" href="/accounts/login/">{% trans "login" %}</a></li>
-            <li><a class="contactlink anchorLink" href="#contact">{% trans "contact" %}</a></li>
+            <li><a class="introlink" href="/">{% trans "latest" %}</a></li>
+            <li><a class="portfoliolink" href="/new/">{% trans "add" %}</a></li>
+            <li><a class="aboutlink" href="/accounts/login/">{% trans "login" %}</a></li>
+            <li><a class="contactlink" href="#contact">{% trans "contact" %}</a></li>
           </ul>
         </div>
       </div>
