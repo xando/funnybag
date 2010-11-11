@@ -22,10 +22,13 @@
     <form method="post" class="clearfix" action="/new/{{ record_type }}/">{% csrf_token %}
       {% if form %}
       <fieldset>
-        {% for field in form %}
+        {% for field in form.visible_fields %}
         {{ field.label_tag }}
         {{ field.errors }}
         {{ field }}
+        {% endfor %}
+        {% for hidden in form.hidden_fields %}
+        {{ hidden }}
         {% endfor %}
         <div style="text-align:right">
           <input type="submit" class="submit" value="{% trans "Create"%}" />

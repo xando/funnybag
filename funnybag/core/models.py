@@ -29,7 +29,7 @@ class RecordBase(models.Model):
         abstract = True
 
     def save(self, *args, **kwargs):
-        user = kwargs.pop('user')
+        user = kwargs.pop('user', None) #this is created on non request save: admin site, shell
         super(RecordBase, self).save(*args, **kwargs)
         try:
             Record.objects.get(data_type=ContentType.objects.get_for_model(self.__class__),
@@ -64,6 +64,7 @@ class Joke(RecordBase):
 class Wideo(RecordBase):
     title = models.CharField(max_length=512)
     embed = models.TextField()
+    source = models.URLField()
 
     def __unicode__(self):
         return self.title
