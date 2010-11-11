@@ -12,37 +12,27 @@
 
 <div class="grid_12 alpha omega clearfix">
   <div id="record-new">
-    <h1>New Item</h1>
+    <h1>New {{ record_type }}</h1>
     <ul>
-      <li>
-        <a id="joke-link" href="/new/joke/">{% trans "joke" %}</a>
-      </li>
-      <li>
-        <a id="image-link" href="/new/image/">{% trans "image" %}</a>
-      </li>
-      <li>
-        <a id="quote-link" href="/new/quote/">{% trans "quote" %}</a>
-      </li>
-      <li>
-        <a id="video-link" href="/new/video/">{% trans "video" %}</a>
-      </li>
+      <li><a id="joke-link" href="/new/joke/">{% trans "joke" %}</a></li>
+      <li><a id="image-link" href="/new/image/">{% trans "image" %}</a></li>
+      <li><a id="quote-link" href="/new/quote/">{% trans "quote" %}</a></li>
+      <li><a id="video-link" href="/new/video/">{% trans "video" %}</a></li>
     </ul>
     <form method="post" class="clearfix" action="/new/{{ record_type }}/">{% csrf_token %}
-
       {% if form %}
-      <div id="joke-form" class="form" >
+      <fieldset>
         {% for field in form %}
-        <h3>{{ field.label }}</h3>
+        {{ field.label_tag }}
         {{ field.errors }}
         {{ field }}
         {% endfor %}
-      </div>
-      <div style="text-align:right">
-        <input type="submit" class="submit" value="{% trans "Create"%}" />
-      </div>
-      {% endif %}
-      
-    </form>
+        <div style="text-align:right">
+          <input type="submit" class="submit" value="{% trans "Create"%}" />
+        </div>
+        {% endif %}
+      </form>
+    </div>
   </div>
 </div>
 {% endblock %}

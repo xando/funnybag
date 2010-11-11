@@ -7,7 +7,13 @@
   <div id="record-details">
     {% include record.template %}
     <div class="list-element-footer">
-      {{ record.created_time|date:"D d M Y" }}
+      <div class="grid_6 alpha">
+        [<a href="#">{% trans "source" %}</a>]
+        {{ record.created_time|date:"D d M Y" }}
+      </div>
+      <div class="grid_6 omega" style="text-align:right">
+        {% trans "added by" %} {{record.user}}
+      </div>
     </div>
   </div>
 </div>

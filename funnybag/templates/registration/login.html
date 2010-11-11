@@ -6,27 +6,26 @@
   <div id="login">
     <h1>Login</h1>
 
-    {% if form.errors %}
-    <span class="errors">Your username and password didn't match. Please try again.</span>
-    {% endif %}
-
-    <form class="login-form" method="post" action="{% url django.contrib.auth.views.login %}">
+    <form id="login-form" method="post" action="{% url django.contrib.auth.views.login %}">
       {% csrf_token %}
-      
-      <h3>{{ form.username.label_tag }}</h3>
-      {{ form.username }}
-      <h3>{{ form.password.label_tag }}</h3>
-      {{ form.password }}
+      <fieldset>
+        {% if form.errors %}
+        <span class="errors">Your username and password didn't match. Please try again.</span>
+        {% endif %}
 
-      <div style="text-align:right">
-        <input type="submit" value="login" />
-      </div>
-      
-      <input type="hidden" name="next" value="{{ login_next }}" />
-      <ul>
-        <li><a href="#">Forgot your password?</a></li>
-        <li><a href="/accounts/register/">Register</a></li>
-      </ul>
+        {{ form.username.label_tag }}{{ form.username }}
+        {{ form.password.label_tag }}{{ form.password }}
+
+        <div style="text-align:right">
+          <input type="submit" value="login" />
+        </div>
+
+        <input type="hidden" name="next" value="{{ login_next }}" />
+        <ul>
+          <li><a href="/accounts/register/">Register</a></li>
+          <li><a href="#">Forgot your password?</a></li>
+        </ul>
+      </fieldset>
     </form>
   </div>
 </div>

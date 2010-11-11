@@ -2,7 +2,7 @@
 {% load i18n %}
 
 {% block application %}
-<div class="grid_8 alpha">
+<div class="grid_12 alpha omega clearfix">
   <div id="record-list" class="clearfix">
     {% for record in records %}
     
@@ -10,8 +10,13 @@
       {% include record.template %}
     </div>
     <div class="list-element-footer">
-      [<a href="{{ record.get_absolute_url }}">link</a>] [<a href="#">{% trans "source" %}</a>]
-      {{ record.created_time|date:"D d M Y" }}
+      <div class="grid_6 alpha">
+        [<a href="{{ record.get_absolute_url }}">link</a>] [<a href="#">{% trans "source" %}</a>]
+        {{ record.created_time|date:"D d M Y" }}
+      </div>
+      <div class="grid_6 omega" style="text-align:right">
+        {% trans "added by" %} {{record.user}}
+      </div>
     </div>
     {% empty %}
     <div class="empty">empty</div>
@@ -19,19 +24,19 @@
   </div>
 </div>
 
-<div class="grid_4 omega">
-  <div id="login-side">
-    <h2>Login</h2>
-    <form class="login-form" method="post" action="{% url django.contrib.auth.views.login %}"> 
-      {% csrf_token %}
-      <input type="hidden" name="next" value="/" />
+<!-- <div class="grid_4 omega"> -->
+<!--   <div id="login-side"> -->
+    <!-- <h2>Login</h2> -->
+    <!-- <form class="login-form" method="post" action="{% url django.contrib.auth.views.login %}">  -->
+    <!--   {% csrf_token %} -->
+    <!--   <input type="hidden" name="next" value="/" /> -->
       
-      <h3>{{ login_form.username.label_tag }}</h3> 
-      {{ login_form.username }} 
-      <h3>{{ login_form.password.label_tag }}</h3> 
-      {{ login_form.password }} 
-      <div style="text-align:right"><input type="submit" value="login" /></div>
-    </form> 
-  </div>
-</div>
+    <!--   <h3>{{ login_form.username.label_tag }}</h3>  -->
+    <!--   {{ login_form.username }}  -->
+    <!--   <h3>{{ login_form.password.label_tag }}</h3>  -->
+    <!--   {{ login_form.password }}  -->
+    <!--   <div style="text-align:right"><input type="submit" value="login" /></div> -->
+    <!-- </form>  -->
+<!--   </div> -->
+<!-- </div> -->
 {% endblock %}
