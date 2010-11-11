@@ -76,7 +76,14 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'pagination.middleware.PaginationMiddleware',
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = ("django.core.context_processors.auth",
+                               "django.core.context_processors.debug",
+                               "django.core.context_processors.i18n",
+                               "django.core.context_processors.media",
+                               "django.core.context_processors.request")
 
 ROOT_URLCONF = 'funnybag.urls'
 
@@ -96,7 +103,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'funnybag.core',
-    'registration'
+    'registration',
+    'pagination'
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7

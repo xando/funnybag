@@ -157,6 +157,20 @@ strong {
     border-bottom: none;
 }
 
+.pagination-nav {
+    text-align:center;
+    font-size: 1.5em;
+}
+
+.pagination-nav.top{
+    margin:100px 0 0 0;
+}
+
+.pagination-nav.bottom {
+    margin:30px 0 0 0;
+}
+
+
 /* section { margin-bottom: 1000px; padding-top: 150px; float: left; } */
 
 /* #intro h2 a { padding-bottom: 0px; } */
@@ -278,14 +292,17 @@ footer ul li img {
 
 #login,
 #registration,
-#record-list,
 #record-details,
 #record-new {
     margin-top: 120px;
 }
 
 .list-element {
-    margin-top: 120px;
+
+}
+
+.list-element-footer {
+    margin-bottom: 60px;
 }
 
 .record {

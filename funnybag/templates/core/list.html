@@ -1,11 +1,17 @@
 {% extends 'base.html' %}
 {% load i18n %}
+{% load pagination_tags %}
 
 {% block application %}
+{% autopaginate records 5 %}
 <div class="grid_12 alpha omega clearfix">
   <div id="record-list" class="clearfix">
-    {% for record in records %}
     
+    <div class="pagination-nav top">
+      {% paginate %}
+    </div>
+    
+    {% for record in records %}
     <div class="list-element">
       {% include record.template %}
     </div>
@@ -21,6 +27,10 @@
     {% empty %}
     <div class="empty">empty</div>
     {% endfor %}
+    
+    <div class="pagination-nav bottom">
+      {% paginate %}
+    </div>
   </div>
 </div>
 
