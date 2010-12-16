@@ -7,8 +7,7 @@ class Record(models.Model):
     data_type = models.ForeignKey(ContentType)
     object_id = models.PositiveIntegerField()
     data = generic.GenericForeignKey('data_type', 'object_id')
-    user = models.ForeignKey(User)
-    
+
     created_time = models.DateTimeField(auto_now_add=True)
 
     @models.permalink
@@ -24,23 +23,24 @@ class Record(models.Model):
                            self.data.__unicode__())
 
 class RecordBase(models.Model):
+    title = models.CharField(max_length=512)
+    source = models.URLField(blank=True, verify_exists=True)
+    user = models.ForeignKey(User)
 
     class Meta:
         abstract = True
 
     def save(self, *args, **kwargs):
-        user = kwargs.pop('user', None) #this is created on non request save: admin site, shell
+        self.user = kwargs.pop('user', None) #this is created on non request save: admin site, shell
         super(RecordBase, self).save(*args, **kwargs)
         try:
             Record.objects.get(data_type=ContentType.objects.get_for_model(self.__class__),
                                object_id=self.id)
         except Record.DoesNotExist:
-            Record.objects.create(data=self,
-                                  user=user)
-
+            Record.objects.create(data=self)
+                                  
 
 class Image(RecordBase):
-    title = models.CharField(max_length=512)
     image = models.ImageField(upload_to="record/image")
 
     def __unicode__(self):
@@ -62,9 +62,7 @@ class Joke(RecordBase):
 
 
 class Wideo(RecordBase):
-    title = models.CharField(max_length=512)
     embed = models.TextField()
-    source = models.URLField()
 
     def __unicode__(self):
         return self.title

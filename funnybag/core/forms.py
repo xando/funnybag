@@ -9,18 +9,21 @@ from funnybag.core import services
 class JokeForm(forms.ModelForm):
     class Meta:
         model = Joke
+        fields = ('title', 'content', 'source')
 
 
 class ImageForm(forms.ModelForm):
     url = forms.CharField(required=False)
+    
     class Meta:
         model = Image
+        fields = ('title', 'image', 'source')
 
 
 class QuoteForm(forms.ModelForm):
     class Meta:
         model = Quote
-
+        fields = ('title', 'content', 'source')
 
 class VideoForm(forms.ModelForm):
     
@@ -44,4 +47,5 @@ class VideoForm(forms.ModelForm):
 
     class Meta:
         model = Wideo
+        fields = ('title', 'embed', 'source')
 
