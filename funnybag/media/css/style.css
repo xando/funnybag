@@ -17,7 +17,6 @@
 body {
     font-family: Keffeesatz, Arial;
     color: #4b4b4b;
-    background: url(../images/pattern.gif);
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
@@ -31,7 +30,7 @@ body {
 }
 
 h1 {
-    color: #fff;
+    color: #aa5533;
     font-size: 40px;
     position: relative;
     top: 15px;
