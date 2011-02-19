@@ -31,7 +31,7 @@ def push():
 
 def requirements():
     "Install the required packages from the requirements file using pip"
-    
+
     run('cd %s; pip install -E . -r requirements.txt' % env.path)
 
 def restart():
@@ -45,3 +45,7 @@ def deploy():
     push()
     requirements()
     restart()
+
+
+if __name__ == '__main__':
+    subprocess.call(['fab', '-f', __file__, 'deploy'])
