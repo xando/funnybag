@@ -6,33 +6,48 @@
 
 <div class="grid_12 alpha omega clearfix">
   <div id="record-new">
-    <h1>New {{ record_type }}</h1>
-    <ul>
-      <li><a id="joke-link" href="#new/joke">{% trans "joke" %}</a></li>
-      <li><a id="image-link" href="#new/image">{% trans "image" %}</a></li>
-      <li><a id="quote-link" href="#new/quote">{% trans "quote" %}</a></li>
-      <li><a id="video-link" href="#new/video">{% trans "video" %}</a></li>
-    </ul>
-    <form class="new-form" method="post" class="clearfix" 
-          action="/ajax/new/valid/{{ record_type }}/">
+    <h1>New</h1>
+    <form id="new-record-form" method="post" class="clearfix" 
+          action="/ajax/new/valid/">
       {% csrf_token %}
 
-      {% if form %}
-      <fieldset>
-        {% for field in form.visible_fields %}
-        {{ field.label_tag }}
-        {{ field.errors }}
-        {{ field }}
-        {% endfor %}
-        {% for hidden in form.hidden_fields %}
-        {{ hidden }}
-        {% endfor %}
-        <div style="text-align:right">
-          <input type="submit" class="submit" value="{% trans "Create"%}" />
-        </div>
-        {% endif %}
-      </form>
-    </div>
+      {{ record_form }}
+      
+      <ul class="add-block">
+        <li><a name="text" id="add-text-link" class="add-link">{% trans "text" %}</a></li>
+        <li><a name="video" id="add-video-link" class="add-link">{% trans "video" %}</a></li>
+      </ul>
+      
+      <ul class="block-panel">
+      </ul>
+      
+      <div style="text-align:right">
+        <input type="submit" class="submit" value="{% trans "Preview"%}" />
+        <input type="submit" class="submit" value="{% trans "Create"%}" />
+      </div>
+      
+      {% for block in blocksset %}
+      {{ block.management_form }}
+      {% endfor %}
+    </form>
   </div>
 </div>
 
+
+{% for block in blocksset %}
+<script type="text/template" id="{{ block.model.type }}-template"> 
+  <li>
+    <div class="{{ block.model.type }} block">
+      <div class="handle"></div>
+      <div class="remove">X</div>
+      {% for field in block.empty_form.visible_fields %}
+      {{ field.label_tag }}
+      {{ field }}
+      {% endfor %}
+      {% for field in block.empty_form.hidden_fields %}
+      {{ field }}
+      {% endfor %}
+    </div>
+  </li>
+</script>
+{% endfor %}

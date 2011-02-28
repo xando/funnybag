@@ -112,6 +112,7 @@ p {
     font-size: 24px;
     margin-bottom: 15px;
     line-height: 36px;
+    text-align: justify;
 }
 
 strong {
@@ -202,7 +203,7 @@ input, textarea {
     font-family: Keffeesatz, Arial;
     color: #4b4b4b;
     font-size: 24px; -webkit-border-radius: 5px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 }
 
 input:focus,
@@ -296,6 +297,10 @@ footer ul li img {
     margin-top: 120px;
 }
 
+#record-list {
+    margin-top:120px;
+}
+
 .list-element {
 
 }
@@ -341,3 +346,41 @@ footer ul li img {
     display:inline;
     margin-right: 20px;
 }
+
+.add-link {
+    cursor: pointer;
+}
+
+.block {
+    position: relative;
+}
+
+.block .remove {
+    position: absolute;
+    cursor: pointer;
+    right: -4px;
+    top: -14px;
+}
+
+.block .handle {
+    cursor: pointer;
+    text-align: center;
+    height: 5px;
+    background: #555;
+    margin-right: 15px;
+    margin-bottom: 10px;
+}
+
+.disabled {
+    cursor: default;
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.ui-state-highlight { 
+    height: 1.5em; 
+    line-height: 1.2em;
+    background: yellow;
+}
+
+

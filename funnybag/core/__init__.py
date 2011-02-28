@@ -1,13 +1,9 @@
 youtube = """
-<object width="640" height="385">
-  <param name="movie" value="$name"></param>
-  <param name="allowFullScreen" value="true"></param>
-  <param name="allowscriptaccess" value="always"></param>
-  <embed src="$name" 
-         type="application/x-shockwave-flash" allowscriptaccess="always" 
-         allowfullscreen="true" width="640" height="385">
-  </embed>
-</object>
+<iframe title="YouTube video player" 
+        width="480" height="390" 
+        src="$name" 
+        frameborder="0" allowfullscreen>
+</iframe>
 """
 
 vimeo = """
@@ -16,14 +12,14 @@ vimeo = """
 
 metacafe = """
 <div style="background:#000000;width:600px;height:370px">
-  <embed flashVars="playerVars=showStats=no|autoPlay=no|" 
-         src="$name" 
+  <embed flashVars="playerVars=showStats=no|autoPlay=no|"
+         src="$name"
          width="640" height="385"
-         wmode="transparent" 
-         allowFullScreen="true" 
-         allowScriptAccess="always" 
-         name="Metacafe_5470065" 
-         pluginspage="http://www.macromedia.com/go/getflashplayer" 
+         wmode="transparent"
+         allowFullScreen="true"
+         allowScriptAccess="always"
+         name="Metacafe_5470065"
+         pluginspage="http://www.macromedia.com/go/getflashplayer"
          type="application/x-shockwave-flash">
   </embed>
 </div>
@@ -37,7 +33,7 @@ dailymotion = """
 """
 
 blip = """
-<embed src="$name" type="application/x-shockwave-flash" 
+<embed src="$name" type="application/x-shockwave-flash"
        width="640" height="385" allowscriptaccess="always" allowfullscreen="true">
 </embed>
 """
@@ -47,14 +43,14 @@ rutube = """
   <PARAM name="movie" value="$name"></PARAM>
   <PARAM name="wmode" value="window"></PARAM>
   <PARAM name="allowFullScreen" value="true"></PARAM>
-  <EMBED src="$name" 
-         type="application/x-shockwave-flash" wmode="window" 
+  <EMBED src="$name"
+         type="application/x-shockwave-flash" wmode="window"
          width="640" height="385" allowFullScreen="true" ></EMBED>
 </OBJECT>
 """
 
 services = {'youtube' : youtube,
-            'vimeo': vimeo, 
+            'vimeo': vimeo,
             'metacafe' : metacafe,
             'dailymotion' : dailymotion,
             'blip' : blip,

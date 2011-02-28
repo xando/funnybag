@@ -7,12 +7,12 @@ def json_response(func):
                         content_type='application/json; charset=UTF-8')
     return _jsonize
 
-def success(**kwargs):
+def success(message=None, **kwargs):
     return { "success" : True,
-             "message" : kwargs.get("message", None),
-             "data" : kwargs.get("data", None) }
+             "message" : message,
+             "data" : kwargs.get("data", None)}
 
-def failed(**kwargs):
+def failed(message=None, **kwargs):
     return { "success" : False,
-             "message" : kwargs.get("message", None),
-             "data" : kwargs.get("data", None) }
+             "message" : message,
+             "data" : kwargs.get("data", None)}

@@ -5,14 +5,14 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth import forms as auth_form
 
 from funnybag.core import utils
-from funnybag.core.models import Record
-from funnybag.core.forms import JokeForm, ImageForm, QuoteForm, VideoForm
+from funnybag.core import models
+from funnybag.core import forms
 
 def main(request):
     return direct_to_template(request, 'base.html')
 
 def list(request):
-    records = Record.objects.order_by('-created_time')
+    records = models.Record.objects.order_by('-created_time')
     return direct_to_template(request,
                               'core/list.html',
                               {'records': records})
@@ -21,39 +21,41 @@ def details(request, record_id):
     return direct_to_template(request, 'core/details.html',
                               {'record': get_object_or_404(Record, pk=record_id) })
 
-# def list(request):
-#     records = Record.objects.order_by('-created_time')
-#     login_form = auth_form.AuthenticationForm()
-#     return direct_to_template(request, 'core/list.html',
-#                               {'records': records ,
-#                                'login_form' : login_form,
-#                                'login_next' : "/"})
+def new(request):
+    record_form = forms.RecordForm()
 
-form_types = {'joke' : JokeForm,
-              'image' : ImageForm,
-              'quote' : QuoteForm,
-              'video' : VideoForm}
-
-# @login_required
-def new(request, record_type=None):
-    print record_type
-    if not record_type:
-        return direct_to_template(request, 'core/new.html', {})
-
-    form = form_types[record_type]()
+    #Something like constructor
+    blocksset = [block(queryset=block.model.objects.none()) for block in forms.blocksset]
 
     return direct_to_template(request, 'core/new.html',
-                              {'form': form,
-                               'record_type' : record_type })
+                              {'record_form': record_form,
+                               'blocksset': blocksset})
 
 
 @utils.json_response
-def new_valid(request, record_type=None):
+def new_valid(request):
     if request.method == "POST":
-        form = form_types[record_type](request.POST)
-        if form.is_valid():
-            record_object = form.save(commit=False)
-            record_object.save(user=request.user)
-            return utils.success()
+        record_form = forms.RecordForm(request.POST)
 
-        return utils.failed()
+        #Something like constructor, again ...
+        blocksset = [block(request.POST) for block in forms.blocksset]
+
+        # Something like validation method, ...
+        if record_form.is_valid() and\
+                not [block for block in blocksset if not block.is_valid()]:
+
+            record = record_form.save()
+            for block in blocksset:
+
+                print block
+                for form in block.forms:
+                    models.RecordBlock.objects.create(record=record,
+                                                      sequence=form.cleaned_data['sequence'],
+                                                      data=form.save())
+
+            return utils.success()
+        else:
+            print [block.errors for block in blocksset]
+            return utils.failed()
+
+
