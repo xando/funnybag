@@ -22,6 +22,9 @@ $(function(){
       $('input[name$=sequence]').each( function(i) {
         $(this).val(i)
       });
+
+      $('.block textarea').elastic();
+
     },
     
     remove_block: function(e) {
