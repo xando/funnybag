@@ -4,3 +4,4 @@ data.sqlite
 .#*
 media/record/image/
 local_settings.py
+.ropeproject
