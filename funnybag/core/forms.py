@@ -14,7 +14,6 @@ class RecordForm(forms.ModelForm):
         model = Record
         fields = ("title",)
 
-
 class ContentNodeForm(forms.ModelForm):
     sequence = forms.CharField(widget=forms.HiddenInput)
     class Meta:
@@ -50,11 +49,21 @@ class VideoForm(ContentNodeForm):
         return cleaned_data
 
 
+class MapForm(ContentNodeForm):
+    class Meta(ContentNodeForm.Meta):
+        model = Map
+
 
 VideoFormSet = modelformset_factory(Video,
                                     form=VideoForm,
                                     formset=ContentNodeFormSet,
                                     extra=0)
+
+TextFormSet = modelformset_factory(Text,
+                                   form=ContentNodeForm,
+                                   formset=ContentNodeFormSet,
+                                   extra=0)
+
 
 TextFormSet = modelformset_factory(Text,
                                    form=ContentNodeForm,
