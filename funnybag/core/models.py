@@ -56,5 +56,12 @@ class Map(models.Model):
         return self.location
 
 
+class Image(models.Model):
+    type = "image"
+    image = models.ImageField(upload_to="blocks/images")
+
+    def render(self):
+        return mark_safe('<img src="%s" />' % self.image.url)
+
 # ToDo:
 # Image, ImageGallery, Code, Map

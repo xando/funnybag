@@ -8,7 +8,9 @@
   <div id="record-new">
     <h1>New</h1>
     <form id="new-record-form" method="post" class="clearfix" 
-          action="/ajax/new/valid/">
+          action="/ajax/new/valid/" 
+          enctype="multipart/form-data">
+
       {% csrf_token %}
 
       {{ record_form }}
@@ -16,6 +18,7 @@
       <ul class="add-block">
         <li><a name="text" id="add-text-link" class="add-link">{% trans "text" %}</a></li>
         <li><a name="video" id="add-video-link" class="add-link">{% trans "video" %}</a></li>
+        <li><a name="image" id="add-image-link" class="add-link">{% trans "image" %}</a></li>
       </ul>
       
       <ul class="block-panel">

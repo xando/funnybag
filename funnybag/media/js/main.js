@@ -75,10 +75,12 @@ $(function(){
       $(this.el).load('/ajax/new/', function() {
         
         $('#new-record-form').ajaxForm({
-          success: function(response, statusText, xhr, $form) {
-            if(response.success) {
+          iframe: true,
+          success: function(response, statusText, xhr, $form)  { 
+            response = jQuery.parseJSON(response);
+            if (response.success) {
               document.location.hash = "#";
-            } 
+            }
           },
         }); 
         

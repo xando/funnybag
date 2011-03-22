@@ -19,12 +19,10 @@ class ContentNodeForm(forms.ModelForm):
     class Meta:
         exclude = ('record',)
 
-
 class ContentNodeFormSet(BaseModelFormSet):
     def __init__(self, *args, **kwargs):
         kwargs['prefix'] = self.model.type
         super(ContentNodeFormSet, self).__init__(*args, **kwargs)
-
 
 class VideoForm(ContentNodeForm):
     class Meta(ContentNodeForm.Meta):
@@ -54,6 +52,11 @@ class MapForm(ContentNodeForm):
         model = Map
 
 
+class ImageForm(ContentNodeForm):
+    class Meta(ContentNodeForm.Meta):
+        model = Image
+
+
 VideoFormSet = modelformset_factory(Video,
                                     form=VideoForm,
                                     formset=ContentNodeFormSet,
@@ -64,11 +67,11 @@ TextFormSet = modelformset_factory(Text,
                                    formset=ContentNodeFormSet,
                                    extra=0)
 
-
-TextFormSet = modelformset_factory(Text,
-                                   form=ContentNodeForm,
-                                   formset=ContentNodeFormSet,
-                                   extra=0)
+ImageFormSet = modelformset_factory(Image,
+                                    form=ContentNodeForm,
+                                    formset=ContentNodeFormSet,
+                                    extra=0)
 
 blocksset = [TextFormSet,
-             VideoFormSet]
+             VideoFormSet,
+             ImageFormSet]

@@ -8,8 +8,10 @@ from funnybag.core import utils
 from funnybag.core import models
 from funnybag.core import forms
 
+
 def main(request):
     return direct_to_template(request, 'base.html')
+
 
 def list(request):
     records = models.Record.objects.order_by('-created_time')
@@ -17,9 +19,11 @@ def list(request):
                               'core/list.html',
                               {'records': records})
 
+
 def details(request, record_id):
     return direct_to_template(request, 'core/details.html',
                               {'record': get_object_or_404(Record, pk=record_id) })
+
 
 def new(request):
     record_form = forms.RecordForm()
@@ -38,7 +42,7 @@ def new_valid(request):
         record_form = forms.RecordForm(request.POST)
 
         #Something like constructor, again ...
-        blocksset = [block(request.POST) for block in forms.blocksset]
+        blocksset = [block(request.POST, request.FILES) for block in forms.blocksset]
 
         # Something like validation method, ...
         if record_form.is_valid() and\
@@ -47,7 +51,6 @@ def new_valid(request):
             record = record_form.save()
             for block in blocksset:
 
-                print block
                 for form in block.forms:
                     models.RecordBlock.objects.create(record=record,
                                                       sequence=form.cleaned_data['sequence'],
