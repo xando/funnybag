@@ -47,5 +47,21 @@ class Video(models.Model):
     def render(self):
         return mark_safe(self.embed)
 
+
+class Map(models.Model):
+    type = "map"
+    location = models.CharField(max_length=1024)
+
+    def render(self):
+        return self.location
+
+
+class Image(models.Model):
+    type = "image"
+    image = models.ImageField(upload_to="blocks/images")
+
+    def render(self):
+        return mark_safe('<img src="%s" />' % self.image.url)
+
 # ToDo:
 # Image, ImageGallery, Code, Map

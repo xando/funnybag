@@ -6,5 +6,4 @@ admin.site.register(RecordBlock)
 
 admin.site.register(Text)
 admin.site.register(Video)
-
-
+admin.site.register(Image)
