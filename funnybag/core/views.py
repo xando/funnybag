@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth import forms as auth_form
 
-from funnybag.core import utils
+from funnybag.core.utils import json_response, success, failed
 from funnybag.core import models
 from funnybag.core import forms
 
@@ -36,7 +36,7 @@ def new(request):
                                'blocksset': blocksset})
 
 
-@utils.json_response
+@json_response
 def new_valid(request):
     if request.method == "POST":
         record_form = forms.RecordForm(request.POST)
@@ -56,9 +56,7 @@ def new_valid(request):
                                                       sequence=form.cleaned_data['sequence'],
                                                       data=form.save())
 
-            return utils.success()
+            return success()
         else:
             print [block.errors for block in blocksset]
             return utils.failed()
-
-
