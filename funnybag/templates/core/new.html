@@ -8,7 +8,7 @@
   <div id="record-new">
     <h1>New</h1>
     <form id="new-record-form" method="post" class="clearfix" 
-          action="/ajax/new/valid/" 
+          action="{% url funnybag.core.views.new_valid %}" 
           enctype="multipart/form-data">
 
       {% csrf_token %}

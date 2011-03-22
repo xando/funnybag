@@ -1,9 +1,4 @@
 from django.views.generic.simple import direct_to_template
-from django.shortcuts import get_object_or_404, get_list_or_404
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
-from django.contrib.auth import forms as auth_form
-
 from funnybag.core.utils import json_response, success, failed
 from funnybag.core import models
 from funnybag.core import forms
@@ -59,4 +54,5 @@ def new_valid(request):
             return success()
         else:
             print [block.errors for block in blocksset]
-            return utils.failed()
+
+            return failed()
