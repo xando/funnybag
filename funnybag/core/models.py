@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
-from django.contrib.auth.models import User
 from django.utils.safestring import mark_safe
+from django.template import Context, loader
 
 
 class Record(models.Model):
@@ -61,7 +61,16 @@ class Image(models.Model):
     image = models.ImageField(upload_to="blocks/images")
 
     def render(self):
-        return mark_safe('<img src="%s" />' % self.image.url)
+        template = loader.get_template('core/blocks/image.html')
+        return template.render(Context({'image': self.image}))
+
+    def save(self, *args, **kwargs):
+        super(Image, self).save(*args, **kwargs)
+        from easy_thumbnails.files import get_thumbnailer
+        tumb = get_thumbnailer(self.image)
+        tumb.generate_thumbnail({'size': (650, 650)})
+# mark_safe('<img src="%s" />' % self.image.url)
+
 
 # ToDo:
 # Image, ImageGallery, Code, Map

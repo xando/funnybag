@@ -72,19 +72,24 @@ $(function(){
     },
     
     render: function() {
-      $(this.el).load('/ajax/new/', function() {
+      $(this.el)
+        .hide()
+        .load('/ajax/new/', function() {
         
-        $('#new-record-form').ajaxForm({
-          iframe: true,
-          success: function(response, statusText, xhr, $form)  { 
-            response = jQuery.parseJSON(response);
-            if (response.success) {
-              document.location.hash = "#";
-            }
-          },
-        }); 
+          $('#new-record-form').ajaxForm({
+            iframe: true,
+            success: function(response, statusText, xhr, $form)  { 
+              response = jQuery.parseJSON(response);
+              if (response.success) {
+                document.location.hash = "#";
+                
+              }
+            },
+          }); 
+          
+          $(this).fadeIn();
+        })
         
-      }).hide().fadeIn('slow');
       return this;
     }
   
@@ -102,7 +107,11 @@ $(function(){
     },
 
     list: function(id) {
-      $('.main-view').load('/ajax/list/').hide().fadeIn('slow');
+      $('.main-view')
+        .hide()
+        .load('/ajax/list/', function() { 
+          $(this).fadeIn(); 
+        });
     },
 
     new: function(type) {

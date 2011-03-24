@@ -18,6 +18,7 @@ body {
     font-family: Keffeesatz, Arial;
     color: #4b4b4b;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    overflow-y: scroll;
 }
 
 ::selection {
@@ -186,8 +187,9 @@ strong {
 
 #contact { margin-bottom: 0px; }
 
-input[type="text"],
-input[type="password"] {
+input[type=text],
+input[type=password],
+input[type=file] {
     width: 909px;
 }
 
