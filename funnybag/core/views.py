@@ -15,11 +15,6 @@ def list(request):
                               {'records': records})
 
 
-def details(request, record_id):
-    return direct_to_template(request, 'core/details.html',
-                              {'record': get_object_or_404(Record, pk=record_id) })
-
-
 def new(request):
     record_form = forms.RecordForm()
 
@@ -56,3 +51,9 @@ def new_valid(request):
             print [block.errors for block in blocksset]
 
             return failed()
+
+
+def details(request, hash):
+    record = models.Record.objects.get(pk=hash)
+    return direct_to_template(request, 'core/details.html',
+                              {"record": record})

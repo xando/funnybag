@@ -5,7 +5,7 @@
 
     {% for record in records %}
     <div class="list-element">
-      <h1>{{ record.title }}</h1>
+      <h1><a href="#{{ record.slug }}/{{ record.id }}/">{{ record.title }}</a></h1>
       {% for block in record.blocks.all %}
       <p>{{ block.data.render }}</p>
       {% endfor %}

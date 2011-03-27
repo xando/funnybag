@@ -1,28 +1,10 @@
-{% extends 'base.html' %}
 {% load i18n %}
-{% load comments %}
 
-{% block application %}
 <div class="grid_12 alpha omega clearfix">
   <div id="record-details">
-    {% include record.template %}
-    <div class="list-element-footer">
-      <div class="grid_6 alpha">
-        [<a href="#">{% trans "source" %}</a>]
-        {{ record.created_time|date:"D d M Y" }}
-      </div>
-      <div class="grid_6 omega" style="text-align:right">
-        {% trans "added by" %} {{record.user}}
-      </div>
-    </div>
+    <h1>{{ record.title }}</h1>
+    {% for block in record.blocks.all %}
+    <p>{{ block.data.render }}</p>
+    {% endfor %}
   </div>
 </div>
-
-<div class="grid_12 alpha omega clearfix">
-  <div class="record-comments">
-    <h3>{% trans "Comments" %}</h3>
-    {% render_comment_list for record %}
-    {% render_comment_form for record %}
-  </div>
-</div>
-{% endblock %}

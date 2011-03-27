@@ -24,47 +24,6 @@ $(function(){
       });
 
       $('.block textarea').elastic();
-      
-
-      var geocoder;
-      var map;
-      var infowindow = new google.maps.InfoWindow();
-      var marker;
-      function initialize() {
-        geocoder = new google.maps.Geocoder();
-        var latlng = new google.maps.LatLng(40.730885,-73.997383);
-        var myOptions = {
-          zoom: 8,
-          center: latlng,
-          mapTypeId: 'roadmap'
-        }
-        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-      }
- 
-      function codeLatLng() {
-        var input = document.getElementById("latlng").value;
-        var latlngStr = input.split(",",2);
-        var lat = parseFloat(latlngStr[0]);
-        var lng = parseFloat(latlngStr[1]);
-        var latlng = new google.maps.LatLng(lat, lng);
-        geocoder.geocode({'latLng': latlng}, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            if (results[1]) {
-              map.setZoom(11);
-              marker = new google.maps.Marker({
-                position: latlng, 
-                map: map
-              }); 
-              infowindow.setContent(results[1].formatted_address);
-              infowindow.open(map, marker);
-            } else {
-          alert("No results found");
-            }
-          } else {
-            alert("Geocoder failed due to: " + status);
-          }
-        });
-      }
     },
     
     remove_block: function(e) {
@@ -92,7 +51,18 @@ $(function(){
         
       return this;
     }
-  
+  });    
+
+  var DetailsView = Backbone.View.extend({
+    el: $(".main-view"),
+    
+    render: function(hash) {
+      $(this.el)
+        .hide()
+        .load('/ajax/details/'+ hash +'/', function() {
+          $(this).fadeIn();
+        })
+    }
   });
 
   var Workspace = Backbone.Controller.extend({
@@ -101,6 +71,8 @@ $(function(){
       "": "list",
       "new/:type" : "new",
       "new" : "new",
+      ":title/:hash/" : "details",
+      ":hash/" : "details",
     },
 
     initialize: function() {
@@ -116,7 +88,13 @@ $(function(){
 
     new: function(type) {
       new NewView().render();
-    }        
+    },
+
+    details: function(first, second){
+      hash = second ? second : first;
+      new DetailsView().render(hash);
+      
+    }
     
   });
   

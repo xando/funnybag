@@ -3,15 +3,21 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.utils.safestring import mark_safe
 from django.template import Context, loader
+from django.template.defaultfilters import slugify
 
 
 class Record(models.Model):
     title = models.CharField(max_length=1024)
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(max_length=40)
 
     def __unicode__(self):
         return "%s :%s" % (self.id, self.title)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Record, self).save(args, kwargs)
 
 
 class RecordBlock(models.Model): # Proxy
