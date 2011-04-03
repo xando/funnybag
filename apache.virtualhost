@@ -1,10 +1,10 @@
 <VirtualHost *:8081>
     ServerAdmin webmaster@localhost
 
-    WSGIScriptAlias / PATH/PROJECT_NAME/apache.wsgi
+    WSGIScriptAlias / PATH/apache.wsgi
 
-    Alias /static/ PATH/PROJECT_NAME/static/
-    <Directory PATH/PROJECT_NAME/static/>
+    Alias /media/ PATH/PROJECT_NAME/media/
+    <Directory PATH/PROJECT_NAME/media/>
         Order deny,allow
         Allow from all
     </Directory>
