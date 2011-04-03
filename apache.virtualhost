@@ -1,6 +1,6 @@
 <VirtualHost *:8081>
     ServerAdmin webmaster@localhost
-    ServerName PROJECT_NAME.*.*
+    ServerName PROJECT_NAME.HOST
 
     WSGIScriptAlias / PATH/apache.wsgi
 
