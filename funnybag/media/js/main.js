@@ -71,6 +71,7 @@ $(function(){
       "": "list",
       "new/:type" : "new",
       "new" : "new",
+      "login" : "login",
       ":title/:hash/" : "details",
       ":hash/" : "details",
     },
@@ -88,6 +89,39 @@ $(function(){
 
     new: function(type) {
       new NewView().render();
+    },
+
+    login: function() {
+      $('.main-view')
+        .hide()
+        .load('/ajax/login/', function() { 
+          $(this).fadeIn();
+
+          $('#login-form').ajaxComplete( function() {
+            console.log('Triggered ajaxComplete handler.');
+          });
+
+          $("#login-form").ajaxForm({
+            // beforeSubmit : function () { alert("Test"); },
+            success: function(response, statusText, xhr, $form)  { 
+              console.log(this);
+              if (response.redirect) {
+                alert("redirect");
+                
+                // data.redirect contains the string URL to redirect to
+                // window.location.href = data.redirect;
+              }
+
+              // superResp = response;
+              superXHR = xhr;
+              // console.log( response );
+              // console.log( statusText );
+              // console.log( xhr );
+              
+            },
+          }); 
+
+        });
     },
 
     details: function(first, second){

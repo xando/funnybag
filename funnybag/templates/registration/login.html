@@ -1,12 +1,10 @@
-{% extends 'base.html' %}
 {% load i18n %}
 
-{% block application %}
 <div class="grid_12 alpha omega clearfix">
   <div id="login">
     <h1>Login</h1>
 
-    <form id="login-form" method="post" action="{% url django.contrib.auth.views.login %}">
+    <form id="login-form" method="post" action="/ajax/login/">
       {% csrf_token %}
       <fieldset>
         {% if form.errors %}
@@ -29,4 +27,3 @@
     </form>
   </div>
 </div>
-{% endblock %}

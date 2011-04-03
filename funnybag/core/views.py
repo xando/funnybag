@@ -57,3 +57,16 @@ def details(request, hash):
     record = models.Record.objects.get(pk=hash)
     return direct_to_template(request, 'core/details.html',
                               {"record": record})
+
+
+def login(request):
+    from django.contrib.auth.forms import AuthenticationForm
+    from django.contrib.auth import login as auth_login
+
+    form = AuthenticationForm(data=request.POST)
+    
+    if form.is_valid():
+        auth_login(request, form.get_user())
+
+        return success()
+    return failed()

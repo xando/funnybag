@@ -1,21 +1,26 @@
 {% load i18n %}
 
-<h2>Login</h2>
 
-<form class="login-form" method="post" action="{% url django.contrib.auth.views.login %}">
-  {% csrf_token %}
+<div class="grid_12 alpha omega clearfix">
+  <div id="record-new">
+    <h1>Login</h1>
 
-  <h3>{{ login_form.username.label_tag }}</h3>
-  <div>{{ login_form.username }}</div>
-  <h3>{{ login_form.password.label_tag }}</h3>
-  <div>{{ login_form.password }}</div>
+    <form class="login-form" method="post" action="{% url django.contrib.auth.views.login %}">
+      {% csrf_token %}
 
-  <div style="text-align:right">
-    <input type="submit" value="login" />
+      <h3>{{ form.username.label_tag }}</h3>
+      <div>{{ form.username }}</div>
+      <h3>{{ form.password.label_tag }}</h3>
+      <div>{{ form.password }}</div>
+
+      <div style="text-align:right">
+        <input type="submit" value="login" />
+      </div>
+      <input type="hidden" name="next" value="{{ next }}" />
+      <ul>
+        <li><a href="#">Forgot your password?</a></li>
+        <li><a href="#">Register</a></li>
+      </ul>
+    </form>
   </div>
-  <input type="hidden" name="next" value="{{ login_next }}" />
-  <ul>
-    <li><a href="#">Forgot your password?</a></li>
-    <li><a href="#">Register</a></li>
-  </ul>
-</form>
+</div>
