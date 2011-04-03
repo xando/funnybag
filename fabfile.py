@@ -1,7 +1,8 @@
 import os
 from fabric.api import *
 from fabric.operations import require
-from fabric.contrib.project import rsync_project
+# from fabric.contrib.project import rsync_project
+from fabric.contrib.files import sed
 
 
 # env.path = None
@@ -45,6 +46,7 @@ def setup_production(path="/var/www/%s" % env.project_name, initial_release="mas
     sudo('apt-get install -y python-dev')
     sudo('apt-get install -y apache2')
     sudo('apt-get install -y libapache2-mod-wsgi')
+    sudo('apt-get install -y libjpeg8-dev')
 
     sudo('easy_install pip')
     sudo('pip install virtualenv')
@@ -53,6 +55,7 @@ def setup_production(path="/var/www/%s" % env.project_name, initial_release="mas
 
     _download_release(initial_release)
     _install_requirements()
+    _configure_webserver()
 
 
 def _download_release(release):
@@ -80,11 +83,11 @@ def _configure_webserver():
     require("path")
 
 
-    fabric.contrib.files.sed("%s/apache.virtualhost" % path,
-                             "${PATH}", env.path, use_sudo=True)
+    sed("%s/apache.virtualhost" % env.path,
+        "PATH", env.path, use_sudo=True)
 
-    fabric.contrib.files.sed("%s/apache.virtualhost" % path,
-                             "${PROJECT_NAME}", env.project_name, use_sudo=True)
+    sed("%s/apache.virtualhost" % env.path,
+        "PROJECT_NAME", env.project_name, use_sudo=True)
 
                              # limit='', use_sudo=False, backup='.bak')
     # env.esc_path = env.path.replace('/','\/')
@@ -95,7 +98,7 @@ def _configure_webserver():
     # # TODO: put here diff check between config versions
     # sudo("cp %(path)s/deploy/apache.virtualhost /etc/apache2/sites-available/qualitio" % env)
 
-    sudo("a2ensite qualitio")
+    # sudo("a2ensite qualitio")
 # def requirements():
 #     "Install the required packages from the requirements file using pip"
 
