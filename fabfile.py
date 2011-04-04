@@ -80,7 +80,7 @@ def _configure_webserver():
 
 
 def _synchronize_database():
-    sudo("python %s/%s/manage.py syncdb" % (env.path, env.project_name))
+    sudo("python %s/%s/manage.py syncdb --noinput" % (env.path, env.project_name))
 
 
 def _setup_rights():
