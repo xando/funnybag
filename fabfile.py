@@ -67,11 +67,12 @@ def _configure_webserver():
     sed("%s/apache.virtualhost" % env.path,
         "HOST", env.host, use_sudo=True)
 
-
-    sudo("cp %s/apache.virtualhost /etc/apache2/sites-available/%s" % (env.path, env.project_name))
-
+    sudo("cp %s/apache.virtualhost /etc/apache2/sites-available/%s"
+         % (env.path, env.project_name))
     sudo("a2ensite %s" % env.project_name)
 
+    sed("%s/apache.wsgi" % env.path,
+        "PROJECT_NAME", env.project_name, use_sudo=True)
 
 def _restart():
     sudo("/etc/init.d/apache2 reload")

@@ -1,9 +1,15 @@
-Django==1.2.3
+Django==1.2.5
+Fabric==1.0.1
 PIL==1.1.7
 distribute==0.6.14
 django-pagination==1.0.7
 django-registration==0.7
+easy-thumbnails==1.0-alpha-16
 ipython==0.10.1
+logilab-astng==0.21.1
+logilab-common==0.55.0
 paramiko==1.7.6
-pycrypto==2.0.1
+pycrypto==2.3
+pylint==0.23.0
+unittest2==0.5.1
 wsgiref==0.1.2
