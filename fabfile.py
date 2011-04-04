@@ -23,6 +23,8 @@ def setup_production(path="/var/www/%s" % env.project_name, initial_release="mas
     _download_release(initial_release)
     _install_requirements()
     _configure_webserver()
+    _synchronize_database()
+    _setup_rights()
     _restart()
 
 
@@ -31,6 +33,8 @@ def update_production(path="/var/www/%s" % env.project_name, release="master"):
 
     _download_release(release)
     _install_requirements()
+    _synchronize_database()
+    _setup_rights()
     _restart()
 
 
@@ -73,6 +77,17 @@ def _configure_webserver():
 
     sed("%s/apache.wsgi" % env.path,
         "PROJECT_NAME", env.project_name, use_sudo=True)
+
+
+def _synchronize_database():
+    sudo("python %s/%s/manage.py syncdb" % (env.path, env.project_name))
+
+
+def _setup_rights():
+    require("path")
+
+    sudo("chown :www-data -R %s" % env.path)
+    sudo("chmod g+rw -R %s" % env.path)
 
 def _restart():
     sudo("/etc/init.d/apache2 reload")
