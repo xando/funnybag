@@ -6,7 +6,7 @@ try:
     os.environ["VIRTUAL_ENV"]
 except KeyError:
     virtualenv = os.path.join(os.path.dirname(__file__),
-                                          ".virtualenv/bin/activate_this.py")
+                                          "../.virtualenv/bin/activate_this.py")
     execfile(virtualenv, dict(__file__=virtualenv))
 
 
