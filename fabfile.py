@@ -28,16 +28,6 @@ def setup_production(path="/var/www/%s" % env.project_name, initial_release="mas
     _restart()
 
 
-def update_production(path="/var/www/%s" % env.project_name, release="master"):
-    env.path = path.rstrip("/")
-
-    _download_release(release)
-    _install_requirements()
-    _synchronize_database()
-    _setup_rights()
-    _restart()
-
-
 def _download_release(release):
     require("path")
 
