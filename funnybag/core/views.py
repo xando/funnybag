@@ -1,4 +1,7 @@
 from django.views.generic.simple import direct_to_template
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login as auth_login
+
 from funnybag.core.utils import json_response, success, failed
 from funnybag.core import models
 from funnybag.core import forms
@@ -60,13 +63,16 @@ def details(request, hash):
 
 
 def login(request):
-    from django.contrib.auth.forms import AuthenticationForm
-    from django.contrib.auth import login as auth_login
+    if request.method == "POST":
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
 
-    form = AuthenticationForm(data=request.POST)
-    
-    if form.is_valid():
-        auth_login(request, form.get_user())
+            return success()
 
-        return success()
-    return failed()
+        return failed(data=dict(form.errors.items()))
+    else:
+        form = AuthenticationForm()
+
+    return direct_to_template(request, 'registration/login.html',
+                              {"form": form})

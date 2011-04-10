@@ -8,11 +8,13 @@ def json_response(func):
 
     return _jsonize
 
+@json_response
 def success(message=None, **kwargs):
     return { "success" : True,
              "message" : message,
              "data" : kwargs.get("data", None)}
 
+@json_response
 def failed(message=None, **kwargs):
     return { "success" : False,
              "message" : message,

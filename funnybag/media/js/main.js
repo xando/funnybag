@@ -39,9 +39,8 @@ $(function(){
             iframe: true,
             success: function(response, statusText, xhr, $form)  { 
               response = jQuery.parseJSON(response);
-              if (response.success) {
+              if(response.success) {
                 document.location.hash = "#";
-                
               }
             },
           }); 
@@ -65,7 +64,7 @@ $(function(){
     }
   });
 
-  var Workspace = Backbone.Controller.extend({
+  Workspace = Backbone.Controller.extend({
 
     routes: {
       "": "list",
@@ -74,9 +73,6 @@ $(function(){
       "login" : "login",
       ":title/:hash/" : "details",
       ":hash/" : "details",
-    },
-
-    initialize: function() {
     },
 
     list: function(id) {
@@ -93,30 +89,26 @@ $(function(){
 
     login: function() {
       $('.main-view')
-        .hide()
-        .load('/ajax/login/', function() { 
+        .hide().load('/ajax/login/', function() { 
           $(this).fadeIn();
 
-          $('#login-form').ajaxComplete( function() {
-            console.log('Triggered ajaxComplete handler.');
-          });
-
           $("#login-form").ajaxForm({
-            // beforeSubmit : function () { alert("Test"); },
             success: function(response, statusText, xhr, $form)  { 
-              console.log(this);
-              if (response.redirect) {
-                alert("redirect");
-                
-                // data.redirect contains the string URL to redirect to
-                // window.location.href = data.redirect;
+              response = jQuery.parseJSON(response);
+              $("#login-form").find(".errors").remove();
+              $("#login-form").find("input[type!=submit]").css("background", "white"); 
+              if (response.success) {
+                document.location.hash = "#";
+              } else {
+                $.each(response.data, function(name, message) {
+                  if(name == "__all__") {
+                    $("#login-form fieldset").prepend(" <span class='errors'>"+message+"</span>");
+                  } else {
+                    $("#id_"+name).css("background", "#ffddaa");
+                    $("label[for=id_"+name+"]").append(" <span class='errors'>"+message+"</span>");
+                  }
+                });
               }
-
-              // superResp = response;
-              superXHR = xhr;
-              // console.log( response );
-              // console.log( statusText );
-              // console.log( xhr );
               
             },
           }); 
