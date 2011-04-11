@@ -2,6 +2,8 @@ from django.views.generic.simple import direct_to_template
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 
+from registration import forms as registration_forms
+
 from funnybag.core.utils import json_response, success, failed
 from funnybag.core import models
 from funnybag.core import forms
@@ -76,3 +78,11 @@ def login(request):
 
     return direct_to_template(request, 'registration/login.html',
                               {"form": form})
+
+
+def registration(request):
+    form = registration_forms.RegistrationForm()
+
+    return direct_to_template(request, 'registration/registration.html',
+                              {"form": form})
+

@@ -71,6 +71,7 @@ $(function(){
       "new/:type" : "new",
       "new" : "new",
       "login" : "login",
+      "registration" : "registration",
       ":title/:hash/" : "details",
       ":hash/" : "details",
     },
@@ -115,7 +116,14 @@ $(function(){
 
         });
     },
-
+    
+    registration: function() {
+      $('.main-view').hide()
+        .load('/ajax/registration/', function() { 
+          $(this).fadeIn();
+        });
+    },
+    
     details: function(first, second){
       hash = second ? second : first;
       new DetailsView().render(hash);
