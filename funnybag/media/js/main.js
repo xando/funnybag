@@ -39,8 +39,16 @@ $(function(){
             iframe: true,
             success: function(response, statusText, xhr, $form)  { 
               response = jQuery.parseJSON(response);
+              $("#new-record-form").find(".errors").remove();
+              $("#new-record-form").find("input[type!=submit],textarea")
+                .css("background", "white"); 
               if(response.success) {
                 document.location.hash = "#";
+              } else {
+                $.each(response.data, function(name, message) {
+                  $("#id_"+name).css("background", "#ffddaa");
+                  $("label[for=id_"+name+"]").append(" <span class='errors'>"+message+"</span>");
+                });
               }
             },
           }); 

@@ -3,8 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 
 from registration import forms as registration_forms
-
-from funnybag.core.utils import json_response, success, failed
+from funnybag.core.utils import success, failed
 from funnybag.core import models
 from funnybag.core import forms
 
@@ -31,7 +30,6 @@ def new(request):
                                'blocksset': blocksset})
 
 
-@json_response
 def new_valid(request):
     if request.method == "POST":
         record_form = forms.RecordForm(request.POST)
@@ -50,12 +48,16 @@ def new_valid(request):
                     models.RecordBlock.objects.create(record=record,
                                                       sequence=form.cleaned_data['sequence'],
                                                       data=form.save())
-
             return success()
         else:
-            print [block.errors for block in blocksset]
+            errors = record_form.errors.items()
 
-            return failed()
+            for block in blocksset:
+                for i, error in  enumerate(block.errors):
+                    errors.extend(map(lambda x: ("%s-%s-%s" % (block.prefix,i,x[0]), x[1]),
+                                      error.items()))
+
+            return failed(data=dict(errors))
 
 
 def details(request, hash):
