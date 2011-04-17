@@ -23,11 +23,12 @@ def new(request):
     record_form = forms.RecordForm()
 
     #Something like constructor
-    blocksset = [block(queryset=block.model.objects.none()) for block in forms.blocksset]
+    # blocksset = [block(queryset=block.model.objects.none()) for block in forms.blocksset]
+    blockset = forms.Blockset()
 
     return direct_to_template(request, 'core/new.html',
                               {'record_form': record_form,
-                               'blocksset': blocksset})
+                               'blocksset': blockset})
 
 
 def new_valid(request):

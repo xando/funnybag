@@ -1,3 +1,7 @@
+from pygments.lexers import get_all_lexers, get_lexer_by_name
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+
 from tagging import fields
 
 from django.db import models
@@ -79,8 +83,25 @@ class Image(models.Model):
         from easy_thumbnails.files import get_thumbnailer
         tumb = get_thumbnailer(self.image)
         tumb.generate_thumbnail({'size': (650, 650)})
-# mark_safe('<img src="%s" />' % self.image.url)
+
+
+class Code(models.Model):
+    type = "code"
+    LANGUAGE_NAME = map(lambda lexer: (lexer[0].replace(" ","").lower(), lexer[0]),
+                        get_all_lexers())
+
+    language = models.CharField(max_length=30, choices=LANGUAGE_NAME)
+    code = models.TextField()
+
+    def render(self):
+        lexer = get_lexer_by_name(self.language)
+        formatter = HtmlFormatter(linenos=True)
+        code = mark_safe(highlight(self.code, lexer, formatter))
+        template = loader.get_template('core/blocks/code.html')
+        return template.render(Context({'code': code,
+                                        'styles' : formatter.get_style_defs('.highlight')}))
 
 
 # ToDo:
-# Image, ImageGallery, Code, Map
+# Image, ImageGallery, Map, Poll
+# Text: textile

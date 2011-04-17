@@ -57,6 +57,11 @@ class MapForm(ContentNodeForm):
         model = Map
 
 
+class CodeForm(ContentNodeForm):
+    class Meta(ContentNodeForm.Meta):
+        model = Code
+
+
 VideoFormSet = modelformset_factory(Video,
                                     form=VideoForm,
                                     formset=ContentNodeFormSet)
@@ -69,13 +74,22 @@ ImageFormSet = modelformset_factory(Image,
                                     form=ContentNodeForm,
                                     formset=ContentNodeFormSet)
 
+CodeFormSet = modelformset_factory(Code,
+                                   form=ContentNodeForm,
+                                   formset=ContentNodeFormSet)
+
+
 class Blockset(object):
     blocks_types = [TextFormSet,
                     VideoFormSet,
-                    ImageFormSet]
+                    ImageFormSet,
+                    CodeFormSet]
 
-    def __init__(self, data, files):
-        self.blocks = [block(data, files) for block in self.blocks_types]
+    def __init__(self, data=None, files=None):
+        if data:
+            self.blocks = [block(data, files) for block in self.blocks_types]
+        else:
+            self.blocks = [block(queryset=block.model.objects.none()) for block in self.blocks_types]
 
     def is_valid(self):
         return not [block for block in self.blocks if not block.is_valid()]
