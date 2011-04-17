@@ -69,11 +69,6 @@ ImageFormSet = modelformset_factory(Image,
                                     form=ContentNodeForm,
                                     formset=ContentNodeFormSet)
 
-blocksset = [TextFormSet,
-             VideoFormSet,
-             ImageFormSet]
-
-
 class Blockset(object):
     blocks_types = [TextFormSet,
                     VideoFormSet,
