@@ -1,3 +1,5 @@
+from tagging import fields
+
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
@@ -8,6 +10,7 @@ from django.template.defaultfilters import slugify
 
 class Record(models.Model):
     title = models.CharField(max_length=1024)
+    tags = fields.TagField()
     created_time = models.DateTimeField(auto_now_add=True)
     modified_time = models.DateTimeField(auto_now=True)
     slug = models.SlugField(max_length=40)
@@ -18,6 +21,7 @@ class Record(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Record, self).save(args, kwargs)
+
 
 
 class RecordBlock(models.Model): # Proxy

@@ -1,4 +1,7 @@
 {% load i18n %}
+{% load tagging_tags %}
+
+{% tags_for_object record as tag_list %}
 
 <div class="grid_12 alpha omega clearfix">
   <div id="record-details">
@@ -6,5 +9,6 @@
     {% for block in record.blocks.all %}
     <p>{{ block.data.render }}</p>
     {% endfor %}
+    Tags: {% for tag in tag_list %}<a href="#">{{ tag }}</a> {% endfor %}
   </div>
 </div>

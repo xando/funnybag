@@ -12,7 +12,7 @@ from funnybag.core import services
 class RecordForm(forms.ModelForm):
     class Meta:
         model = Record
-        fields = ("title",)
+        fields = ("title",'tags')
 
 
 class ContentNodeForm(forms.ModelForm):

@@ -74,7 +74,8 @@ INSTALLED_APPS = (
     'funnybag.core',
     'registration',
     'pagination',
-    'easy_thumbnails'
+    'easy_thumbnails',
+    'tagging'
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
