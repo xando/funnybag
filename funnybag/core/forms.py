@@ -72,3 +72,29 @@ ImageFormSet = modelformset_factory(Image,
 blocksset = [TextFormSet,
              VideoFormSet,
              ImageFormSet]
+
+
+class Blockset(object):
+    blocks_types = [TextFormSet,
+                    VideoFormSet,
+                    ImageFormSet]
+
+    def __init__(self, data, files):
+        self.blocks = [block(data, files) for block in self.blocks_types]
+
+    def is_valid(self):
+        return not [block for block in self.blocks if not block.is_valid()]
+
+    def errors(self):
+        errors = []
+
+        for block in self.blocks:
+            for i, error in  enumerate(block.errors):
+                errors.extend(map(lambda x: ("%s-%s-%s" % (block.prefix,i,x[0]), x[1]),
+                                  error.items()))
+
+        return errors
+
+    def __iter__(self):
+        for block in self.blocks:
+            yield block

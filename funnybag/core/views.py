@@ -34,15 +34,12 @@ def new_valid(request):
     if request.method == "POST":
         record_form = forms.RecordForm(request.POST)
 
-        #Something like constructor, again ...
-        blocksset = [block(request.POST, request.FILES) for block in forms.blocksset]
+        blockset = forms.Blockset(request.POST, request.FILES)
 
-        # Something like validation method, ...
-        if record_form.is_valid() and\
-                not [block for block in blocksset if not block.is_valid()]:
-
+        if record_form.is_valid() and blockset.is_valid():
             record = record_form.save()
-            for block in blocksset:
+
+            for block in blockset:
 
                 for form in block.forms:
                     models.RecordBlock.objects.create(record=record,
@@ -51,11 +48,7 @@ def new_valid(request):
             return success()
         else:
             errors = record_form.errors.items()
-
-            for block in blocksset:
-                for i, error in  enumerate(block.errors):
-                    errors.extend(map(lambda x: ("%s-%s-%s" % (block.prefix,i,x[0]), x[1]),
-                                      error.items()))
+            errors.extend(blockset.errors())
 
             return failed(data=dict(errors))
 
