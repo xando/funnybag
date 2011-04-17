@@ -359,10 +359,14 @@ footer ul li img {
 }
 
 .block .remove {
-    position: absolute;
+    background-image: url("../images/close-button2.png");
+    background-repeat: no-repeat;
     cursor: pointer;
+    height: 28px;
+    position: absolute;
     right: -4px;
-    top: -14px;
+    top: -11px;
+    width: 30px;
 }
 
 .block .handle {
@@ -374,7 +378,8 @@ footer ul li img {
     margin-bottom: 10px;
 }
 
-.disabled {
+.disabled input[type=text], 
+.disabled textarea {
     cursor: default;
     opacity: 0.3;
     pointer-events: none;
@@ -386,4 +391,6 @@ footer ul li img {
     background: yellow;
 }
 
-
+.hidden {
+    display:none;
+}

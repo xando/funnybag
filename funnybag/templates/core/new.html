@@ -42,7 +42,7 @@
   <li>
     <div class="{{ block.model.type }} block">
       <div class="handle"></div>
-      <div class="remove">X</div>
+      <div class="remove"></div>
       {% for field in block.empty_form.visible_fields %}
       {{ field.label_tag }}
       {{ field }}
@@ -50,6 +50,7 @@
       {% for field in block.empty_form.hidden_fields %}
       {{ field }}
       {% endfor %}
+      
     </div>
   </li>
 </script>

@@ -14,20 +14,29 @@ $(function(){
     
     add_block: function(e) {
       type = $(e.target).attr('name');
-
       var template = _.template($('#'+ type + '-template').html());
       $('.block-panel').append( template({'prefix' : $('.block.'+ type).length }) );
-      
+      $('label[for$=DELETE],input[id$=DELETE]').hide();
       $('#id_'+ type +'-TOTAL_FORMS').val( $('.block.'+ type).length );
       $('input[name$=sequence]').each( function(i) {
-        $(this).val(i)
+        $(this).val(i);
       });
 
       $('.block textarea').elastic();
     },
     
     remove_block: function(e) {
-      $(e.target).parent('.block').addClass("disabled");
+      if ($(e.target).parent('.block').find('input[name$=DELETE]').is(":checked") ) {
+        $(e.target).parent('.block').removeClass("disabled");
+        $(e.target).parent('.block').find('textarea,input').removeAttr("disabled");
+        $(e.target).parent('.block').find('input[name$=DELETE]').attr("checked", false);
+        $('#id_'+ type +'-TOTAL_FORMS').val( $('.block.'+ type).length );
+      } else {
+        $('#id_'+ type +'-TOTAL_FORMS').val( $('.block.'+ type).length - 1 );
+        $(e.target).parent('.block').addClass("disabled");
+        $(e.target).parent('.block').find('textarea,input').attr("disabled", true);
+        $(e.target).parent('.block').find('input[name$=DELETE]').attr("checked", true);
+      }
     },
     
     render: function() {

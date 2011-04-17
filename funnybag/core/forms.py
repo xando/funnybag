@@ -24,6 +24,8 @@ class ContentNodeForm(forms.ModelForm):
 class ContentNodeFormSet(BaseModelFormSet):
     def __init__(self, *args, **kwargs):
         kwargs['prefix'] = self.model.type
+        self.can_delete = True
+        self.extra = 0
         super(ContentNodeFormSet, self).__init__(*args, **kwargs)
 
 
@@ -57,18 +59,15 @@ class MapForm(ContentNodeForm):
 
 VideoFormSet = modelformset_factory(Video,
                                     form=VideoForm,
-                                    formset=ContentNodeFormSet,
-                                    extra=0)
+                                    formset=ContentNodeFormSet)
 
 TextFormSet = modelformset_factory(Text,
                                    form=ContentNodeForm,
-                                   formset=ContentNodeFormSet,
-                                   extra=0)
+                                   formset=ContentNodeFormSet)
 
 ImageFormSet = modelformset_factory(Image,
                                     form=ContentNodeForm,
-                                    formset=ContentNodeFormSet,
-                                    extra=0)
+                                    formset=ContentNodeFormSet)
 
 blocksset = [TextFormSet,
              VideoFormSet,
