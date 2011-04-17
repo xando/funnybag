@@ -359,7 +359,7 @@ footer ul li img {
 }
 
 .block .remove {
-    background-image: url("../images/close-button2.png");
+    background-image: url("../images/close-button.png");
     background-repeat: no-repeat;
     cursor: pointer;
     height: 28px;
