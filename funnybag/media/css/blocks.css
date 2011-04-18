@@ -1,0 +1,23 @@
+.highlighttable {
+    border: 1px solid;
+}
+
+.highlighttable .linenos {
+    background: #DDDDDD;
+    border-right: 1px solid #555555;
+    padding: 0 5px 0 10px;
+}
+
+.highlighttable .code {
+    width: 100%
+}
+
+.code.block textarea{
+    font-family: monospace;
+    font-size: 14px;
+}
+
+.text.block textarea{
+    font-family: georgia;
+    font-size: 15px;
+}
