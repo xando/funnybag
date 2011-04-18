@@ -27,8 +27,6 @@ def list(request, tags=None):
 def new(request):
     record_form = forms.RecordForm()
 
-    #Something like constructor
-    # blocksset = [block(queryset=block.model.objects.none()) for block in forms.blocksset]
     blockset = forms.Blockset()
 
     return direct_to_template(request, 'core/new.html',
