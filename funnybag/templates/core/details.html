@@ -9,6 +9,11 @@
     {% for block in record.blocks.all %}
     <p>{{ block.data.render }}</p>
     {% endfor %}
+  </div>
+  <div class="grid_6 alpha">
+    {{ record.created_time|date:"D d M Y" }}
+  </div>
+  <div class="grid_6 omega" style="text-align:right">
     Tags: {% for tag in tag_list %}<a href="#t/{{ tag|iriencode }}">{{ tag }}</a> {% endfor %}
   </div>
 </div>
