@@ -87,8 +87,7 @@ class Image(models.Model):
 
 class Code(models.Model):
     type = "code"
-    LANGUAGE_NAME = map(lambda lexer: (lexer[0].replace(" ","").lower(), lexer[0]),
-                        get_all_lexers())
+    LANGUAGE_NAME = map(lambda lexer: (lexer[1][0], lexer[0]),get_all_lexers())
 
     language = models.CharField(max_length=30, choices=LANGUAGE_NAME)
     code = models.TextField()
