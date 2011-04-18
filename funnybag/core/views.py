@@ -1,3 +1,5 @@
+from tagging.models import TaggedItem
+
 from django.views.generic.simple import direct_to_template
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
@@ -12,8 +14,11 @@ def main(request):
     return direct_to_template(request, 'base.html')
 
 
-def list(request):
-    records = models.Record.objects.order_by('-created_time')
+def list(request, tags=None):
+    if tags:
+        records = TaggedItem.objects.get_by_model(models.Record, tags.split("/")).order_by('-created_time')
+    else:
+        records = models.Record.objects.order_by('-created_time')
     return direct_to_template(request,
                               'core/list.html',
                               {'records': records})

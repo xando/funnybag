@@ -85,17 +85,17 @@ $(function(){
 
     routes: {
       "": "list",
+      "t/*tags" : "tags",
       "new/:type" : "new",
       "new" : "new",
       "login" : "login",
       "registration" : "registration",
       ":title/:hash/" : "details",
-      ":hash/" : "details",
+      ":hash/" : "details"
     },
 
     list: function(id) {
-      $('.main-view')
-        .hide()
+      $('.main-view').hide()
         .load('/ajax/list/', function() { 
           $(this).fadeIn(); 
         });
@@ -145,6 +145,13 @@ $(function(){
       hash = second ? second : first;
       new DetailsView().render(hash);
       
+    },
+    
+    tags: function(tags) {
+      $('.main-view').hide()
+        .load('/ajax/list/'+tags, function() { 
+          $(this).fadeIn(); 
+        });
     }
     
   });
