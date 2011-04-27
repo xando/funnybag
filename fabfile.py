@@ -46,7 +46,7 @@ def _install_requirements():
         del(os.environ['PIP_VIRTUALENV_BASE'])
     except KeyError:
         pass
-    sudo('pip -E %s/.virtualenv install -r %s/requirements.txt' % (env.path, env.path))
+    sudo('pip -E %s/.virtualenv install -U -r %s/requirements.txt' % (env.path, env.path))
 
 
 def _configure_webserver():
