@@ -63,24 +63,32 @@ def details(request, hash):
                               {"record": record})
 
 
-def login(request):
-    if request.method == "POST":
-        form = AuthenticationForm(data=request.POST)
-        if form.is_valid():
-            auth_login(request, form.get_user())
-
-            return success()
-
-        return failed(data=dict(form.errors.items()))
-    else:
-        form = AuthenticationForm()
+def login_registration(request):
+    login_form = AuthenticationForm()
+    registration_form = forms.RegistrationForm()
 
     return direct_to_template(request, 'registration/login.html',
-                              {"form": form})
+                              {"login_form": login_form,
+                               "registration_form": registration_form})
 
 
-def registration(request):
-    form = registration_forms.RegistrationForm()
+# ToDo: post and ajax check
+def login_valid(request):
+    form = AuthenticationForm(data=request.POST)
+    if form.is_valid():
+        auth_login(request, form.get_user())
+        return success()
+
+    return failed(data=dict(form.errors.items()))
+
+
+def registration_valid(request):
+    form = forms.RegistrationForm(data=request.POST)
+    if form.is_valid():
+        print "dupa"
+    else:
+
+        return failed(data=dict(form.errors))
 
     return direct_to_template(request, 'registration/registration.html',
                               {"form": form})

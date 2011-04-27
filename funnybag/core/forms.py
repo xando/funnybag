@@ -107,3 +107,70 @@ class Blockset(object):
     def __iter__(self):
         for block in self.blocks:
             yield block
+
+
+class RegistrationForm(forms.Form):
+    """
+    Form for registering a new user account.
+
+    Validates that the requested username is not already in use, and
+    requires the password to be entered twice to catch typos.
+
+    Subclasses should feel free to add any additional validation they
+    need, but should avoid defining a ``save()`` method -- the actual
+    saving of collected user data is delegated to the active
+    registration backend.
+
+    """
+    username = forms.RegexField(required=True,
+                                regex=r'^\w+$',
+                                max_length=30,
+                                widget=forms.TextInput(),
+                                label=_("Username"),
+                                error_messages={'invalid': _("This value must contain only letters, numbers and underscores.")})
+
+    email = forms.EmailField(required=True,
+                             label=_("E-mail"))
+
+    password1 = forms.CharField(required=True,
+                                widget=forms.PasswordInput(),
+                                label=_("Password"))
+
+    password2 = forms.CharField(required=True,
+                                widget=forms.PasswordInput(),
+                                label=_("Password (again)"))
+
+    def clean_username(self):
+        """
+        Validate that the username is alphanumeric and is not already
+        in use.
+
+        """
+        try:
+            User.objects.get(username__iexact=self.cleaned_data['username'])
+        except User.DoesNotExist:
+            return self.cleaned_data['username']
+        raise forms.ValidationError(_("A user with that username already exists."))
+
+    def clean_email(self):
+        """
+        Validate that the supplied email address is unique for the
+        site.
+
+        """
+        if User.objects.filter(email__iexact=self.cleaned_data['email']):
+            raise forms.ValidationError(_("This email address is already in use. Please supply a different email address."))
+        return self.cleaned_data['email']
+
+    def clean(self):
+        """
+        Verifiy that the values entered into the two password fields
+        match. Note that an error here will end up in
+        ``non_field_errors()`` because it doesn't apply to a single
+        field.
+
+        """
+        if 'password1' in self.cleaned_data and 'password2' in self.cleaned_data:
+            if self.cleaned_data['password1'] != self.cleaned_data['password2']:
+                raise forms.ValidationError(_("The two password fields didn't match."))
+        return self.cleaned_data

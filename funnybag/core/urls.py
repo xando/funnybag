@@ -1,4 +1,5 @@
 from django.conf.urls.defaults import patterns
+# from core.views import login_registration
 
 urlpatterns = patterns('funnybag.core.views',
                        (r'^$', 'main'),
@@ -6,8 +7,10 @@ urlpatterns = patterns('funnybag.core.views',
                        (r'^ajax/new/$', 'new'),
                        (r'^ajax/new/valid/$', 'new_valid'),
                        (r'^ajax/details/(?P<hash>.+)/$', 'details'),
-                       (r'^ajax/login/$', 'login'),
-                       (r'^ajax/registration/$', 'registration'),
+                       (r'^ajax/login/$', 'login_registration'),
+                       (r'^ajax/login/valid/$', 'login_valid'),
+                       (r'^ajax/registration/valid/$', 'registration_valid'),
+                       # (r'^ajax/registration/activate/$', 'registration_activate'),
                        )
 
 
