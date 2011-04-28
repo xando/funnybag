@@ -7,8 +7,11 @@ urlpatterns = patterns('funnybag.core.views',
                        (r'^ajax/new/$', 'new'),
                        (r'^ajax/new/valid/$', 'new_valid'),
                        (r'^ajax/details/(?P<hash>.+)/$', 'details'),
-                       (r'^ajax/login/$', 'login_registration'),
+
+                       (r'^ajax/login/$', 'login'),
                        (r'^ajax/login/valid/$', 'login_valid'),
+
+                       (r'^ajax/registration/$', 'registration'),
                        (r'^ajax/registration/valid/$', 'registration_valid'),
                        # (r'^ajax/registration/activate/$', 'registration_activate'),
                        )

@@ -63,13 +63,10 @@ def details(request, hash):
                               {"record": record})
 
 
-def login_registration(request):
-    login_form = AuthenticationForm()
-    registration_form = forms.RegistrationForm()
-
+def login(request):
+    form = AuthenticationForm()
     return direct_to_template(request, 'registration/login.html',
-                              {"login_form": login_form,
-                               "registration_form": registration_form})
+                              {"form": form})
 
 
 # ToDo: post and ajax check
@@ -80,6 +77,12 @@ def login_valid(request):
         return success()
 
     return failed(data=dict(form.errors.items()))
+
+
+def registration(request):
+    form = forms.RegistrationForm()
+    return direct_to_template(request, 'registration/registration.html',
+                              {"form": form})
 
 
 def registration_valid(request):

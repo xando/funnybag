@@ -1,41 +1,17 @@
 {% load i18n %}
 <div class="grid_12 alpha omega clearfix">
   <div id="login">
-    
-    <div class="login-registration">
-      <h1 class="login">Login</h1>
-      <div class="login">
-        <form id="login-form" method="post" action="/ajax/login/valid/">
-          {% csrf_token %}
-          <fieldset>
-            {{ login_form.username.label_tag }}{{ login_form.username }}
-            {{ login_form.password.label_tag }}{{ login_form.password }}
-            <div style="text-align:right">
-              <input type="submit" value="login" />
-            </div>
-            <input type="hidden" name="next" value="{{ login_next }}" />
-          </fieldset>
-        </form>
-      </div>
-      <h1 class="registration">Registration</h1>
-      <div class="registration">
-        <form id="registration-form" method="post" action="/ajax/registration/valid/">
-          {% csrf_token %}
-          <fieldset>
-            
-            {{ registration_form.username.label_tag }}{{ registration_form.username }}
-            {{ registration_form.email.label_tag }}{{ registration_form.email }}
-            {{ registration_form.password1.label_tag }}{{ registration_form.password1 }}
-            {{ registration_form.password2.label_tag }}{{ registration_form.password2 }}
-            
-            <div style="text-align:right">
-              <input type="submit" value="login" />
-            </div>
-
-            <input type="hidden" name="next" value="{{ login_next }}" />
-          </fieldset>
-        </form>
-      </div>
-    </div>
+    <h1>Login</h1>
+    <form id="login-form" method="post" action="/ajax/login/valid/">
+      {% csrf_token %}
+      <fieldset>
+        {{ form.username.label_tag }}{{ form.username }}
+        {{ form.password.label_tag }}{{ form.password }}
+        <div style="text-align:right">
+          <input type="submit" value="login" />
+        </div>
+          <input type="hidden" name="next" value="{{ login_next }}" />
+      </fieldset>
+    </form>
   </div>
 </div>

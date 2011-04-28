@@ -81,6 +81,70 @@ $(function(){
     }
   });
 
+  var LoginView = Backbone.View.extend({
+    el: $(".main-view"),
+    
+    render: function() {
+      $('.main-view').hide().load('/ajax/login/', function() { 
+        $(this).fadeIn();
+
+        $("#login-form").ajaxForm({
+          success: function(response, statusText, xhr, $form)  { 
+            response = jQuery.parseJSON(response);
+            $("#login-form").find(".errors").remove();
+            $("#login-form").find("input[type!=submit]").css("background", "white"); 
+            if (response.success) {
+              document.location.hash = "#";
+            } else {
+              $.each(response.data, function(name, message) {
+                if(name == "__all__") {
+                  $("#login-form fieldset").prepend("<span class='errors'>"+message+"</span>");
+                } else {
+                  $("#id_"+name).css("background", "#ffddaa");
+                  $("label[for=id_"+name+"]").append(" <span class='errors'>"+message+"</span>");
+                }
+              });
+            }
+          },
+        }); 
+        
+        
+      });
+    }
+  });
+
+  var RegistrationView = Backbone.View.extend({
+    el: $(".main-view"),
+    
+    render: function() {
+      $(".main-view").hide().load('/ajax/registration/', function() {
+        $(this).fadeIn();
+        
+        $("#registration-form").ajaxForm({
+          success: function(response, statusText, xhr, $form)  { 
+            response = jQuery.parseJSON(response);
+            $("#registration-form").find(".errors").remove();
+            $("#registration-form").find("input[type!=submit]").css("background", "white"); 
+            if (response.success) {
+              document.location.hash = "#";
+            } else {
+              $.each(response.data, function(name, message) {
+                if(name == "__all__") {
+                  $("#login-form fieldset").prepend(" <span class='errors'>"+message+"</span>");
+                } else {
+                  $("#id_"+name).css("background", "#ffddaa");
+                  $("label[for=id_"+name+"]").append(" <span class='errors'>"+message+"</span>");
+                }
+              });
+            }
+            
+          },
+        }); 
+      });
+    }
+    
+  });
+    
   Workspace = Backbone.Controller.extend({
 
     routes: {
@@ -106,76 +170,11 @@ $(function(){
     },
 
     login: function() {
-      $('.main-view')
-        .hide().load('/ajax/login/', function() { 
-          $(this).fadeIn();
-          
-          $('div.login-registration > div').hide();
-          $('div.login-registration > div.login').show();
-          
-          $('div.login-registration> h1').click(function() {
-            var $nextDiv = $(this).next();
-            var $visibleSiblings = $nextDiv.siblings('div:visible');
-            
-            if ($visibleSiblings.length ) {
-              $visibleSiblings.slideUp('fast', function() {
-                $nextDiv.slideToggle('fast');
-              });
-            } else {
-              $nextDiv.slideToggle('fast');
-            }
-          });
-
-          $("#login-form").ajaxForm({
-            success: function(response, statusText, xhr, $form)  { 
-              response = jQuery.parseJSON(response);
-              $("#login-form").find(".errors").remove();
-              $("#login-form").find("input[type!=submit]").css("background", "white"); 
-              if (response.success) {
-                document.location.hash = "#";
-              } else {
-                $.each(response.data, function(name, message) {
-                  if(name == "__all__") {
-                    $("#login-form fieldset").prepend(" <span class='errors'>"+message+"</span>");
-                  } else {
-                    $("#id_"+name).css("background", "#ffddaa");
-                    $("label[for=id_"+name+"]").append(" <span class='errors'>"+message+"</span>");
-                  }
-                });
-              }
-              
-            },
-          }); 
-
-          $("#registration-form").ajaxForm({
-            success: function(response, statusText, xhr, $form)  { 
-              response = jQuery.parseJSON(response);
-              $("#registration-form").find(".errors").remove();
-              $("#registration-form").find("input[type!=submit]").css("background", "white"); 
-              if (response.success) {
-                document.location.hash = "#";
-              } else {
-                $.each(response.data, function(name, message) {
-                  if(name == "__all__") {
-                    $("#login-form fieldset").prepend(" <span class='errors'>"+message+"</span>");
-                  } else {
-                    $("#id_"+name).css("background", "#ffddaa");
-                    $("label[for=id_"+name+"]").append(" <span class='errors'>"+message+"</span>");
-                  }
-                });
-              }
-              
-            },
-          }); 
-
-        });
+      new LoginView().render();
     },
-    
+
     registration: function() {
-      $('.main-view').hide()
-        .load('/ajax/registration/', function() { 
-          $(this).fadeIn();
-        });
+      new RegistrationView().render();
     },
     
     details: function(first, second){
