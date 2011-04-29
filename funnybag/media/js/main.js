@@ -42,12 +42,19 @@ $(function(){
     render: function() {
       $(this.el)
         .hide()
-        .load('/ajax/new/', function() {
-        
+        .load('/ajax/new/', function(response) {
+          $(this).fadeIn();
+          var response = jQuery.parseJSON(response);
+          
+          if (!response.success) {
+            document.location.hash = "#login/new";
+            return false;
+          }
+          
           $('#new-record-form').ajaxForm({
             iframe: true,
             success: function(response, statusText, xhr, $form)  { 
-              response = jQuery.parseJSON(response);
+              var response = jQuery.parseJSON(response);
               $("#new-record-form").find(".errors").remove();
               $("#new-record-form").find("input[type!=submit],textarea")
                 .css("background", "white"); 
@@ -83,8 +90,16 @@ $(function(){
 
   var LoginView = Backbone.View.extend({
     el: $(".main-view"),
+    next: "#",
     
+    initialize: function(next) {
+      if (next) {
+        this.next = "#"+next;
+      }
+    },
+
     render: function() {
+      var next = this.next;
       $('.main-view').hide().load('/ajax/login/', function() { 
         $(this).fadeIn();
 
@@ -94,7 +109,7 @@ $(function(){
             $("#login-form").find(".errors").remove();
             $("#login-form").find("input[type!=submit]").css("background", "white"); 
             if (response.success) {
-              document.location.hash = "#";
+              document.location.hash = next;
             } else {
               $.each(response.data, function(name, message) {
                 if(name == "__all__") {
@@ -153,12 +168,13 @@ $(function(){
       "new/:type" : "new",
       "new" : "new",
       "login" : "login",
+      "login/:next" : "login",
       "registration" : "registration",
       ":title/:hash/" : "details",
       ":hash/" : "details"
     },
 
-    list: function(id) {
+    list: function() {
       $('.main-view').hide()
         .load('/ajax/list/', function() { 
           $(this).fadeIn(); 
@@ -169,8 +185,8 @@ $(function(){
       new NewView().render();
     },
 
-    login: function() {
-      new LoginView().render();
+    login: function(next) {
+      new LoginView(next).render();
     },
 
     registration: function() {

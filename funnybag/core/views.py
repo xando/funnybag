@@ -3,6 +3,7 @@ from tagging.models import TaggedItem
 from django.views.generic.simple import direct_to_template
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
+from django.http import HttpResponseRedirect
 
 from registration import forms as registration_forms
 from funnybag.core.utils import success, failed
@@ -24,11 +25,13 @@ def list(request, tags=None):
                               {'records': records})
 
 
+
 def new(request):
+    if not request.user.is_authenticated():
+        return failed()
+
     record_form = forms.RecordForm()
-
     blockset = forms.Blockset()
-
     return direct_to_template(request, 'core/new.html',
                               {'record_form': record_form,
                                'blocksset': blockset})
