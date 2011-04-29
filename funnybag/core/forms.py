@@ -70,6 +70,10 @@ TextFormSet = modelformset_factory(Text,
                                    form=ContentNodeForm,
                                    formset=ContentNodeFormSet)
 
+LinkFormSet = modelformset_factory(Link,
+                                   form=ContentNodeForm,
+                                   formset=ContentNodeFormSet)
+
 ImageFormSet = modelformset_factory(Image,
                                     form=ContentNodeForm,
                                     formset=ContentNodeFormSet)
@@ -81,6 +85,7 @@ CodeFormSet = modelformset_factory(Code,
 
 class Blockset(object):
     blocks_types = [TextFormSet,
+                    LinkFormSet,
                     VideoFormSet,
                     ImageFormSet,
                     CodeFormSet]

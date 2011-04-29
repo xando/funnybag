@@ -54,6 +54,20 @@ class Text(models.Model):
         return self.text
 
 
+class Link(models.Model):
+    type = "link"
+    name = models.CharField(blank=True, max_length=1024)
+    link = models.URLField(verify_exists=False)
+
+    def render(self):
+        if self.name:
+            return mark_safe('<a target="_blank" href="%s">%s</a>' % (self.link, self.name))
+        return mark_safe('<a target="_blank" href="%s">%s</a>' % (self.link,self.link))
+
+    def __unicode__(self):
+        return self.link
+
+
 class Video(models.Model):
     type = "video"
     embed = models.TextField()

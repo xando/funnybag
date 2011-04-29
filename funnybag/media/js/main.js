@@ -44,12 +44,13 @@ $(function(){
         .hide()
         .load('/ajax/new/', function(response) {
           $(this).fadeIn();
-          var response = jQuery.parseJSON(response);
-          
-          if (!response.success) {
-            document.location.hash = "#login/new";
-            return false;
-          }
+          try {
+            var response = jQuery.parseJSON(response);
+            if (!response.success) {
+              document.location.hash = "#login/new";
+              return false;
+            }
+          } catch(error) {}
           
           $('#new-record-form').ajaxForm({
             iframe: true,
