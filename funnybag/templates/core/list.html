@@ -19,7 +19,9 @@
         {{ record.created_time|date:"D d M Y" }}
       </div>
       <div class="grid_6 omega" style="text-align:right">
-        Tags: {% for tag in tag_list %}<a href="#t/{{ tag|iriencode }}">{{ tag }}</a> {% endfor %}
+        {% if tag_list %}
+        {% for tag in tag_list %}<a href="#t/{{ tag|iriencode }}">{{ tag }}</a> {% endfor %}
+        {% endif %}
       </div>
     </div>
     {% empty %}
