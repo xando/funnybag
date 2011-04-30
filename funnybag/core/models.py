@@ -9,6 +9,7 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.utils.safestring import mark_safe
 from django.template import Context, loader
+from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 
 
@@ -48,7 +49,7 @@ class Text(models.Model):
     text = models.TextField()
 
     def render(self):
-        return self.text
+        return render_to_string('core/blocks/text.html', {"text": self.text})
 
     def __unicode__(self):
         return self.text
@@ -89,8 +90,7 @@ class Image(models.Model):
     image = models.ImageField(upload_to="blocks/images")
 
     def render(self):
-        template = loader.get_template('core/blocks/image.html')
-        return template.render(Context({'image': self.image}))
+        return render_to_string('core/blocks/image.html', {'image': self.image})
 
     def save(self, *args, **kwargs):
         super(Image, self).save(*args, **kwargs)

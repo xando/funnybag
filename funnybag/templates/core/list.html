@@ -1,7 +1,6 @@
 {% load i18n %}
 {% load tagging_tags %}
 
-
 <div class="grid_12 alpha omega clearfix">
   <div id="record-list" class="clearfix">
 
@@ -10,9 +9,9 @@
 
     <div class="list-element">
       <h1><a href="#{{ record.slug }}/{{ record.id }}/">{{ record.title }}</a></h1>
-      {% for block in record.blocks.all %}
-      <p>{{ block.data.render }}</p>
-      {% endfor %}
+      <!-- {% for block in record.blocks.all %} -->
+      <!-- <p>{{ block.data.render }}</p> -->
+      <!-- {% endfor %} -->
     </div>
     <div class="list-element-footer">
       <div class="grid_6 alpha">

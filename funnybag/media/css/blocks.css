@@ -24,6 +24,24 @@
     font-size: 14px;
 }
 
+.text {
+    font-family: Arial, sans-serif;
+    line-height: 1.58em;
+    vertical-align: baseline;
+    outline: 0;
+    orphans: 4;
+    hyphenate: auto;
+    hyphenate-before: 2;
+    hyphenate-after: 3;
+    hyphenate-lines: 3;
+    orphans: 4;
+    text-align: justify;
+}
+
+.image {
+    text-align:center;
+}
+
 .text.block textarea{
     font-family: georgia;
     font-size: 15px;

@@ -7,11 +7,14 @@
     <meta name="description" content="FUNNYbag" />
     <link rel="Shortcut Icon" type="image/ico" href="{{ MEDIA_URL }}images/favicon.png" />
 
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.2.0/build/cssreset/reset-context-min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.2.0/build/cssreset/reset-context-min.css"> -->
 
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/style.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/blocks.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="{{ MEDIA_URL }}css/grid.css" type="text/css" media="screen" />
+    <link href="http://fonts.googleapis.com/css?family=Koulen:regular&subset=khmer" rel="stylesheet" type="text/css"x>
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" >
+    <link href="http://fonts.googleapis.com/css?family=Permanent+Marker:regular" rel="stylesheet" type="text/css" >
 
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
@@ -30,18 +33,18 @@
   </head>
 
   <body>
-
-    <div id="header" class="clearfix"> <!-- HTML5 header tag -->
+    <div id="header">
       <div id="headercontainer">
-        <div id="logo"><a class="introlink anchorLink" href="#">http://OfObO.com</a></div>
-        <div id="nav">
-          <ul>
-            <li><a class="introlink" href="#">{% trans "latest" %}</a></li>
-            <li><a class="portfoliolink" href="#new">{% trans "add" %}</a></li>
-            <li><a class="loginlink" href="#login">{% trans "login" %}</a></li>
-            <li><a class="registrationlink" href="#registration">{% trans "registration" %}</a></li>
-          </ul>
+        <div id="logo" style="float:left">
+          <a href="#">FunnyBag</a>
+          <span id="subtitle">:new</span>
         </div>
+        <ul id="top-nav">
+	  <li><a href="#">{% trans "latest" %}</a></li>
+	  <li><a href="#new">{% trans "add" %}</a></li>
+	  <li><a href="#login">{% trans "login" %}</a></li>
+          <li><a href="#registration">{% trans "registration" %}</a></li>
+	</ul>
       </div>
     </div>
 

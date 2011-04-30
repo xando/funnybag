@@ -39,72 +39,49 @@ h1 {
 }
 
 #logo a {
+    font-family: KeffeesatzBold;
     color: #fff;
     font-size: 40px;
-    background-color: #ff5400;
-    padding: 5px 25px 10px 25px;
-    width: 300px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-    border-top: 1px solid rgba(255, 255, 255, 0.6);
-    background: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.23, #c34000),
-        color-stop(0.62, #ff5400)
-    );
-    background: -moz-linear-gradient(
-        center bottom,
-        #c34000 23%,
-        #ff5400 62%
-    );
 }
 
 #logo a:hover {
-    color: #fff;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
-    padding-bottom: 10px;
-    background-color: #7ac000;
-    background: -webkit-gradient(
-        linear,
-        left bottom,
-        left top,
-        color-stop(0.23, #619702),
-        color-stop(0.62, #7ac000)
-    );
-    background: -moz-linear-gradient(
-        center bottom,
-        #619702 23%,
-        #7ac000 62%
-    );
+    color: #ddd;
 }
 
-h2 { padding-left: 125px; font-size: 66px; color: #ff5400; height: 105px; }
-h2 span.sub { font-size: 48px; float: left; color: #4b4b4b; }
+#subtitle {
+    color: #fff;
+}
 
-h2.intro { background: url(../images/intro.png) no-repeat -10px -10px; }
-h2.work { background: url(../images/portfolio.png) no-repeat -10px -10px; }
-h2.about { background: url(../images/about.png) no-repeat -10px -10px; }
-h2.contact { background: url(../images/contact.png) no-repeat -10px -10px; }
+h2 { 
+    padding-left: 125px; 
+    font-size: 66px; 
+    color: #ff5400; 
+    height: 105px; 
+}
+
+h2 span.sub { 
+    font-size: 48px; 
+    float: left; 
+    color: #4b4b4b; 
+}
 
 a {
     color: #7ac000;
     text-decoration: none; 
-    border-bottom: 1px solid #7ac000;
     padding-bottom: 2px;
 }
 
 a:hover {
     color: #ff5400;
     text-decoration: none;
-    border-bottom: 1px solid #ff5400;
+    /* border-bottom: 1px solid #ff5400; */
     padding-bottom: 2px;
 }
 
 a:active {
     color: #ff5400;
     text-decoration: none;
-    border-bottom: 1px solid #ff5400;
+    /* border-bottom: 1px solid #ff5400; */
     padding-bottom: 2px;
     position: relative;
     top: 1px;
@@ -122,13 +99,16 @@ strong {
 }
 
 #header {
-    padding: 5px 0;
+    padding: 0 0 10px 0;
     width: 100%;
     background-color: #000;
-    margin-bottom: 25px; -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    margin-bottom: 25px; 
+    -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); 
+    -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     position: fixed;
-    z-index: 10;
-    float: left;
+    z-index: 1000;
+    height: 38px;
 }
 
 #headercontainer, #contentcontainer {
@@ -137,27 +117,37 @@ strong {
     position: relative;
 }
 
-#nav {
-    width: auto;
+#top-nav {
+    font-family: 'Lato', serif;
+    line-height: 3em;
+    height: 90px;
+    margin: 0 auto;
+    position: absolute;
+    z-index: 100;
+    list-style: none;
+    right: 0;
+    
+}
+
+#top-nav li {
     float: left;
 }
 
-#nav ul {
-    position: absolute;
-    right: 0;
+#top-nav li a {
+    color: #d1d1d1;
     display: block;
-    margin-top: -37px;
+    height: 51px;
+    padding: 0 10px;
+    text-shadow: 1px 1px 2px #000;
+    text-transform: uppercase;
+    text-decoration: none;
 }
 
-#nav ul li {
-    display: inline;
-    margin-left: 50px;
+#top-nav li a:hover {
+    background: url(../images/nav-hover-bg.png);
+    color: #fff;
 }
 
-#nav ul li a {
-    font-size: 24px;
-    border-bottom: none;
-}
 
 .pagination-nav {
     text-align:center;
@@ -172,21 +162,6 @@ strong {
     margin:30px 0 0 0;
 }
 
-
-/* section { margin-bottom: 1000px; padding-top: 150px; float: left; } */
-
-/* #intro h2 a { padding-bottom: 0px; } */
-/* #intro a.featured { padding-bottom: 0px; border-bottom: none; } */
-/* #intro a img { border: 5px solid rgba(122, 192, 0, 0.15); -webkit-border-radius: 5px; margin-top: 40px; margin-bottom: 5px; } */
-#intro a img:hover, #portfolio .work a img:hover, input:hover, textarea:hover { border: 3px solid rgba(122, 192, 0, 1); -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.4); }
-/* #intro a img:active, #portfolio .work a img:active { -webkit-box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); } */
-
-#portfolio ul.work a { border-bottom: none; }
-#portfolio ul.work a img { border: 5px solid rgba(122, 192, 0, 0.15); -webkit-border-radius: 5px; }
-#portfolio ul.work { float: left; margin-left: -15px; width: 975px;  }
-#portfolio ul.work li { list-style: none; float: left; margin-left: 15px; margin-bottom: 15px; }
-
-#contact { margin-bottom: 0px; }
 
 input[type=text],
 input[type=password],
@@ -205,7 +180,8 @@ input, textarea {
     padding: 10px;
     font-family: Keffeesatz, Arial;
     color: #4b4b4b;
-    font-size: 24px; -webkit-border-radius: 5px;
+    font-size: 24px; 
+    border-radius: 5px;
     margin-bottom: 5px;
 }
 
@@ -223,21 +199,25 @@ input[type="submit"] {
     color: #fff;
     font-size: 1.6em;
     background-color: #7ac000;
-    padding: 2px 24px; -webkit-border-radius: 10px; -moz-border-radius: 10px; -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+    padding: 2px 24px; 
+    border-radius: 10px; 
+    border-radius: 10px; 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); 
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     border-top: 1px solid rgba(255, 255, 255, 0.6);
-        background: -webkit-gradient(
-            linear,
-            left bottom,
-            left top,
-            color-stop(0.23, #619702),
-            color-stop(0.62, #7ac000)
-        );
-        background: -moz-linear-gradient(
-            center bottom,
-            #619702 23%,
-            #7ac000 62%
-        );
+    background: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0.23, #619702),
+        color-stop(0.62, #7ac000)
+    );
+    background: -moz-linear-gradient(
+        center bottom,
+        #619702 23%,
+        #7ac000 62%
+    );
 }
 
 input[type="submit"]:hover {
@@ -265,6 +245,7 @@ input[type="submit"]:active {
 
 fieldset {
     padding: 15px 5px;
+    border: none;
 }
 
 label {
@@ -296,12 +277,9 @@ footer ul li img {
 #login,
 #registration,
 #record-details,
+#record-list,
 #record-new {
-    margin-top: 120px;
-}
-
-#record-list {
-    margin-top:120px;
+    margin-top: 60px;
 }
 
 .list-element {
