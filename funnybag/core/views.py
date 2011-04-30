@@ -44,8 +44,9 @@ def new_valid(request):
         blockset = forms.Blockset(request.POST, request.FILES)
 
         if record_form.is_valid() and blockset.is_valid():
-            record = record_form.save()
-
+            record = record_form.save(commit=False)
+            record.created_by = request.user
+            record.save()
             for block in blockset:
 
                 for form in block.forms:

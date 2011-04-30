@@ -16,7 +16,7 @@
     </div>
     <div class="list-element-footer">
       <div class="grid_6 alpha">
-        {{ record.created_time|date:"D d M Y" }}
+        {{ record.created_time|date:"D d M Y" }} by {{ record.created_by }}
       </div>
       <div class="grid_6 omega" style="text-align:right">
         {% if tag_list %}
