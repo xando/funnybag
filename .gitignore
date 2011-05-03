@@ -3,6 +3,7 @@
 data.sqlite
 .#*
 media/record/image/
+media/CACHE/
 local_settings.py
 .ropeproject
 funnybag/media/blocks/images/*
