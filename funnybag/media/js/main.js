@@ -127,8 +127,6 @@ $(function(){
             }
           },
         }); 
-        
-        
       });
     }
   });
@@ -148,7 +146,7 @@ $(function(){
             $("#registration-form").find(".errors").remove();
             $("#registration-form").find("input[type!=submit]").css("background", "white"); 
             if (response.success) {
-              document.location.hash = "#";
+              document.location.hash = "#login";
             } else {
               $.each(response.data, function(name, message) {
                 if(name == "__all__") {

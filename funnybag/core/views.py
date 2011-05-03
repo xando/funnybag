@@ -102,9 +102,10 @@ def registration(request):
 def registration_valid(request):
     form = forms.RegistrationForm(data=request.POST)
     if form.is_valid():
-        print "dupa"
+        username, email, password = request.POST['username'], request.POST['email'], request.POST['password1']
+        auth_models.User.objects.create_user(username, email, password)
+        return success()
     else:
-
         return failed(data=dict(form.errors))
 
     return direct_to_template(request, 'registration/registration.html',

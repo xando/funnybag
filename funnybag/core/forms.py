@@ -1,11 +1,11 @@
 import re
 
 from django import forms
-from django.forms.models import modelformset_factory
-from django.forms.models import BaseModelFormSet
+from django.forms.models import modelformset_factory, BaseModelFormSet
 from django.utils.translation import ugettext as _
 
 from funnybag.core.models import *
+from django.contrib.auth.models import User
 from funnybag.core import services
 
 
