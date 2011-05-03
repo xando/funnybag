@@ -3,19 +3,16 @@
 
 <div class="grid_12 alpha omega clearfix">
   <div id="record-list" class="clearfix">
-
+    <div id="view-name">{% if title %}{{ title }}{% else %}latest{% endif %}</div>
     {% for record in records %}
     {% tags_for_object record as tag_list %}
 
     <div class="list-element">
       <h1><a href="#{{ record.slug }}/{{ record.id }}/">{{ record.title }}</a></h1>
-      <!-- {% for block in record.blocks.all %} -->
-      <!-- <p>{{ block.data.render }}</p> -->
-      <!-- {% endfor %} -->
     </div>
     <div class="list-element-footer">
       <div class="grid_6 alpha">
-        {{ record.created_time|date:"D d M Y" }} by {{ record.created_by }}
+        {{ record.created_time|date:"D d M Y" }} by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>
       </div>
       <div class="grid_6 omega" style="text-align:right">
         {% if tag_list %}

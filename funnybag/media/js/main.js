@@ -1,3 +1,4 @@
+
 $(function(){
   
   _.templateSettings = {
@@ -44,6 +45,7 @@ $(function(){
         .hide()
         .load('/ajax/new/', function(response) {
           $(this).fadeIn();
+          $('#logo-view').text($('#view-name').text()+"@");
           try {
             var response = jQuery.parseJSON(response);
             if (!response.success) {
@@ -104,6 +106,8 @@ $(function(){
       $('.main-view').hide().load('/ajax/login/', function() { 
         $(this).fadeIn();
 
+        $('#logo-view').text($('#view-name').text()+"@");
+        
         $("#login-form").ajaxForm({
           success: function(response, statusText, xhr, $form)  { 
             response = jQuery.parseJSON(response);
@@ -136,6 +140,8 @@ $(function(){
       $(".main-view").hide().load('/ajax/registration/', function() {
         $(this).fadeIn();
         
+        $('#logo-view').text($('#view-name').text()+"@");
+        
         $("#registration-form").ajaxForm({
           success: function(response, statusText, xhr, $form)  { 
             response = jQuery.parseJSON(response);
@@ -165,7 +171,8 @@ $(function(){
 
     routes: {
       "": "list",
-      "t/*tags" : "tags",
+      "t/:tag" : "tag",
+      "a/:author" : "author",
       "new/:type" : "new",
       "new" : "new",
       "login" : "login",
@@ -179,10 +186,27 @@ $(function(){
       $('.main-view').hide()
         .load('/ajax/list/', function() { 
           $(this).fadeIn(); 
+          $('#logo-view').text($('#view-name').text()+"@");
+        });
+    },
+    
+    tag: function(tag) {
+      $('.main-view').hide()
+        .load('/ajax/list/tag/'+tag, function() { 
+          $(this).fadeIn(); 
+          $('#logo-view').text($('#view-name').text()+"@");
         });
     },
 
-    new: function(type) {
+    author: function(author) {
+      $('.main-view').hide()
+        .load('/ajax/list/author/'+author, function() { 
+          $(this).fadeIn(); 
+          $('#logo-view').text($('#view-name').text()+"@");
+        });
+    },
+
+    new: function() {
       new NewView().render();
     },
 
@@ -197,15 +221,7 @@ $(function(){
     details: function(first, second){
       hash = second ? second : first;
       new DetailsView().render(hash);
-      
     },
-    
-    tags: function(tags) {
-      $('.main-view').hide()
-        .load('/ajax/list/'+tags, function() { 
-          $(this).fadeIn(); 
-        });
-    }
     
   });
   

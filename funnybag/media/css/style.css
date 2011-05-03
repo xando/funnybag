@@ -38,6 +38,14 @@ h1 {
     margin-bottom: 30px;
 }
 
+#logo-view {
+    color: #AA5533;
+    font-size: 40px;
+    margin-bottom: 30px;
+    font-family: Keffeesatz,Arial;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+}
+
 #logo a {
     font-family: KeffeesatzBold;
     color: #fff;
@@ -48,8 +56,8 @@ h1 {
     color: #ddd;
 }
 
-#subtitle {
-    color: #fff;
+#view-name {
+    display:none;
 }
 
 h2 { 
@@ -279,7 +287,7 @@ footer ul li img {
 #record-details,
 #record-list,
 #record-new {
-    margin-top: 60px;
+    margin-top: 120px;
 }
 
 .list-element {

@@ -21,6 +21,9 @@ class Record(models.Model):
     modified_time = models.DateTimeField(auto_now=True)
     created_by = models.ForeignKey('auth.User')
 
+    class Meta:
+        ordering = ['-created_time']
+
     def __unicode__(self):
         return "%s :%s" % (self.id, self.title)
 
