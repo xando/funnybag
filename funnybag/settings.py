@@ -75,7 +75,8 @@ INSTALLED_APPS = (
     'registration',
     'pagination',
     'easy_thumbnails',
-    'tagging'
+    'tagging',
+    "compressor",
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
