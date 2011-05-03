@@ -7,4 +7,4 @@ local_settings.py
 .ropeproject
 funnybag/media/blocks/images/*
 funnybag/media/CACHE
-
+deploy/

@@ -6,7 +6,7 @@ from fabric.contrib.files import sed
 env.project_name = 'funnybag'
 env.github_login = 'xando'
 
-def setup_production(path="/var/www/%s" % env.project_name, initial_release="master"):
+def setup_production(path="/var/www/%s" % env.project_name, initial_release="master", local_settings=None):
     env.path = path.rstrip("/")
 
     sudo('apt-get install -y python-setuptools')
@@ -23,6 +23,7 @@ def setup_production(path="/var/www/%s" % env.project_name, initial_release="mas
     _download_release(initial_release)
     _install_requirements()
     _configure_webserver()
+    _local_settings(local_settings)
     _synchronize_database()
     _setup_rights()
     _restart()
@@ -71,6 +72,17 @@ def _configure_webserver():
 
 def _synchronize_database():
     sudo("python %s/%s/manage.py syncdb --noinput" % (env.path, env.project_name))
+
+
+def _local_settings(local_settings):
+
+    if not local_settings:
+        print(colors.yellow("No local settins files provied, using defaults."))
+    else:
+        try:
+            put(local_settings, "%s/%s/local_settings.py" % (env.path, env.project_name), use_sudo=True)
+        except ValueError:
+            print(colors.yellow("Local settings file doesn't exists, using defaults."))
 
 
 def _setup_rights():
