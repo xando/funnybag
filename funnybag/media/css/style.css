@@ -4,50 +4,32 @@
     outline: 0;
 }
 
-@font-face {
-    font-family: Keffeesatz;
-    src: url(../fonts/YanoneKaffeesatz-Light.otf) format("opentype")
-}
-
-@font-face {
-    font-family: KeffeesatzBold;
-    src: url(../fonts/YanoneKaffeesatz-Bold.otf) format("opentype")
-}
-
 body {
-    font-family: Keffeesatz, Arial;
+    font-family: 'Yanone Kaffeesatz', serif;
+    font-weight: 400;
     color: #4b4b4b;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
     overflow-y: scroll;
 }
 
-::selection {
-    background-color: rgba(122, 192, 0, 0.2);
-}
-
-::-moz-selection {
-    background-color: rgba(122, 192, 0, 0.2);
-    border: 10px solid red;
-}
-
 h1 {
+    font-family: 'Terminal Dosis Light', serif;
+    font-size: 24px;
     color: #aa5533;
-    font-size: 40px;
     position: relative;
-    top: 15px;
-    margin-bottom: 30px;
+    margin-bottom: 5px;
 }
 
 #logo-view {
     color: #AA5533;
     font-size: 40px;
     margin-bottom: 30px;
-    font-family: Keffeesatz,Arial;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
 #logo a {
-    font-family: KeffeesatzBold;
+    font-family: 'Yanone Kaffeesatz', serif;
+    font-weight: 700;
     color: #fff;
     font-size: 40px;
 }
@@ -102,10 +84,6 @@ p {
     text-align: justify;
 }
 
-strong {
-    font-family: KeffeesatzBold, Arial;
-}
-
 #header {
     padding: 0 0 10px 0;
     width: 100%;
@@ -134,7 +112,6 @@ strong {
     z-index: 100;
     list-style: none;
     right: 0;
-    
 }
 
 #top-nav li {
@@ -170,7 +147,6 @@ strong {
     margin:30px 0 0 0;
 }
 
-
 input[type=text],
 input[type=password],
 input[type=file] {
@@ -186,7 +162,6 @@ input, textarea {
     background-color: rgba(255, 255, 255, 0.4);
     border: 3px solid rgba(122, 192, 0, 0.15);
     padding: 10px;
-    font-family: Keffeesatz, Arial;
     color: #4b4b4b;
     font-size: 24px; 
     border-radius: 5px;
@@ -200,6 +175,8 @@ textarea:focus {
 }
 
 input[type="submit"] {
+    font-family: 'Yanone Kaffeesatz', serif;
+    font-weight: 300;
     margin-bottom: -5px;
     margin-right: 3px;
     border: none;
@@ -252,7 +229,6 @@ input[type="submit"]:active {
 }
 
 fieldset {
-    padding: 15px 5px;
     border: none;
 }
 
@@ -261,41 +237,26 @@ label {
     display: block;
 }
 
-footer {
-    float: left;
-    margin-top: 50px;
-}
-
-footer ul {
-    margin-bottom: 150px;
-}
-footer ul li {
-display: inline;
-margin-right: 50px;
-}
-footer ul li a {
-    font-size: 24px; margin-left: 10px;
-}
-footer ul li img {
-    vertical-align: bottom;
-    position: relative;
-    top: 2px;
-}
-
 #login,
 #registration,
 #record-details,
 #record-list,
 #record-new {
-    margin-top: 120px;
+    margin-top: 70px;
 }
 
 .list-element {
-
+    border-bottom: 3px solid rgba(122, 192, 0, 0.15);
+    padding: 5px 0;
+    margin-bottom: 15px;
 }
 
-.list-element-footer {
-    margin-bottom: 60px;
+.list-element .stamp {
+    float: left;
+}
+
+.list-element .tags {
+    text-align: right;
 }
 
 .record {
@@ -321,19 +282,6 @@ footer ul li img {
 
 #record-new fieldset {
     margin-top: 20px;
-}
-
-#login-form  ul,
-#login-form li {
-    list-style:none outside none;
-    font-size: 1.20em;
-    padding:0 0 7px 10px;
-    padding:6px 0 3px 2px;
-}
-
-#login-form li {
-    display:inline;
-    margin-right: 20px;
 }
 
 .add-link {

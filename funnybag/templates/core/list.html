@@ -7,17 +7,15 @@
     {% for record in records %}
     {% tags_for_object record as tag_list %}
 
-    <div class="list-element">
-      <h1><a href="#{{ record.slug }}/{{ record.id }}/">{{ record.title }}</a></h1>
-    </div>
-    <div class="list-element-footer">
-      <div class="grid_6 alpha">
+    <div class="list-element clearfix">
+      <h1>
+        <a href="#{{ record.slug }}/{{ record.id }}/">{{ record.title }}</a>
+      </h1>
+      <div class="stamp">
         {{ record.created_time|date:"D d M Y" }} by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>
       </div>
-      <div class="grid_6 omega" style="text-align:right">
-        {% if tag_list %}
-        {% for tag in tag_list %}<a href="#t/{{ tag|iriencode }}">{{ tag }}</a> {% endfor %}
-        {% endif %}
+      <div class="tags">
+        {% if tag_list %}{% for tag in tag_list %}<a href="#t/{{ tag|iriencode }}">{{ tag }}</a> {% endfor %}{% endif %}
       </div>
     </div>
     {% empty %}
