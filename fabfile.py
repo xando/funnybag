@@ -77,12 +77,12 @@ def _synchronize_database():
 def _local_settings(local_settings):
 
     if not local_settings:
-        print(colors.yellow("No local settins files provied, using defaults."))
+        print("No local settins files provied, using defaults.")
     else:
         try:
             put(local_settings, "%s/%s/local_settings.py" % (env.path, env.project_name), use_sudo=True)
         except ValueError:
-            print(colors.yellow("Local settings file doesn't exists, using defaults."))
+            print("Local settings file doesn't exists, using defaults.")
 
 
 def _setup_rights():
