@@ -1,0 +1,50 @@
+﻿
+/* textbox part of the dropdown list */
+.idd_textbox {
+    width: 909px;
+    vertical-align: middle;
+}
+
+/* Dropdown list */
+div.idd_list {
+    font-family: monospace;
+    border: thin solid #C0C0C0;
+    background-color: #FFFFFF;	
+    padding-left: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    z-index: 900;
+    width: 907px !important;
+    max-height: 300px !important;
+    border-radius: 5px;
+}
+
+/* Option Group headers */
+.idd_listItemGroupHeader {
+    padding-bottom: 2px;
+    font-weight: bold;
+}
+
+/* Dropdown list items except group headers */
+.idd_listItem {
+    height: 1em; 
+    margin: 4px 0;
+    padding: 0 4px 4px 4px;
+}
+
+/* Dropdown list items nested under group headers */
+.idd_listItem_Nested {
+    margin-left: 15px;
+}
+
+/* mouseover on all list items except group headers */
+.idd_listItem_Hover {
+    color: #FFFFFF;
+    background-color: #669999;
+}
+
+/* List items that are disabled */
+.idd_listItem_Disabled {
+    color: #C0C0C0;
+    cursor: default;
+}

@@ -23,6 +23,15 @@ $(function(){
       });
 
       $('.block textarea').elastic();
+      
+      $('.code.block select[name$="language"]').each(function() {
+        if( $("#"+$(this).attr("id")+"_iddtext").length < 1) {
+          $(this).improveDropDown();
+          $('.idd_textbox').focus(function() {
+            $(this).val("");
+          });
+        }
+      });
     },
     
     remove_block: function(e) {
