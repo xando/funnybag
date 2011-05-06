@@ -9,7 +9,7 @@
 
     <div class="list-element clearfix">
       <h1>
-        <a href="#{{ record.slug }}/{{ record.id }}/">{{ record.title }}</a>
+        <a href="{{ record.get_absolute_url }}">{{ record.title }}</a>
       </h1>
       <div class="stamp">
         {{ record.created_time|date:"D d M Y" }} by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>

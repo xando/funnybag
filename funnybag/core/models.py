@@ -24,12 +24,15 @@ class Record(models.Model):
     class Meta:
         ordering = ['-created_time']
 
-    def __unicode__(self):
-        return "%s :%s" % (self.id, self.title)
+    def get_absolute_url(self):
+        return "#%s/%s/" % (self.slug, self.id)
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Record, self).save(args, kwargs)
+
+    def __unicode__(self):
+        return "%s :%s" % (self.id, self.title)
 
 
 class RecordBlock(models.Model): # Proxy

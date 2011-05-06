@@ -1,5 +1,7 @@
 from django.conf.urls.defaults import patterns
 
+from funnybag.core import feeds
+
 urlpatterns = patterns('funnybag.core.views',
                        (r'^$', 'main'),
 
@@ -17,5 +19,9 @@ urlpatterns = patterns('funnybag.core.views',
 
                        (r'^ajax/registration/$', 'registration'),
                        (r'^ajax/registration/valid/$', 'registration_valid'),
+
+                       (r'^rss/?$', feeds.BaseFeed()),
+                       (r'^rss/t(ag)?/(?P<tag>.+)/?$', feeds.ByTagFeed()),
+                       (r'^rss/a(uthor)?/(?P<author>.+)/?$', feeds.ByAuthorFeed()),
                        )
 
