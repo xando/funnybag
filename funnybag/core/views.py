@@ -3,6 +3,7 @@ from tagging.models import TaggedItem
 from django.views.generic.simple import direct_to_template
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
+from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import models as auth_models
 from django.http import HttpResponseRedirect
 
@@ -87,10 +88,16 @@ def login(request):
 def login_valid(request):
     form = AuthenticationForm(data=request.POST)
     if form.is_valid():
-        auth_login(request, form.get_user())
-        return success()
+        user = form.get_user()
+        auth_login(request, user)
+        return success(data={"username": user.username})
 
     return failed(data=dict(form.errors.items()))
+
+
+def logout(request):
+    auth_logout(request)
+    return success()
 
 
 def registration(request):

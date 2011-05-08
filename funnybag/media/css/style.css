@@ -97,10 +97,27 @@ p {
     height: 38px;
 }
 
-#headercontainer, #contentcontainer {
+#headercontainer, 
+#contentcontainer {
     width: 960px;
     margin: 0 auto;
     position: relative;
+}
+
+#userprofileinfo {
+    -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); 
+    -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    background: #444;
+    color: #ddd;
+    padding: 2px 0;
+}
+
+#userprofileinfo_header {
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+    text-align: right;
 }
 
 #top-nav {
@@ -109,7 +126,6 @@ p {
     height: 90px;
     margin: 0 auto;
     position: absolute;
-    z-index: 100;
     list-style: none;
     right: 0;
 }
@@ -121,7 +137,7 @@ p {
 #top-nav li a {
     color: #d1d1d1;
     display: block;
-    height: 51px;
+    height: 48px;
     padding: 0 10px;
     text-shadow: 1px 1px 2px #000;
     text-transform: uppercase;
@@ -131,6 +147,7 @@ p {
 #top-nav li a:hover {
     background: url(../images/nav-hover-bg.png);
     color: #fff;
+    z-index: 0;
 }
 
 

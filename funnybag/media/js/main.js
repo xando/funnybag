@@ -115,6 +115,7 @@ $(function(){
         $(this).fadeIn();
 
         $('#logo-view').text($('#view-name').text()+"@");
+        $('#id_username').focus();
         
         $("#login-form").ajaxForm({
           success: function(response, statusText, xhr, $form)  { 
@@ -123,6 +124,8 @@ $(function(){
             $("#login-form").find("input[type!=submit]").css("background", "white"); 
             if (response.success) {
               document.location.hash = next;
+              $( "#username").text(response.data.username);
+              $( "#userprofileinfo").show({ direction: "down"}, 700700);
             } else {
               $.each(response.data, function(name, message) {
                 if(name == "__all__") {
@@ -183,6 +186,7 @@ $(function(){
       "new" : "new",
       "login" : "login",
       "login/:next" : "login",
+      "logout" : "logout",
       "registration" : "registration",
       ":title/:hash/" : "details",
       ":hash/" : "details"
@@ -220,6 +224,14 @@ $(function(){
       new LoginView(next).render();
     },
 
+    logout: function() {
+      $.get('ajax/logout/', function(response) {
+        document.location.hash = "#";
+        $("#userprofileinfo").hide(700);
+        $("#username").text("");
+      });
+    },
+    
     registration: function() {
       new RegistrationView().render();
     },
