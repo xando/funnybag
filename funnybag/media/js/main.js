@@ -1,5 +1,10 @@
 $(function(){
-  
+
+  $(".back-button").live("click", function(){
+    window.history.go(-1);
+    return false;
+  })
+
   _.templateSettings = {
     interpolate : /\_\_(.+?)\_\_/g
   };

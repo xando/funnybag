@@ -5,7 +5,7 @@
 
 <div class="grid_12 alpha omega clearfix">
   <div id="record-details">
-    <a href="#">back</a> 
+    <a class="back-button" href="#">back</a> 
     <h1>{{ record.title }}</h1>
     {% for block in record.blocks.all %}
     <p>{{ block.data.render }}</p>
