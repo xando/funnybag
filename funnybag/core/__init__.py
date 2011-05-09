@@ -1,10 +1,11 @@
 youtube = """
-<iframe title="YouTube video player" 
-        width="480" height="390" 
-        src="$name" 
+<iframe title="YouTube video player"
+        width="480" height="390"
+        src="$name&wmode=transparent"
         frameborder="0" allowfullscreen>
 </iframe>
 """
+
 
 vimeo = """
 <iframe src="$name&autoplay=0" width="640" height="385" frameborder="0"></iframe>
