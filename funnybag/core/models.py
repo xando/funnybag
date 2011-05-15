@@ -3,6 +3,7 @@ from pygments import highlight
 from pygments.formatters import HtmlFormatter
 
 from tagging import fields
+from mptt.models import MPTTModel, TreeForeignKey
 
 from django.db import models
 from django.contrib.contenttypes.models import ContentType
@@ -13,13 +14,17 @@ from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
 
 
-class Record(models.Model):
-    title = models.CharField(max_length=1024)
-    tags = fields.TagField()
-    slug = models.SlugField(max_length=40)
-    created_time = models.DateTimeField(auto_now_add=True)
-    modified_time = models.DateTimeField(auto_now=True)
+class Record(MPTTModel):
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
     created_by = models.ForeignKey('auth.User')
+
+    title = models.CharField(max_length=1024, blank=True)
+    slug = models.SlugField(max_length=40, blank=True)
+
+    modified_time = models.DateTimeField(auto_now=True)
+    created_time = models.DateTimeField(auto_now_add=True)
+
+    tags = fields.TagField()
 
     class Meta:
         ordering = ['-created_time']
@@ -28,10 +33,13 @@ class Record(models.Model):
         return "#%s/%s/" % (self.slug, self.id)
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
-        super(Record, self).save(args, kwargs)
+        if self.title:
+            self.slug = slugify(self.title)
+        super(Record, self).save(*args, **kwargs)
 
     def __unicode__(self):
+        if self.parent:
+            return "Comment %s" % (self.id)
         return "%s :%s" % (self.id, self.title)
 
 

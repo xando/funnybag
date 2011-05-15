@@ -171,7 +171,7 @@ input[type=file] {
 }
 
 textarea {
-    width: 909px;
+    width: 933px;
     height: 100px;
 }
 
@@ -260,6 +260,22 @@ label {
 #record-list,
 #record-new {
     margin-top: 100px;
+}
+
+#record-details {
+    border-bottom: 1px solid #cccccc;
+    margin-bottom: 20px;
+}
+
+#record-responses {
+    margin: 10px 0;
+}
+
+.response {
+    margin: 10px 0;
+    border: 1px solid #cccccc;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .list-element {

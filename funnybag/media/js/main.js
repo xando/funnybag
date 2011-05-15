@@ -100,10 +100,20 @@ $(function(){
         .hide()
         .load('/ajax/details/'+ hash +'/', function() {
           $(this).fadeIn();
-        })
+          
+          $("#record-responses form").ajaxForm({
+            success: function(response, statusText, xhr, $form)  { 
+              console.log(response);
+              response = jQuery.parseJSON(response);
+              if (response.success) {
+                Backbone.history.loadUrl()
+              }
+            }
+          });
+        });
     }
   });
-
+  
   var LoginView = Backbone.View.extend({
     el: $(".main-view"),
     next: "#",
@@ -194,7 +204,7 @@ $(function(){
       "logout" : "logout",
       "registration" : "registration",
       ":title/:hash/" : "details",
-      ":hash/" : "details"
+      ":hash/" : "details",
     },
 
     list: function() {
@@ -245,7 +255,7 @@ $(function(){
       hash = second ? second : first;
       new DetailsView().render(hash);
     },
-    
+
   });
   
   new Workspace();

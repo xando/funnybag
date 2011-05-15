@@ -77,6 +77,7 @@ INSTALLED_APPS = (
     'easy_thumbnails',
     'tagging',
     "compressor",
+    "mptt"
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7

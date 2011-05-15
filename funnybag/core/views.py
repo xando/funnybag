@@ -18,20 +18,20 @@ def main(request):
 
 
 def list(request):
-    records = models.Record.objects.all()
+    records = models.Record.objects.filter(parent=None)
     return direct_to_template(request,
                               'core/list.html',
                               {'records': records})
 
 def list_by_tag(request, tag):
-    records = TaggedItem.objects.get_by_model(models.Record, tag)
+    records = TaggedItem.objects.get_by_model(models.Record, tag).filter(parent=None)
     return direct_to_template(request,
                               'core/list.html',
                               {'records': records,
                                "title": tag})
 
 def list_by_author(request, author):
-    records = models.Record.objects.filter(created_by__username=author)
+    records = models.Record.objects.filter(created_by__username=author).filter(parent=None)
     return direct_to_template(request,
                               'core/list.html',
                               {'records': records,
@@ -74,8 +74,27 @@ def new_valid(request):
 
 def details(request, hash):
     record = models.Record.objects.get(pk=hash)
+    form = forms.TextForm(initial={"sequence": 0})
     return direct_to_template(request, 'core/details.html',
-                              {"record": record})
+                              {"record": record,
+                               "form": form})
+
+
+def response_valid(request, hash):
+    if request.method == "POST":
+        record = models.Record.objects.get(pk=hash)
+        form = forms.TextForm(request.POST)
+        if form.is_valid():
+            record = models.Record.objects.create(parent=record,
+                                                  created_by=request.user)
+            models.RecordBlock.objects.create(record=record,
+                                              sequence=0,
+                                              data=form.save())
+
+            return success(data={"record": record.id})
+
+        print form.errors
+        return failed()
 
 
 def login(request):

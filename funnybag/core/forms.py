@@ -15,6 +15,12 @@ class RecordForm(forms.ModelForm):
         fields = ("title",'tags')
 
 
+class RecordResponseForm(forms.ModelForm):
+    class Meta:
+        model = Record
+        fields = ("title",'tags')
+
+
 class ContentNodeForm(forms.ModelForm):
     sequence = forms.CharField(widget=forms.HiddenInput)
     class Meta:
@@ -27,6 +33,11 @@ class ContentNodeFormSet(BaseModelFormSet):
         self.can_delete = True
         self.extra = 0
         super(ContentNodeFormSet, self).__init__(*args, **kwargs)
+
+
+class TextForm(ContentNodeForm):
+    class Meta(ContentNodeForm.Meta):
+        model = Text
 
 
 class VideoForm(ContentNodeForm):
