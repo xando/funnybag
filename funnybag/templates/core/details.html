@@ -20,15 +20,7 @@
     {% for block in record.blocks.all %}
     <p>{{ block.data.render }}</p>
     {% endfor %}
-    
-    <div class="grid_6 alpha">
-      {{ record.created_time|date:"D d M Y" }} by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>
-    </div>
-    <div class="grid_6 omega" style="text-align:right">
-      {% if tag_list %}
-      {% for tag in tag_list %}<a href="#t/{{ tag|iriencode }}">{{ tag }}</a> {% endfor %}
-      {% endif %}
-    </div>
+  
   </div>
 </div>
 
@@ -46,7 +38,7 @@
       
     </div>
     {% endfor %}
-  
+    
     <form method="post" action="{% url funnybag.core.views.response_valid record.id %}">
       {% csrf_token %}
       {{ form.text }}

@@ -4,7 +4,7 @@ PIL==1.1.7
 Pygments==1.4
 distribute==0.6.16
 django-compressor==0.7.1
--e git+https://github.com/qualitio/qualitio/tarball/development#egg=django-mptt
+-e git://github.com/django-mptt/django-mptt.git#egg=django-mptt
 django-pagination==1.0.7
 django-registration==0.7
 django-tagging==0.3.1
