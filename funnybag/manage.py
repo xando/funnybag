@@ -2,6 +2,9 @@
 import os
 import sys
 
+
+sys.path.append("django")
+
 try:
     os.environ["VIRTUAL_ENV"]
 except KeyError:

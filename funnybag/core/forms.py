@@ -6,6 +6,7 @@ from django.utils.translation import ugettext as _
 
 from funnybag.core.models import *
 from django.contrib.auth.models import User
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from funnybag.core import services
 
 
@@ -39,6 +40,45 @@ class TextForm(ContentNodeForm):
     class Meta(ContentNodeForm.Meta):
         model = Text
 
+
+class ImageForm(ContentNodeForm):
+    image = forms.FileField(required=False)
+    url = forms.URLField(required=False)
+
+    class Meta(ContentNodeForm.Meta):
+        model = Image
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        url = cleaned_data['url']
+
+        if not url:
+            return cleaned_data
+
+        import urllib2
+        import StringIO
+
+        response = urllib2.urlopen(url)
+
+        image_file = StringIO.StringIO(response.read())
+        image_file_name =  url.split("/")[-1]
+
+        content_lenght = response.info().get('content-length')
+        content_type = response.info().get('content-type')
+
+        url_file = InMemoryUploadedFile(
+            file = image_file,
+            field_name = "image",
+            name = image_file_name,
+            content_type = content_type,
+            size = int(content_lenght),
+            charset = "utf-8"
+            )
+
+        cleaned_data["image"] = url_file
+
+        print "test"
+        return cleaned_data
 
 class VideoForm(ContentNodeForm):
     class Meta(ContentNodeForm.Meta):
@@ -86,7 +126,7 @@ LinkFormSet = modelformset_factory(Link,
                                    formset=ContentNodeFormSet)
 
 ImageFormSet = modelformset_factory(Image,
-                                    form=ContentNodeForm,
+                                    form=ImageForm,
                                     formset=ContentNodeFormSet)
 
 CodeFormSet = modelformset_factory(Code,
