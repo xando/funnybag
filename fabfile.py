@@ -3,8 +3,9 @@ from fabric.api import *
 from fabric.operations import require
 from fabric.contrib.files import sed
 
-env.project_name = 'funnybag'
+env.project_name = 'ofobo'
 env.github_login = 'xando'
+env.github_repo = 'funnybag'
 
 def setup_production(path="/var/www/%s" % env.project_name, initial_release="master", local_settings=None):
     env.path = path.rstrip("/")
@@ -35,7 +36,7 @@ def _download_release(release):
     env.release = release
     env.release_download_tmp_file = "/tmp/%(release)s.tgz" % env
 
-    sudo("wget http://github.com/%(github_login)s/%(project_name)s/tarball/%(release)s -O %(release_download_tmp_file)s --no-check-certificate" % env)
+    sudo("wget http://github.com/%(github_login)s/%(github_repo)s/tarball/%(release)s -O %(release_download_tmp_file)s --no-check-certificate" % env)
     sudo("tar xzvf %(release_download_tmp_file)s --strip-components=1 --directory=%(path)s" % env)
     sudo("rm -f %(release_download_tmp_file)s" % env)
 
@@ -57,7 +58,7 @@ def _configure_webserver():
         "PATH", env.path, use_sudo=True)
 
     sed("%s/apache.virtualhost" % env.path,
-        "PROJECT_NAME", env.project_name, use_sudo=True)
+        "PROJECT_NAME", env.github_repo, use_sudo=True)
 
     sed("%s/apache.virtualhost" % env.path,
         "HOST", env.host, use_sudo=True)
@@ -71,7 +72,7 @@ def _configure_webserver():
 
 
 def _synchronize_database():
-    sudo("python %s/%s/manage.py syncdb --noinput" % (env.path, env.project_name))
+    sudo("python %s/%s/manage.py syncdb --noinput" % (env.path, env.github_repo))
 
 
 def _local_settings(local_settings):
@@ -80,7 +81,7 @@ def _local_settings(local_settings):
         print("No local settins files provied, using defaults.")
     else:
         try:
-            put(local_settings, "%s/%s/local_settings.py" % (env.path, env.project_name), use_sudo=True)
+            put(local_settings, "%s/%s/local_settings.py" % (env.path, env.github_repo), use_sudo=True)
         except ValueError:
             print("Local settings file doesn't exists, using defaults.")
 
