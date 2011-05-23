@@ -11,6 +11,7 @@ from funnybag.core import services
 
 
 class RecordForm(forms.ModelForm):
+    title = forms.CharField(required=True)
     class Meta:
         model = Record
         fields = ("title",'tags')
