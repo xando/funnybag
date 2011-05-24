@@ -93,7 +93,6 @@ def response_valid(request, hash):
 
             return success(data={"record": record.id})
 
-        print form.errors
         return failed()
 
 

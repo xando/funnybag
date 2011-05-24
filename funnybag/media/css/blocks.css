@@ -1,31 +1,29 @@
-.highlighttable {
-    border: 1px solid;
+.block-form {
+    border: 1px solid #cccccc; 
+    border-radius: 0 0 6px 6px; 
+    padding: 5px;
 }
 
-.highlighttable .linenos {
-    background: #DDDDDD;
-    border-right: 1px solid #555555;
-    padding-right: 3px;
-    width: 200px;
-    text-align:right;
+.block-form label {
+    
 }
 
-.code .highlight{
-    width: 910px;
-    overflow-x: auto;
-    overflow-y: hidden;
+.block-form.image .or {
+    position: relative; 
+    background:url(http://ep2011.europython.eu/static/8a9c110514f5/p5/i/sep.png); 
+    height: 30px
 }
 
-.code.block textarea{
-    font-family: monospace;
-    font-size: 14px;
+.block-form.image .or div {
+    background: white; 
+    position: absolute; 
+    left: 48%; 
+    top: -5px; 
+    padding: 0 15px;
+    font-size: 28px;
 }
 
-.code.block input{
-    font-family: monospace;
-}
-
-.text {
+.block-form.text textarea {
     font-family: Arial, sans-serif;
     line-height: 1.58em;
     vertical-align: baseline;
@@ -39,11 +37,35 @@
     text-align: justify;
 }
 
-.render.image {
-    text-align:center;
+.block-form.code textarea,
+.block-form.code input{
+    font-family: monospace;
+    font-size: 14px;
 }
 
-.text.block textarea{
+.block-form.text textarea{
     font-family: georgia;
     font-size: 15px;
 }
+
+.block.code .highlighttable {
+    border: 1px solid;
+}
+
+.block.code .highlighttable .linenos {
+    background: #DDDDDD;
+    border-right: 1px solid #555555;
+    padding-right: 3px;
+    width: 200px;
+    text-align:right;
+}
+
+.block.code .highlight{
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.block.image {
+    text-align:center;
+}
+

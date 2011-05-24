@@ -18,7 +18,9 @@
     </div>
 
     {% for block in record.blocks.all %}
-    <p>{{ block.data.render }}</p>
+    <div class="{{ block.data.type }} block">
+      {{ block.data.render }}
+    </div>
     {% endfor %}
   
   </div>

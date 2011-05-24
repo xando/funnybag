@@ -23,8 +23,8 @@
         <li><a name="code" id="add-code-link" class="add-link">{% trans "code" %}</a></li>
       </ul>
       
-      <ul class="block-panel">
-      </ul>
+      <div class="block-panel">
+      </div>
       
       <div style="text-align:right">
         <input type="submit" class="submit" value="{% trans "Preview"%}" />
@@ -41,19 +41,10 @@
 
 {% for block in blocksset %}
 <script type="text/template" id="{{ block.model.type }}-template"> 
-  <li>
-    <div class="{{ block.model.type }} block">
-      <div class="handle"></div>
-      <div class="remove"></div>
-      {% for field in block.empty_form.visible_fields %}
-      {{ field.label_tag }}
-      {{ field }}
-      {% endfor %}
-      {% for field in block.empty_form.hidden_fields %}
-      {{ field }}
-      {% endfor %}
-      
-    </div>
-  </li>
+  <div class="{{ block.model.type }} block-form">
+    <div class="handle"></div>
+    <div class="remove"></div>
+    {{ block.empty_form }}
+  </div>
 </script>
 {% endfor %}

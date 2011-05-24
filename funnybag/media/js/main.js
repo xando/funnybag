@@ -27,9 +27,9 @@ $(function(){
         $(this).val(i);
       });
 
-      $('.block textarea').elastic();
+      $('.block-form textarea').elastic();
       
-      $('.code.block select[name$="language"]').each(function() {
+      $('.block-form.code select[name$="language"]').each(function() {
         if( $("#"+$(this).attr("id")+"_iddtext").length < 1) {
           $(this).improveDropDown();
           $('.idd_textbox').focus(function() {

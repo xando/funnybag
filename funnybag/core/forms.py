@@ -1,12 +1,13 @@
 import re
 
 from django import forms
+from django.contrib.auth.models import User
+from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.forms.models import modelformset_factory, BaseModelFormSet
+from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 
 from funnybag.core.models import *
-from django.contrib.auth.models import User
-from django.core.files.uploadedfile import InMemoryUploadedFile
 from funnybag.core import services
 
 
@@ -78,8 +79,11 @@ class ImageForm(ContentNodeForm):
 
         cleaned_data["image"] = url_file
 
-        print "test"
         return cleaned_data
+
+    def __unicode__(self):
+        return render_to_string("core/blocks/image_form.html", {"form": self})
+
 
 class VideoForm(ContentNodeForm):
     class Meta(ContentNodeForm.Meta):

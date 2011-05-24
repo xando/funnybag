@@ -150,7 +150,6 @@ p {
     z-index: 0;
 }
 
-
 .pagination-nav {
     text-align:center;
     font-size: 1.5em;
@@ -167,20 +166,25 @@ p {
 input[type=text],
 input[type=password],
 input[type=file] {
-    width: 909px;
+    width: 100%;
 }
 
 textarea {
-    width: 925px;
     height: 100px;
+    width: 100%;
 }
 
 input, textarea {
+    -webkit-appearance: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    outline: 0;
     background-color: rgba(255, 255, 255, 0.4);
     border: 3px solid rgba(122, 192, 0, 0.15);
-    padding: 10px;
+    padding: 7px;
     color: #4b4b4b;
-    font-size: 24px; 
+    font-size: 24px;
     border-radius: 5px;
     margin-bottom: 5px;
 }
