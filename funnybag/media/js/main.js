@@ -37,6 +37,20 @@ $(function(){
           });
         }
       });
+
+      $('.block-panel').sortable({
+        placeholder: "block-form-placeholder",
+        start: function(event, ui) {
+          ui.placeholder.height( ui.item.height() );
+          ui.item.toggleClass("block-form-onmove");
+        },
+        stop: function(event, ui) {
+          ui.item.toggleClass("block-form-onmove");
+          $('input[name$=sequence]').each( function(i) {
+            $(this).val(i);
+          });
+        }
+      });
     },
     
     remove_block: function(e) {

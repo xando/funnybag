@@ -3,6 +3,23 @@
     border-radius: 6px;
     padding: 5px;
     margin: 5px 0;
+    Background: white;
+}
+
+.block-form label {
+    cursor: pointer;
+}
+
+.block-form-placeholder { 
+    border: 3px solid #FCEFA1;
+    border-radius: 6px;
+    background: #ffee77;
+    padding: 3px;
+    margin: 5px 0;
+}
+
+.block-form-onmove {
+    border: 3px solid #CCCCCC;
 }
 
 .block-form label {
