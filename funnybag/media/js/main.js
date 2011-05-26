@@ -71,15 +71,23 @@ $(function(){
             iframe: true,
             success: function(response, statusText, xhr, $form)  { 
               var response = jQuery.parseJSON(response);
-              $("#new-record-form").find(".errors").remove();
-              $("#new-record-form").find("input[type!=submit],textarea")
-                .css("background", "white"); 
+              $("#new-record-form")
+                .find(".errors").remove().end()
+                .find("input[type!=submit],textarea").css("background", "white").end()
+                .find(".block-form").css("border","1px solid #CCCCCC")
+              
               if(response.success) {
                 document.location.hash = "#";
               } else {
                 $.each(response.data, function(name, message) {
-                  $("#id_"+name).css("background", "#ffddaa");
-                  $("label[for=id_"+name+"]").append(" <span class='errors'>"+message+"</span>");
+                  if( /__all__$/.test(name)) {
+                    $("#"+name.replace("-__all__", ""))
+                      .css("border", "3px solid #FF9933")
+                      .prepend("<div style='text-align: center' class='errors'>"+message+"</span>");
+                  } else {
+                    $("#id_"+name).css("background", "#ffddaa");
+                    $("label[for=id_"+name+"]").append(" <span class='errors'>"+message+"</span>");
+                  }
                 });
               }
             },

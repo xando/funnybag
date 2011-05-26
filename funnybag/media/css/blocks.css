@@ -1,7 +1,8 @@
 .block-form {
     border: 1px solid #cccccc; 
-    border-radius: 0 0 6px 6px; 
+    border-radius: 6px;
     padding: 5px;
+    margin: 5px 0;
 }
 
 .block-form label {

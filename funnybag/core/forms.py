@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.core.files.uploadedfile import InMemoryUploadedFile
 from django.forms.models import modelformset_factory, BaseModelFormSet
+from django.core.exceptions import ValidationError
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext as _
 
@@ -44,7 +45,7 @@ class TextForm(ContentNodeForm):
 
 
 class ImageForm(ContentNodeForm):
-    image = forms.FileField(required=False)
+    image = forms.FileField(required=False, label="File")
     url = forms.URLField(required=False)
 
     class Meta(ContentNodeForm.Meta):
@@ -53,31 +54,38 @@ class ImageForm(ContentNodeForm):
     def clean(self):
         cleaned_data = self.cleaned_data
         url = cleaned_data['url']
+        image = cleaned_data['image']
 
-        if not url:
+        if image:
+            return cleaned_data
+        elif not url and not image:
+            self._errors['image'] = "or url is required"
+            self._errors['url'] = "or file is required"
             return cleaned_data
 
         import urllib2
         import StringIO
 
-        response = urllib2.urlopen(url)
+        try:
+            response = urllib2.urlopen(url)
+            image_file = StringIO.StringIO(response.read())
+            image_file_name =  url.split("/")[-1]
 
-        image_file = StringIO.StringIO(response.read())
-        image_file_name =  url.split("/")[-1]
+            content_lenght = response.info().get('content-length')
+            content_type = response.info().get('content-type')
 
-        content_lenght = response.info().get('content-length')
-        content_type = response.info().get('content-type')
-
-        url_file = InMemoryUploadedFile(
-            file = image_file,
-            field_name = "image",
-            name = image_file_name,
-            content_type = content_type,
-            size = int(content_lenght),
-            charset = "utf-8"
+            url_file = InMemoryUploadedFile(
+                file = image_file,
+                field_name = "image",
+                name = image_file_name,
+                content_type = content_type,
+                size = int(content_lenght),
+                charset = "utf-8"
             )
 
-        cleaned_data["image"] = url_file
+            cleaned_data["image"] = url_file
+        except e:
+            raise ValidationError(e)
 
         return cleaned_data
 
