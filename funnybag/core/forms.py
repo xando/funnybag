@@ -45,8 +45,8 @@ class TextForm(ContentNodeForm):
 
 
 class ImageForm(ContentNodeForm):
-    image = forms.FileField(required=False, label="File")
-    url = forms.URLField(required=False)
+    image = forms.FileField(required=False, label="Image file")
+    url = forms.URLField(required=False, label="Image url")
 
     class Meta(ContentNodeForm.Meta):
         model = Image
