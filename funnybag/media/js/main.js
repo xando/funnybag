@@ -20,9 +20,9 @@ $(function(){
     add_block: function(e) {
       type = $(e.target).attr('name');
       var template = _.template($('#'+ type + '-template').html());
-      $('.block-panel').append( template({'prefix' : $('.block.'+ type).length }) );
+      $('.block-panel').append( template({'prefix' : $('.block-form.'+ type).length }) );
       $('label[for$=DELETE],input[id$=DELETE]').hide();
-      $('#id_'+ type +'-TOTAL_FORMS').val( $('.block.'+ type).length );
+      $('#id_'+ type +'-TOTAL_FORMS').val( $('.block-form.'+ type).length );
       $('input[name$=sequence]').each( function(i) {
         $(this).val(i);
       });
