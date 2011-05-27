@@ -4,8 +4,8 @@
 
     WSGIScriptAlias / PATH/apache.wsgi
 
-    Alias /media/ PATH/PROJECT_NAME/media/
-    <Directory PATH/PROJECT_NAME/media/>
+    Alias /media/ PATH/funnybag/media/
+    <Directory PATH/funnybag/media/>
         Order deny,allow
         Allow from all
     </Directory>
