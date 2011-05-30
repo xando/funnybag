@@ -271,6 +271,12 @@ label {
     margin-bottom: 20px;
 }
 
+#record-details .details{
+    padding: 20px 0;
+    border-bottom: 1px solid #cccccc;
+}
+
+
 #record-responses {
     margin: 10px 0;
 }

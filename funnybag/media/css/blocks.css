@@ -68,20 +68,27 @@
 
 .block.code .highlighttable {
     border: 1px solid;
+    width: 100%;
 }
 
-.block.code .highlighttable .linenos {
+.block.code .linenos {
     background: #DDDDDD;
     border-right: 1px solid #555555;
     padding-right: 3px;
-    width: 200px;
+    width: 25px;
     text-align:right;
 }
 
-.block.code .highlight{
+.block.code .highlight {
+    padding: 0 4px;
     overflow-x: auto;
-    overflow-y: hidden;
+    width: 920px;
 }
+
+/* .block.code .highlight{ */
+
+/*     overflow-y: hidden; */
+/* } */
 
 .block.image {
     text-align:center;

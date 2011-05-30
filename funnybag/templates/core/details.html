@@ -5,26 +5,28 @@
 {% tags_for_object record as tag_list %}
 
 <div class="grid_12">
-  <div id="record-details" class="clearfix">
-    <h1>{{ record.title }}</h1>
+  <div id="record-details">
+    <div class="heading clearfix">
+      <h1>{{ record.title }}</h1>
+      <div class="grid_6 alpha">
+        {{ record.created_time|date:"D d M Y" }} by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>
+      </div>
+      <div class="grid_6 omega" style="text-align:right">
+        {% if tag_list %}
+        {% for tag in tag_list %}<a href="#t/{{ tag|iriencode }}">{{ tag }}</a> {% endfor %}
+        {% else %}
+        &nbsp;
+        {% endif %}
+      </div>
+    </div>
     
-    <div class="grid_6 alpha">
-      {{ record.created_time|date:"D d M Y" }} by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>
+    <div class="grid_12 alpha omega details clearfix">
+      {% for block in record.blocks.all %}
+      <div class="{{ block.data.type }} block">
+        {{ block.data.render }}
+      </div>
+      {% endfor %}
     </div>
-    <div class="grid_6 omega" style="text-align:right">
-      {% if tag_list %}
-      {% for tag in tag_list %}<a href="#t/{{ tag|iriencode }}">{{ tag }}</a> {% endfor %}
-      {% else %}
-      &nbsp;
-      {% endif %}
-    </div>
-
-    {% for block in record.blocks.all %}
-    <div class="{{ block.data.type }} block">
-      {{ block.data.render }}
-    </div>
-    {% endfor %}
-  
   </div>
 </div>
 
