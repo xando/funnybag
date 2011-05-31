@@ -88,7 +88,7 @@ $(function(){
               $("#new-record-form")
                 .find(".errors").remove().end()
                 .find("input[type!=submit],textarea").css("background", "white").end()
-                .find(".block-form").css("border","1px solid #CCCCCC")
+
               
               if(response.success) {
                 document.location.hash = "#";
