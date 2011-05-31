@@ -79,6 +79,11 @@ def details(request, hash):
                               {"record": record,
                                "form": form})
 
+def responses(request, hash):
+    record = models.Record.objects.get(pk=hash)
+    return direct_to_template(request, 'core/responses.html',
+                              {"record": record})
+
 
 def response_valid(request, hash):
     if request.method == "POST":

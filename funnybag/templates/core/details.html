@@ -31,31 +31,16 @@
 </div>
 
 <div class="grid_12">
-  <div id="record-responses" class="clearfix">
-    {% for response in record.get_children %}
-    <div class="response" class="clearfix">
-      
-      {% for block in response.blocks.all %}
-      {{ block.data.render }}
-      {% endfor %}
-      
-      {{ record.created_time|date:"D d M Y" }} 
-      by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>
-      
+  <div id="record-responses" class="clearfix"></div>
+  <form id="response-form" method="post" action="{% url funnybag.core.views.response_valid record.id %}">
+    {% csrf_token %}
+    <div class="block-form text">
+      {{ form.text }}
+      {{ form.sequence }}
     </div>
-    {% endfor %}
-    
-    <form method="post" action="{% url funnybag.core.views.response_valid record.id %}">
-      {% csrf_token %}
-      <div class="block-form text">
-        {{ form.text }}
-        {{ form.sequence }}
-      </div>
-      <div style="text-align:right">
-        <input type="submit" class="submit" value="{% trans "Response"%}" />
-      </div>
-    </form>
-    
-  </div>
+    <div style="text-align:right">
+      <input type="submit" class="submit" value="{% trans "Response"%}" />
+    </div>
+  </form>
 </div>
 

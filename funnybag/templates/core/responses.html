@@ -1,34 +1,16 @@
 {% load mptt_tags %}
 {% load i18n %}
 
-<div class="grid_12 alpha omega clearfix">
-  <div id="responses">
-    
-    <ul class="root">
-      {% recursetree record.get_children %}
-      <li>
-        {% for block in node.blocks.all %}
-        <p>{{ block.data.render }}</p>
-        {% endfor %}
-        
-        {% if not node.is_leaf_node %}
-        <ul class="children">
-          {{ children }}s
-        </ul>
-        {% endif %}
-      </li>
-      {% endrecursetree %}
-    </ul>
-
-    {% for response in record.get_children %}
-    {{ response.blocks.data.text }}
-    {% endfor %}
-    <form method="post" action="{% url funnybag.core.views.responses record.id %}">
-      {% csrf_token %}
-      {{ form }}
-      <div style="text-align:right">
-        <input type="submit" class="submit" value="{% trans "Send"%}" />
-      </div>
-    </form>
-  </div>
+{% for response in record.get_children %}
+<div class="response" class="clearfix">
+  
+  {% for block in response.blocks.all %}
+  {{ block.data.render }}
+  {% endfor %}
+  
+  {{ record.created_time|date:"D d M Y" }} 
+  by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>
+  
 </div>
+{% endfor %}
+

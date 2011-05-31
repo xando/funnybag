@@ -122,13 +122,15 @@ $(function(){
         .hide()
         .load('/ajax/details/'+ hash +'/', function() {
           $(this).fadeIn();
-          
-          $("#record-responses form").ajaxForm({
+
+          $("#record-responses").load('/ajax/responses/'+ hash +'/');
+
+          $("#response-form").ajaxForm({
             success: function(response, statusText, xhr, $form)  { 
               console.log(response);
               response = jQuery.parseJSON(response);
               if (response.success) {
-                Backbone.history.loadUrl()
+                $("#record-responses").load('/ajax/responses/'+ hash +'/');
               }
             }
           });
