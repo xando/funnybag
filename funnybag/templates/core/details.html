@@ -47,8 +47,10 @@
     
     <form method="post" action="{% url funnybag.core.views.response_valid record.id %}">
       {% csrf_token %}
-      {{ form.text }}
-      {{ form.sequence }}
+      <div class="block-form text">
+        {{ form.text }}
+        {{ form.sequence }}
+      </div>
       <div style="text-align:right">
         <input type="submit" class="submit" value="{% trans "Response"%}" />
       </div>

@@ -1,7 +1,5 @@
 .block-form {
-    border: 1px solid #cccccc; 
     border-radius: 6px;
-    padding: 5px;
     margin: 5px 0;
     Background: white;
 }
@@ -43,27 +41,23 @@
 
 .block-form.text textarea {
     font-family: Arial, sans-serif;
+    font-size: 14px;
     line-height: 1.58em;
-    vertical-align: baseline;
-    outline: 0;
-    orphans: 4;
-    hyphenate: auto;
-    hyphenate-before: 2;
-    hyphenate-after: 3;
-    hyphenate-lines: 3;
-    orphans: 4;
     text-align: justify;
+    height: 120px;
+    padding-bottom: 10px;
+}
+
+.block-form.video textarea {
+    height: 120px;
+    font-family: monospace;
+    font-size: 12px;
 }
 
 .block-form.code textarea,
 .block-form.code input{
     font-family: monospace;
     font-size: 14px;
-}
-
-.block-form.text textarea{
-    font-family: georgia;
-    font-size: 15px;
 }
 
 .block.code .highlighttable {
@@ -82,7 +76,7 @@
 .block.code .highlight {
     padding: 0 4px;
     overflow-x: auto;
-    width: 920px;
+    width: 905px;
 }
 
 /* .block.code .highlight{ */
