@@ -32,6 +32,7 @@
 
 <div class="grid_12">
   <div id="record-responses" class="clearfix"></div>
+  {% if user.is_authenticated %}
   <form id="response-form" method="post" action="{% url funnybag.core.views.response_valid record.id %}">
     {% csrf_token %}
     <div class="block-form text">
@@ -42,5 +43,8 @@
       <input type="submit" class="submit" value="{% trans "Response"%}" />
     </div>
   </form>
+  {% else %}
+  To add response <a href="#login/{{ record.slug }}/{{ record.id }}/">login</a> | <a href="#registration">register</a>
+  {% endif %}
 </div>
 

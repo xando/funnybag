@@ -224,7 +224,7 @@ $(function(){
       "new/:type" : "new",
       "new" : "new",
       "login" : "login",
-      "login/:next" : "login",
+      "login/*next" : "login",
       "logout" : "logout",
       "registration" : "registration",
       ":title/:hash/" : "details",
