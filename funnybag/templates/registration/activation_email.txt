@@ -1,4 +1,0 @@
-{% load i18n %}
-
-{% trans "Thanks for registration"%}
-http://{{ site.domain }}/accounts/activate/{{ activation_key }}/

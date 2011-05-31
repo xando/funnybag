@@ -138,6 +138,3 @@ def registration_valid(request):
     else:
         return failed(data=dict(form.errors))
 
-    return direct_to_template(request, 'registration/registration.html',
-                              {"form": form})
-
