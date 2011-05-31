@@ -82,4 +82,4 @@ try:
 except ImportError:
     pass
 
-MANAGERS = ADMINS
+
