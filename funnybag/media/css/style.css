@@ -98,10 +98,17 @@ p {
 }
 
 #headercontainer, 
-#contentcontainer {
+#contentcontainer,
+#contentswitch{
     width: 960px;
     margin: 0 auto;
     position: relative;
+}
+
+#contentswitch {
+    background: none repeat scroll 0 0 #EEEEEE;
+    margin-top: 7px;
+    padding:5px;
 }
 
 #userprofileinfo {

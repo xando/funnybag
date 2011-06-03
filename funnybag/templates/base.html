@@ -31,6 +31,12 @@
     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.form-2.67.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.elastic-1.6.5.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/main.js"></script>
+    {% endcompress %}
+
+    {% block js-include %}{% endblock %}
+
+    <!--[if IE 7]><link rel="stylesheet" href="css/ie/ie7.css" type="text/css" media="screen"><![endif]-->
+    <!--[if lt IE 7]><link rel="stylesheet" href="css/ie/ie6.css" type="text/css" media="screen"><![endif]-->
     <script type="text/javascript">
       
       var _gaq = _gaq || [];
@@ -44,12 +50,6 @@
       })();
       
     </script>
-    {% endcompress %}
-
-    {% block js-include %}{% endblock %}
-
-    <!--[if IE 7]><link rel="stylesheet" href="css/ie/ie7.css" type="text/css" media="screen"><![endif]-->
-    <!--[if lt IE 7]><link rel="stylesheet" href="css/ie/ie6.css" type="text/css" media="screen"><![endif]-->
 
 
   </head>
@@ -73,6 +73,10 @@
           <span id="username">{{ user }}</span> | 
           <a href="#logout">logout</a>
         </div>
+      </div>
+      
+      <div id="contentswitch">
+        All | Comments | Follow 
       </div>
     </div>
     
