@@ -5,6 +5,14 @@ $(function(){
     return false;
   })
 
+  $(".block-form input, .block-form textarea")
+    .live("focus", function() {
+      $(this).parents(".block-form").addClass("focus");
+    })
+    .live("blur", function() {
+      $(this).parents(".block-form").removeClass("focus");
+    });
+  
   _.templateSettings = {
     interpolate : /\_\_(.+?)\_\_/g
   };
@@ -14,7 +22,7 @@ $(function(){
 
     events: {
       "click .add-link": "add_block",
-      "click .block .remove": "remove_block"
+      "click .block-form .remove": "remove_block"
     },
     
     add_block: function(e) {
@@ -54,17 +62,9 @@ $(function(){
     },
     
     remove_block: function(e) {
-      if ($(e.target).parent('.block').find('input[name$=DELETE]').is(":checked") ) {
-        $(e.target).parent('.block').removeClass("disabled");
-        $(e.target).parent('.block').find('textarea,input').removeAttr("disabled");
-        $(e.target).parent('.block').find('input[name$=DELETE]').attr("checked", false);
-        $('#id_'+ type +'-TOTAL_FORMS').val( $('.block.'+ type).length );
-      } else {
-        $('#id_'+ type +'-TOTAL_FORMS').val( $('.block.'+ type).length - 1 );
-        $(e.target).parent('.block').addClass("disabled");
-        $(e.target).parent('.block').find('textarea,input').attr("disabled", true);
-        $(e.target).parent('.block').find('input[name$=DELETE]').attr("checked", true);
-      }
+      $('#id_'+ type +'-TOTAL_FORMS').val( $('.block-form.'+ type).length - 1 );
+      $(e.target).parent('.block-form').find('input[name$=DELETE]').attr("checked", true);
+      $(e.target).parent('.block-form').hide(300);
     },
     
     render: function() {

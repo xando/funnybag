@@ -333,19 +333,33 @@ label {
     cursor: pointer;
 }
 
-.block {
+.block-form {
     position: relative;
+    padding: 5px 0;
 }
 
-.block .remove {
-    background-image: url("../images/close-button.png");
+.block-form.focus .remove {
+    background-image: url("../images/close_button.png");
     background-repeat: no-repeat;
     cursor: pointer;
     height: 28px;
     position: absolute;
-    right: -4px;
-    top: -11px;
+    right: -15px;
+    top: -7px;
     width: 30px;
+}
+
+.block-form.focus {
+    background: #ffffcc;
+}
+
+.block-form.focus input,
+.block-form.focus textarea {
+    background: white;
+}
+
+.block-form.focus {
+    background: #ffffdd;
 }
 
 .block .handle {

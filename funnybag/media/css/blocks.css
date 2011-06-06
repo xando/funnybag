@@ -26,12 +26,10 @@
 
 .block-form.image .or {
     position: relative; 
-    background:url(http://ep2011.europython.eu/static/8a9c110514f5/p5/i/sep.png); 
     height: 30px
 }
 
 .block-form.image .or div {
-    background: white; 
     position: absolute; 
     left: 48%; 
     top: -5px; 
