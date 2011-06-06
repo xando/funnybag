@@ -164,7 +164,7 @@ $(function(){
             if (response.success) {
               document.location.hash = next;
               $( "#username").text(response.data.username);
-              $( "#userprofileinfo").show({ direction: "down"}, 700700);
+              $( "#userprofileinfo").show(700);
             } else {
               $.each(response.data, function(name, message) {
                 if(name == "__all__") {
