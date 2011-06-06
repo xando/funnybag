@@ -162,7 +162,11 @@ $(function(){
             $("#login-form").find(".errors").remove();
             $("#login-form").find("input[type!=submit]").css("background", "white"); 
             if (response.success) {
-              document.location.hash = next;
+              if ( next == "#") {
+                document.location.hash = "#a/" + response.data.username;
+              } else {
+                document.location.hash = next;
+              }
               $( "#username").text(response.data.username);
               $( "#userprofileinfo").show(700);
             } else {
