@@ -362,6 +362,10 @@ label {
     background: #ffffdd;
 }
 
+.block {
+    margin-bottom: 10px;
+}
+
 .disabled input[type=text], 
 .disabled textarea {
     cursor: default;
