@@ -12,7 +12,7 @@ $(function(){
     .live("blur", function() {
       $(this).parents(".block-form").removeClass("focus");
     });
-  
+
   _.templateSettings = {
     interpolate : /\_\_(.+?)\_\_/g
   };
@@ -83,7 +83,25 @@ $(function(){
           
           $('#new-record-form').ajaxForm({
             iframe: true,
+            beforeSubmit: function() {
+              block = true;
+              setTimeout(function() { 
+                if (block) {
+                  $.blockUI({ css: { 
+                    border: 'none', 
+                    padding: '15px', 
+                    backgroundColor: '#000', 
+                    '-webkit-border-radius': '10px', 
+                    '-moz-border-radius': '10px', 
+                    opacity: .5, 
+                    color: '#fff' 
+                  } });
+                }
+              }, 500); 
+            },
             success: function(response, statusText, xhr, $form)  { 
+              block = false;
+              $.unblockUI();
               var response = jQuery.parseJSON(response);
               $("#new-record-form")
                 .find(".errors").remove().end()
