@@ -84,7 +84,7 @@ class ImageForm(ContentNodeForm):
             )
 
             cleaned_data["image"] = url_file
-        except e:
+        except Exception as e:
             raise ValidationError(e)
 
         return cleaned_data
