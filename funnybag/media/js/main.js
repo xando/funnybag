@@ -1,5 +1,28 @@
 $(function(){
 
+  var Notyfication = Backbone.View.extend({
+    el: $("#notyfication"),
+    
+    initialize: function() {
+    },
+    
+    show: function(text, time) {
+      var $self = $(this.el);
+      $self
+        .text(text)
+        .position({
+          of: $("#header"),
+          my: "center top",
+          at: "center bottom",
+          offset: "0px 12px",
+        }).show();
+      setTimeout(function() {
+        $self.hide("slide", { direction: "up" }, 500);
+      }, 6000);
+    },
+  });
+  notyfication = new Notyfication();
+
   $(".back-button").live("click", function(){
     window.history.go(-1);
     return false;
@@ -186,7 +209,7 @@ $(function(){
                 document.location.hash = next;
               }
               $( "#username").text(response.data.username);
-              $( "#userprofileinfo").show(700);
+              $( "#userprofile").show("slide", { direction: "up" }, 700);
             } else {
               $.each(response.data, function(name, message) {
                 if(name == "__all__") {
@@ -219,6 +242,7 @@ $(function(){
             $("#registration-form").find("input[type!=submit]").css("background", "white"); 
             if (response.success) {
               document.location.hash = "#login";
+              notyfication.show("You account was just created. Please login.");
             } else {
               $.each(response.data, function(name, message) {
                 if(name == "__all__") {
@@ -288,7 +312,7 @@ $(function(){
     logout: function() {
       $.get('ajax/logout/', function(response) {
         document.location.hash = "#";
-        $("#userprofileinfo").hide(700);
+        $("#userprofile").hide("slide", { direction: "up" }, 700);
         $("#username").text("");
       });
     },
