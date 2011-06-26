@@ -6,11 +6,10 @@
   
   {% for block in response.blocks.all %}
   {{ block.data.render }}
-  {{ record.created_time|date:"D d M Y" }} 
-  by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>
+  {{ response.created_time }} 
+  by <a href="#a/{{ response.created_by.username }}">{{ response.created_by.username }}</a>
   {% endfor %}
   
   
 </div>
 {% endfor %}
-
