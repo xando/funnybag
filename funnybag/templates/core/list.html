@@ -12,7 +12,9 @@
         <a href="{{ record.get_absolute_url }}">{{ record.title }}</a>
       </h1>
       <div class="stamp">
-        {{ record.created_time|date:"D d M Y" }} by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>
+        {{ record.created_time|date:"D d M Y" }} by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>{% if record.get_children %}, 
+        with <a href="{{ record.get_absolute_url }}">responses {{ record.get_descendant_count }}</a>
+        {% endif %}
       </div>
       <div class="tags">
         {% if tag_list %}{% for tag in tag_list %}<a href="#t/{{ tag|iriencode }}">{{ tag }}</a> {% endfor %}{% endif %}
