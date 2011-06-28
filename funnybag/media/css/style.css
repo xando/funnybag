@@ -304,7 +304,6 @@ label {
 .list-element {
     border-bottom: 3px solid rgba(122, 192, 0, 0.15);
     padding: 5px 0;
-    margin-bottom: 15px;
 }
 
 .list-element .stamp {
