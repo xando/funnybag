@@ -1,13 +1,14 @@
 {% load i18n %}
 {% load tagging_tags %}
 {% load mptt_tags %}
+{% load gravatar_tags %}
 
 {% tags_for_object record as tag_list %}
 
 <div class="grid_12">
   <div id="record-details">
     <div class="heading clearfix">
-      <h1>{{ record.title }}</h1>
+      <h1>{% gravatar_img_for_email record.created_by.email 40 %} {{ record.title }}</h1>
       <div class="grid_6 alpha">
         {{ record.created_time|date:"D d M Y" }} by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>
       </div>

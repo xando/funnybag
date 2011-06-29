@@ -1,5 +1,6 @@
 {% load i18n %}
 {% load tagging_tags %}
+{% load gravatar_tags %}
 
 <div class="grid_12 alpha omega clearfix">
   <div id="record-list" class="clearfix">
@@ -9,7 +10,7 @@
 
     <div class="list-element clearfix">
       <h1>
-        <a href="{{ record.get_absolute_url }}">{{ record.title }}</a>
+        {% gravatar_img_for_email record.created_by.email 40 %}<a href="{{ record.get_absolute_url }}">{{ record.title }}</a>
       </h1>
       <div class="stamp">
         {{ record.created_time|date:"D d M Y" }} by <a href="#a/{{ record.created_by.username }}">{{ record.created_by.username }}</a>{% if record.get_children %}, 

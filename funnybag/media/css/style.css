@@ -20,6 +20,11 @@ h1 {
     margin-bottom: 5px;
 }
 
+h1 img {
+/* avatar */
+    margin-right: 6px
+}
+
 #view-name {
     display:none;
 }
@@ -299,6 +304,11 @@ label {
     border: 1px solid #cccccc;
     padding: 5px;
     border-radius: 5px;
+}
+
+.response img {
+    float:left;
+    margin-right: 7px;
 }
 
 .list-element {
