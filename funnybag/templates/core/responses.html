@@ -6,7 +6,7 @@
 <div class="response" class="clearfix">
   
   {% for block in response.blocks.all %}
-  {% gravatar_img_for_email record.created_by.email 40 %}{{ block.data.render }}
+  {% gravatar_img_for_email response.created_by.email 40 %}{{ block.data.render }}
   {{ response.created_time }} 
   by <a href="#a/{{ response.created_by.username }}">{{ response.created_by.username }}</a>
   {% endfor %}
