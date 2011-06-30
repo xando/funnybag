@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404
 
 from funnybag.core import models
 
+
 class BaseFeed(Feed):
     def items(self, obj):
         return models.Record.objects.all()
@@ -19,8 +20,8 @@ class BaseFeed(Feed):
     def item_description(self, record):
         return str(record.created_time)
 
-    def link(self, obj):
-        return "/#%s" % self.title(obj)
+    def link(self):
+        return ""
 
 
 class ByTagFeed(BaseFeed):
