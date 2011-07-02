@@ -48,8 +48,9 @@ $(function(){
       "click .block-form .remove": "remove_block"
     },
     
+
     add_block: function(e) {
-      type = $(e.target).attr('name');
+      var type = $(e.target).attr('name');
       var template = _.template($('#'+ type + '-template').html());
       $('.block-panel').append( template({'prefix' : $('.block-form.'+ type).length }) );
       $('label[for$=DELETE],input[id$=DELETE]').hide();
@@ -85,9 +86,20 @@ $(function(){
     },
     
     remove_block: function(e) {
+      var type = $(e.target).parent().attr('name');
       $('#id_'+ type +'-TOTAL_FORMS').val( $('.block-form.'+ type).length - 1 );
       $(e.target).parent('.block-form').find('input[name$=DELETE]').attr("checked", true);
-      $(e.target).parent('.block-form').hide(300);
+      $(e.target).parent('.block-form').hide(300).remove();
+      $('input[name$=sequence]').each( function(i) {
+        $(this).val(i);
+      });
+      
+      $('.block-form.'+type).each( function(i) {
+        $(this).find('[id^=id_]').map( function() {
+          $(this).attr("name", $(this).attr("name").replace(/\d+/, i));
+          $(this).attr("id", $(this).attr("id").replace(/\d+/, i));
+        });
+      });
     },
     
     render: function() {
