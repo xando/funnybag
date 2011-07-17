@@ -221,7 +221,7 @@ $(function(){
                 document.location.hash = next;
               }
               $( "#username").text(response.data.username);
-              $( "#userprofile").show("slide", { direction: "up" }, 700);
+              $( ".userprofile").show("slide", { direction: "up" }, 700);
             } else {
               $.each(response.data, function(name, message) {
                 if(name == "__all__") {
@@ -324,7 +324,7 @@ $(function(){
     logout: function() {
       $.get('ajax/logout/', function(response) {
         document.location.hash = "#";
-        $("#userprofile").hide("slide", { direction: "up" }, 700);
+        $(".userprofile").hide("slide", { direction: "up" }, 700);
         $("#username").text("");
       });
     },

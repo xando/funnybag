@@ -71,85 +71,46 @@ p {
     text-align: justify;
 }
 
-/* #header { */
-/*     padding: 0 0 10px 0; */
-/*     width: 100%; */
-/*     background-color: #000; */
-/*     margin-bottom: 25px;  */
-/*     -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);  */
-/*     -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); */
-/*     shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); */
-/*     position: fixed; */
-/*     z-index: 1000; */
-/*     height: 38px; */
-/* } */
-
-/* #headercontainer,  */
-/* #contentcontainer, */
-/* #contentswitch{ */
-/*     width: 960px; */
-/*     margin: 0 auto; */
-/*     position: relative; */
-/* } */
-
-/* #contentswitch { */
-/*     background: none repeat scroll 0 0 #EEEEEE; */
-/*     margin-top: 7px; */
-/*     padding:5px; */
-/* } */
-
-#header {
+.header {
     -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     -moz-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     position: fixed;
+    top: 0px;
     z-index: 1000;
     width: 100%;
-    text-align:center;
     background-color: #000;
 }
 
-#logo-menu {
-    height: 38px;
-    padding: 0 0 10px 0;
-    width: 960px;
+.logo {
     margin: auto;
-}
-
-#header .line {
-}
-
-#logo {
     color: #AA5533;
     font-size: 40px;
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-    float:left;
     position: relative;
 }
 
-#logo a {
+.logo a {
     font-family: 'Yanone Kaffeesatz', serif;
     font-weight: 700;
     color: #fff;
     font-size: 40px;
 }
 
-#logo a:hover {
+.logo a:hover {
     color: #ddd;
 }
 
-#logo .version {
+.logo .version {
     position: absolute;
     font-size: 21px;
-    bottom: -5px;
-    right: 0;
     font-family: 'Permanent Marker', serif;
     color: #88aa00;
-    font-size: 16px;
-    bottom: -5px;
+    bottom: -9px;
+    left: 63px;
 }
 
-#main-menu {
+.main-menu ul {
     font-family: 'Lato', serif;
     line-height: 3em;
     margin: 0 auto;
@@ -157,11 +118,11 @@ p {
     float: right;
 }
 
-#main-menu li {
+.main-menu li {
     float: left;
 }
 
-#main-menu li a {
+.main-menu li a {
     color: #d1d1d1;
     display: block;
     height: 48px;
@@ -171,15 +132,13 @@ p {
     text-decoration: none;
 }
 
-#main-menu li a:hover {
+.main-menu li a:hover {
     background: url(../images/nav-hover-bg.png);
     color: #fff;
     z-index: 0;
 }
 
-#userprofile {
-    width: 960px;
-    margin: auto;
+.userprofile {
     border-top: 1px solid #cccccc;
     text-align: right;
     padding: 3px 0;
@@ -328,13 +287,6 @@ label {
     padding: 5px 0;
 }
 
-.list-element .stamp {
-    float: left;
-}
-
-.list-element .tags {
-    text-align: right;
-}
 
 .record {
     border-bottom: 1px dashed #555;
