@@ -70,7 +70,8 @@ INSTALLED_APPS = (
     'tagging',
     "compressor",
     "mptt",
-    "gravatar"
+    "gravatar",
+    "djangorestframework",
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
