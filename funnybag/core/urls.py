@@ -8,6 +8,7 @@ urlpatterns = patterns('funnybag.core.views',
                        url(r'^api/record/(?P<pk>[^/]+)/$', resources.RecordDetail.as_view()),
 
                        (r'^$', 'main'),
+                       (r'^index/$', 'index'),
 
                        (r'^ajax/list/author/(?P<author>.+)$', 'list_by_author'),
                        (r'^ajax/list/tag/(?P<tag>.+)$', 'list_by_tag'),

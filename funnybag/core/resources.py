@@ -4,6 +4,14 @@ from djangorestframework.views import View
 from djangorestframework.resources import Resource
 
 
+class User(Resource):
+    fields = ("username", "gravatar")
+
+    def gravatar(self, instance):
+        import hashlib
+        return hashlib.md5(instance.email).hexdigest()
+
+
 class BlockResource(Resource):
     fields = ("data", "data_type", "sequence", ("record",["id"]),"data")
 
@@ -16,14 +24,14 @@ class BlockResource(Resource):
 
 class RecordResource(Resource):
     fields = ("id", "title", "slug", "tags", "created_time", "modified_time", "blocks",
-              ("created_by",["username"]), ("parent", ["id"]), ("blocks", "BlockResource"))
+              ("created_by","User"), ("parent", ["id"]), ("blocks", "BlockResource"))
 
 
 class RecordList(View):
     resource = RecordResource
 
     def get(self, request, *args, **kwargs):
-        queryset = Record.objects.all()
+        queryset = Record.objects.filter(parent=None)
         if request.GET.get('author'):
             queryset.filter(created_by__username=request.GET.get('author'))
         return queryset

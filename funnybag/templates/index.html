@@ -1,0 +1,91 @@
+{% load i18n %}
+{% load compress %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+    <title>ofobo!</title>
+    <meta charset="utf-8" />
+    <meta name="description" content="ofobo" />
+
+    <link rel="Shortcut Icon" type="image/ico" href="{{ MEDIA_URL }}images/favicon.ico" />
+    
+    <link href="http://fonts.googleapis.com/css?family=Lato:100,100italic,300,300italic,400,400italic,700,700italic,900,900italic" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Permanent+Marker:regular" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/css?family=Terminal+Dosis+Light:regular" rel="stylesheet" type="text/css" >
+    <link href="http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz:200,300,400,700" rel="stylesheet" type="text/css" >
+    
+    {% compress css %}
+    <link href="{{ MEDIA_URL }}css/blocks.css" rel="stylesheet" type="text/css" />
+    <!-- <link href="{{ MEDIA_URL }}css/grid.css" rel="stylesheet" type="text/css" /> -->
+    <link href="{{ MEDIA_URL }}css/improvedDropdown.css" rel="stylesheet" type="text/css" />
+    <link href="{{ MEDIA_URL }}css/style.css" rel="stylesheet" type="text/css" />
+    {% endcompress %}
+
+    {% compress js %}
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.6.min.js"></script> 
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-ui-1.8.13.js"></script> 
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/improvedDropDown.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/underscore-1.1.7.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/backbone-0.5.3.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.form-2.67.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.elastic-1.6.5.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.blockUI.js"></script>
+    <!-- <script type="text/javascript" src="{{ MEDIA_URL }}js/main.js"></script> -->
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/core.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/adapt.js"></script>
+    {% endcompress %}
+
+    {% block js-include %}{% endblock %}
+
+    <!--[if IE 7]><link rel="stylesheet" href="css/ie/ie7.css" type="text/css" media="screen"><![endif]-->
+    <!--[if lt IE 7]><link rel="stylesheet" href="css/ie/ie6.css" type="text/css" media="screen"><![endif]-->
+    <script type="text/javascript">
+      
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-11337039-3']);
+      _gaq.push(['_trackPageview']);
+      
+      (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+      
+    </script>
+
+  </head>
+  <body>
+    <div id="notyfication"></div>
+
+    <div class="header">
+      <div class="container_12">
+        <div class="logo grid_2">
+          <a href="#">ofobo.com</a>
+          <div class="version">alpha</div>
+        </div>
+        <div class="main-menu grid_10">
+          <ul>
+            <li><a href="#">{% trans "latest" %}</a></li>
+            <li><a href="#new">{% trans "add" %}</a></li>
+            <li><a href="#login">{% trans "login" %}</a></li>
+            <li><a href="#registration">{% trans "registration" %}</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="container_12">
+        <div class="grid_12 userprofile "
+             style="{% if not user.is_authenticated %}display:none{% endif %}">
+          <span id="username">{{ user }}</span> |
+          <a href="#logout">logout</a>
+        </div>
+      </div>
+    </div>
+    
+    <div id="main-view" class="container_12">
+      
+    </div>
+  </body>
+</html>
+
+{% include "core/list_b.html" %}
+

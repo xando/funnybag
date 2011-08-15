@@ -13,6 +13,10 @@ from funnybag.core import models
 from funnybag.core import forms
 
 
+def index(request):
+    return direct_to_template(request, 'index.html')
+
+
 def main(request):
     return direct_to_template(request, 'base.html')
 
