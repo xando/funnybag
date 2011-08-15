@@ -34,7 +34,9 @@ $(function() {
     },
     
     render: function() {
-      $("#main-view").html($(this.el).html( this.template({record_list : this.model.toJSON() }) ));
+      $("#main-view").html(
+        $(this.el).html(this.template({record_list :this.model.toJSON()}))
+      );
     },
     
   });
