@@ -6,22 +6,23 @@ $(function() {
     }
   });
 
+
   RecordList = Backbone.Collection.extend({
     model: Record, 
     url : function(){
       return '/api/record/'
     }
   });
-  recordList = new RecordList();
 
 
   RecordListView = Backbone.View.extend({
 
     tagName:  "div",
     id: "record-list",
+    className: "grid_12",
     
     template: _.template($('#record-list-template').html()),
-    model: recordList,
+    model: new RecordList(),
 
     initialize: function() {
       
@@ -41,6 +42,53 @@ $(function() {
     
   });
   
-  recordListView = new RecordListView();
-  // template: _.template($('#item-template').html()),  
+
+  RecordDetailsView = Backbone.View.extend({
+
+    tagName:  "div",
+    id: "record-details",
+    className: "grid_12",
+    
+    template: _.template($('#record-details-template').html()),
+
+    initialize: function(options) {
+      self = this;
+      model = new Record({id:options.hash})
+      model.fetch({
+        success: function() {
+          self.render();
+        }
+      });
+    },
+    
+    render: function() {
+      // alert("test");
+      $("#main-view").html(
+        $(this.el).html(this.template(model.toJSON()))
+      );
+    },
+    
+  });
+  
+
+  var Router =  Backbone.Router.extend({
+
+    routes: {
+      "":                     "list",
+      ":hash/:slug/":        "details",
+    },
+    
+    list: function() {
+      new RecordListView();
+    },
+
+    details: function(hash, slug) {
+      new RecordDetailsView({hash: hash});
+    },
+    
+  });
+  new Router();
+  
+  Backbone.history.start();
+  
 })

@@ -1,9 +1,10 @@
 <script id="record-list-template" type="text/template" >
   <% _.each(record_list, function(record) { %> 
-  <div class="list-element grid_12">
+  <div class="list-element clearfix">
     <h1>
-      <img width="40" height="40" src="http://www.gravatar.com/avatar/<%= record.created_by.gravatar %>/?default=&amp;amp;s=40">
-      <a href="#"><%= record.title %></a>
+      <img width="40" height="40" 
+           src="http://www.gravatar.com/avatar/<%= record.created_by.gravatar %>/?default=&amp;amp;s=40">
+      <a href="#<%= record.id %>/<%= record.slug %>/"><%= record.title %></a>
     </h1>
     <div class="grid_6 alpha">
       <%= record.created_time %> by
@@ -16,4 +17,3 @@
   </div>
   <% }); %>
 </script>
-
