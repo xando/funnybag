@@ -9,7 +9,11 @@
   <div class="grid_12 alpha omega details clearfix">
     <div class="<%= block.data_type %> block">
       <div class="<%= block.data_type %>"> 
-        <%= block.data %>
+        <% _.each(block.data, function(value, key)  { %> 
+        <div class="<%= key %>">
+          <%= value %>
+        </div>
+        <% }); %>
       </div>
     </div>
   </div>

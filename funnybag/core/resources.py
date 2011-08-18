@@ -11,9 +11,12 @@ class User(Resource):
         import hashlib
         return hashlib.md5(instance.email).hexdigest()
 
+class Block(Resource):
+    exclude = ("id",)
+
 
 class BlockResource(Resource):
-    fields = ("data", "data_type", "sequence", ("record",["id"]),"data")
+    fields = (("data", "Block"), "data_type", "sequence", ("record",("id")))
 
     def data(self, instance):
         return instance.data
