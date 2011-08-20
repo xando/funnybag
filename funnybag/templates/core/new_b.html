@@ -1,0 +1,24 @@
+{% load i18n %}
+<script id="record-new-template" type="text/template">
+  <form id="record-new-form" enctype="multipart/form-data" method="post">
+    
+    {{ record_form.title.label_tag }}
+    {{ record_form.title }}
+
+    {{ record_form.tags.label_tag }}
+    {{ record_form.tags }}
+
+    <ul class="add-block">
+      <li><a name="text" id="add-text-link" class="add-link">{% trans "text" %}</a></li>
+      <li><a name="link" id="add-link-link" class="add-link">{% trans "link" %}</a></li>
+      <li><a name="video" id="add-video-link" class="add-link">{% trans "video" %}</a></li>
+      <li><a name="image" id="add-image-link" class="add-link">{% trans "image" %}</a></li>
+      <li><a name="code" id="add-code-link" class="add-link">{% trans "code" %}</a></li>
+    </ul>
+    
+    <div style="text-align:right">
+      <input type="submit" class="submit" value="{% trans "Create"%}" />
+    </div>
+    
+  </form>
+</script>

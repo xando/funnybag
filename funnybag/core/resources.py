@@ -2,7 +2,7 @@ from django.db import transaction
 
 from djangorestframework.views import View
 from djangorestframework.resources import Resource
-from djangorestframework.response import Response
+from djangorestframework.response import Response, ErrorResponse
 from djangorestframework import status
 
 from funnybag.core.models import Record, RecordBlock
@@ -54,15 +54,15 @@ class RecordList(View):
         record = Record()
         record.title = self.CONTENT.get('title')
         record.parent = self.CONTENT.get('parent')
-        record.created_by = self.user
+        record.created_by = self.request.user
 
         try:
             record.full_clean()
             record.save()
         except ValidationError, e:
-            errors.append(str(e))
+            errors.append(e.message_dict)
 
-        for i, block in enumerate(self.CONTENT['blocks']):
+        for i, block in enumerate(self.CONTENT.get('blocks', [])):
             block_type = block.get('type')
             if not block_type:
                 #TODO. append here information about available types
@@ -91,7 +91,7 @@ class RecordList(View):
 
         if errors:
             transaction.rollback()
-            return errors
+            return Response(status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, errors)
 
         transaction.commit()
         return Response(status.HTTP_201_CREATED, record)

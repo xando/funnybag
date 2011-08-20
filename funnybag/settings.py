@@ -73,6 +73,7 @@ INSTALLED_APPS = (
     "mptt",
     "gravatar",
     "djangorestframework",
+    "django_extensions"
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7

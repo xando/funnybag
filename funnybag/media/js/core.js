@@ -2,7 +2,10 @@ $(function() {
   
   Record = Backbone.Model.extend({
     url : function(){
-      return '/api/record/' + this.get('id') + '/';
+      if( this.get('id') ) {
+        return '/api/record/' + this.get('id') + '/';
+      }
+      return '/api/record/';
     }
   });
 
@@ -68,13 +71,47 @@ $(function() {
     },
     
   });
+
+
+  RecordNewView = Backbone.View.extend({
+
+    tagName:  "div",
+    id: "record-new",
+    className: "grid_12",
+    
+    template: _.template($('#record-new-template').html()),
+
+    events: {
+      "submit form": "save"
+    },
+
+    initialize: function(options) {
+      this.render();
+      
+    },
+
+    save: function() {
+      new_model = new Record({title: $(this.el).find("input[name=title]").val(),
+                              tags: $(this.el).find("input[name=tags]").val()});
+      new_model.save();
+      return false;
+    },
+    
+    render: function() {
+      $("#main-view").html( 
+        $(this.el).html(this.template()) 
+      );
+    },
+    
+  });
   
 
   var Router =  Backbone.Router.extend({
 
     routes: {
       "":                     "list",
-      ":hash/:slug/":        "details",
+      ":hash/:slug/":         "details",
+      "new/":                 "create",
     },
     
     list: function() {
@@ -84,6 +121,10 @@ $(function() {
     details: function(hash, slug) {
       new RecordDetailsView({hash: hash});
     },
+
+    create: function() {
+      new RecordNewView();
+    }
     
   });
   new Router();

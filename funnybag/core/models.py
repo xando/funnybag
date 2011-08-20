@@ -9,6 +9,7 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 from django.utils.safestring import mark_safe
+from django.core.exceptions import ValidationError
 from django.template import Context, loader
 from django.template.loader import render_to_string
 from django.template.defaultfilters import slugify
@@ -41,6 +42,13 @@ class Record(MPTTModel):
         if self.parent:
             return "Comment %s" % (self.id)
         return "%s :%s" % (self.id, self.title)
+
+    def clean(self):
+        #ToDo: non comments, how to make it better? Overload Validation Error?
+        if not self.parent:
+            error = ValidationError("")
+            error.message_dict = {u"title": u"Field is required."}
+            raise error
 
 
 class RecordBlock(models.Model): # Proxy
