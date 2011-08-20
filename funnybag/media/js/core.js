@@ -62,7 +62,6 @@ $(function() {
     },
     
     render: function() {
-      // alert("test");
       $("#main-view").html(
         $(this.el).html(this.template(model.toJSON()))
       );
