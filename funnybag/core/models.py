@@ -45,7 +45,7 @@ class Record(MPTTModel):
 
     def clean(self):
         #ToDo: non comments, how to make it better? Overload Validation Error?
-        if not self.parent:
+        if not (self.parent or self.title):
             error = ValidationError("")
             error.message_dict = {u"title": u"Field is required."}
             raise error
