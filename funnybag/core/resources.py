@@ -16,7 +16,7 @@ class Block(Resource):
 
 
 class BlockResource(Resource):
-    fields = (("data", "Block"), "data_type", "sequence", ("record",("id")))
+    fields = (("data", "Block"), "data_type", "sequence")
 
     def data(self, instance):
         return instance.data
