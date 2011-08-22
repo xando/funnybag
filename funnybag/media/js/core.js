@@ -91,10 +91,35 @@ $(function() {
     },
 
     save: function() {
-      new_model = new Record({title: $(this.el).find("input[name=title]").val(),
-                              tags: $(this.el).find("input[name=tags]").val()});
-      new_model.save();
+      var new_model = new Record({
+        title: $(this.el).find("input[name=title]").val(),
+        tags: $(this.el).find("input[name=tags]").val()
+      });
+      
+      var self = this;
+      new_model.save(null, {
+        success: function(model, response, xhr){ 
+          self.hide_errors();
+          if (model.isNew()) {
+            self.show_errors(response);
+          } else {
+            window.location = "#" + model.get("id") + "/" + model.get("slug") + "/";
+          }
+        } 
+      });
       return false;
+    },
+
+    show_errors: function(response) {
+      _.each(response[0], function(errors, field) {
+        $("input[name="+ field  +"]").css("border", "3px solid #FF9933");
+        $("label[for=id_"+ field +"]").append("<span class='errors'>: " + errors + "</span>");
+      });
+    },
+
+    hide_errors: function() {
+      $("input").css("border", "3px solid rgba(122, 192, 0, 0.15)");
+      $("label .errors").remove();
     },
     
     render: function() {
@@ -106,7 +131,7 @@ $(function() {
   });
   
 
-  var Router =  Backbone.Router.extend({
+  Router =  Backbone.Router.extend({
 
     routes: {
       "":                     "list",
