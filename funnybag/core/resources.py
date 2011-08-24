@@ -22,13 +22,13 @@ class Block(Resource):
 
 
 class BlockResource(Resource):
-    fields = (("data", "Block"), "data_type", "sequence")
+    fields = (("data", "Block"), "type", "sequence")
 
     def data(self, instance):
         return instance.data
 
     def type(self, instance):
-        return instance.data_type.mode
+        return instance.data._meta.verbose_name
 
 
 class RecordResource(Resource):
