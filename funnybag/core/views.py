@@ -16,7 +16,7 @@ from funnybag.core import forms
 def index(request):
     return direct_to_template(request, 'index.html',
                               {"record_form": forms.RecordForm(),
-                               "block_forms": [forms.TextForm(), forms.ImageForm()]})
+                               "block_form_list": [forms.TextForm(), forms.ImageForm()]})
 
 
 def main(request):

@@ -9,11 +9,11 @@
     {{ record_form.tags }}
 
     <ul class="add-block">
-      <li><a name="text" id="add-text-link" class="add-link">{% trans "text" %}</a></li>
-      <li><a name="link" id="add-link-link" class="add-link">{% trans "link" %}</a></li>
-      <li><a name="video" id="add-video-link" class="add-link">{% trans "video" %}</a></li>
-      <li><a name="image" id="add-image-link" class="add-link">{% trans "image" %}</a></li>
-      <li><a name="code" id="add-code-link" class="add-link">{% trans "code" %}</a></li>
+      <li><a name="text"  class="add-block-button">{% trans "text" %}</a></li>
+      <li><a name="link"  class="add-block-button">{% trans "link" %}</a></li>
+      <li><a name="video" class="add-block-button">{% trans "video" %}</a></li>
+      <li><a name="image" class="add-block-button">{% trans "image" %}</a></li>
+      <li><a name="code"  class="add-block-button">{% trans "code" %}</a></li>
     </ul>
     
     <div style="text-align:right">
@@ -22,3 +22,14 @@
     
   </form>
 </script>
+
+{% for block_form in block_form_list %}
+<script id="{{ block_form.type }}-block-new-template" type="text/template">
+  <div class="{{ block_form.type }} block-form ui-state-default">
+    {% for field in block_form %}
+    {{ field.label_tag }}
+    {{ field }}
+    {% endfor %}
+  </div>
+</script>
+{% endfor %}

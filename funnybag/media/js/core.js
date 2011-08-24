@@ -82,18 +82,22 @@ $(function() {
     template: _.template($('#record-new-template').html()),
 
     events: {
-      "submit form": "save"
+      "submit form": "save",
+      "click .add-block-button": "add_block"
     },
 
     initialize: function(options) {
       this.render();
-      
     },
 
     save: function() {
       var new_model = new Record({
         title: $(this.el).find("input[name=title]").val(),
-        tags: $(this.el).find("input[name=tags]").val()
+        tags: $(this.el).find("input[name=tags]").val(),
+        blocks: [{
+          "type": "text",
+          "data": {"text": ""}
+        }]
       });
       
       var self = this;
@@ -120,6 +124,12 @@ $(function() {
     hide_errors: function() {
       $("input").css("border", "3px solid rgba(122, 192, 0, 0.15)");
       $("label .errors").remove();
+    },
+    
+    add_block: function(e) {
+      var block_name = $(e.target).attr("name");
+      var block_template = _.template($("#" + block_name + "-block-new-template").html());
+      $('.add-block').before(block_template());
     },
     
     render: function() {

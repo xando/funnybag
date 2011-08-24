@@ -1,4 +1,5 @@
 from django.db import transaction
+from django.utils.text import get_text_list
 
 from djangorestframework.views import View
 from djangorestframework.resources import Resource
@@ -26,8 +27,8 @@ class BlockResource(Resource):
     def data(self, instance):
         return instance.data
 
-    def data_type(self, instance):
-        return instance.data_type.model
+    def type(self, instance):
+        return instance.data_type.mode
 
 
 class RecordResource(Resource):
@@ -49,7 +50,7 @@ class RecordList(View):
         from django.db.models import get_model
         from django.core.exceptions import ValidationError
 
-        errors = []
+        errors = {}
 
         record = Record()
         record.title = self.CONTENT.get('title')
@@ -60,24 +61,35 @@ class RecordList(View):
             record.full_clean()
             record.save()
         except ValidationError, e:
-            errors.append(e.message_dict)
+            errors.update(e.message_dict)
 
+        errors["blocks"] = []
         for i, block in enumerate(self.CONTENT.get('blocks', [])):
-            block_type = block.get('type')
-            if not block_type:
-                #TODO. append here information about available types
-                errors.append(u"Block %s is missing type." % i)
+            block_error = {}
+            errors["blocks"].append(block_error)
+
+            if not isinstance(block, dict):
+                block_error['__all__'] = u"Definition of block has to be presented as a dict"
                 continue
 
-            BlockModel = get_model('core', block['type'])
-            del block['type']
-            block_obj = BlockModel(**block)
+            block_type = block.pop('type', None)
+            if not block_type:
+                block_error['type'] = u"Block is missing a type."
+                continue
+
+            BlockModel = get_model('core', block_type)
+            if not BlockModel:
+                block_error['type'] = u"Block is in a wrong type."
+                continue
+
+            block_obj = BlockModel(**block['data'])
 
             try:
                 block_obj.full_clean()
                 block_obj.save()
             except ValidationError, e:
-                errors.append(str(e))
+                message_dict = dict([(e[0], get_text_list(e[1])) for e in e.message_dict.items()])
+                block_error.update(message_dict)
 
             recordblock = RecordBlock(sequence=i,
                                       record=record,
@@ -86,15 +98,16 @@ class RecordList(View):
                 recordblock.full_clean()
                 recordblock.save()
             except ValidationError, e:
-                errors.append(str(e))
-
+                pass #TODO: not shure if errors from this are needed
 
         if errors:
             transaction.rollback()
-            return Response(status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, errors)
+
+            raise ErrorResponse(status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, errors)
 
         transaction.commit()
         return Response(status.HTTP_201_CREATED, record)
+
 
 class RecordDetail(View):
     resource = RecordResource

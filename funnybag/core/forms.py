@@ -26,9 +26,11 @@ class RecordResponseForm(forms.ModelForm):
 
 
 class ContentNodeForm(forms.ModelForm):
-    sequence = forms.CharField(widget=forms.HiddenInput)
     class Meta:
         exclude = ('record',)
+
+    def type(self):
+        return self._meta.model._meta.verbose_name
 
 
 class ContentNodeFormSet(BaseModelFormSet):
