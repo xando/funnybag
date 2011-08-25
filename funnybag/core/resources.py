@@ -100,6 +100,9 @@ class RecordList(View):
             except ValidationError, e:
                 pass #TODO: not shure if errors from this are needed
 
+        if not any(errors["blocks"]):
+            del errors["blocks"]
+
         if errors:
             transaction.rollback()
 

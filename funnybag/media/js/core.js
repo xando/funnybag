@@ -91,13 +91,23 @@ $(function() {
     },
 
     save: function() {
+      var blocks = [];
+      $('.block-form').each(function(){ 
+        var block = {};
+        var data = {};
+        $(this).find('input,textarea').each( function() { 
+          data[$(this).attr("name")] = $(this).val();
+        });
+          
+        block["type"] = $(this).attr("name");
+        block["data"] = data;
+        blocks.push(block);
+      });
+
       var new_model = new Record({
         title: $(this.el).find("input[name=title]").val(),
         tags: $(this.el).find("input[name=tags]").val(),
-        blocks: [{
-          "type": "text",
-          "data": {"text": ""}
-        }]
+        blocks: blocks
       });
       
       var self = this;
