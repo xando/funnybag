@@ -5,16 +5,12 @@
     <%= title %>
   </h1>
   
-  <% _.each(blocks, function(block) { %> 
+  <% _.each(blocks, function(block) { 
+     block_template = _.template($('#' + block.type + '-block-template').html()); %> 
+  
   <div class="grid_12 alpha omega details clearfix">
     <div class="<%= block.type %> block">
-      <div class="<%= block.type %>"> 
-        <% _.each(block.data, function(value, key)  { %> 
-        <div class="<%= key %>">
-          <%= value %>
-        </div>
-        <% }); %>
-      </div>
+      <%= block_template({data: block.data}) %>
     </div>
   </div>
 
@@ -28,4 +24,12 @@
     <a href="#t/humor">humor</a>
     <a href="#t/quote">quote</a>
   </div>
+</script>
+
+<script id="image-block-template" type="text/template">
+  <image style="max-width: 1000px;" src="/media/<%= data.image %>" />
+</script>
+
+<script id="text-block-template" type="text/template">
+  <%= data.text %>
 </script>

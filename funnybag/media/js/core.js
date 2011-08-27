@@ -82,7 +82,7 @@ $(function() {
     template: _.template($('#record-new-template').html()),
 
     events: {
-      "submit form": "save",
+      "submit form": "submit",
       "click .add-block-button": "add_block"
     },
 
@@ -90,12 +90,33 @@ $(function() {
       this.render();
     },
 
+    submit: function(e) {
+      var self = this;
+      e.preventDefault();
+      $('#record-new-form').ajaxForm({
+        beforeSubmit: function(arr, $form, options) {
+          arr = _.filter(arr, function(element) {
+            return element.name == 'image' || element.name == 'csrfmiddlewaretoken';
+          });
+        },
+        success: function(response, statusText, xhr, jQ) {
+          var local_files = jQuery.parseJSON(response);
+          $(self.el).find("input[name=local_file]").each( 
+            function(i) {
+              $(this).val(local_files[i]);
+            }
+          );
+          self.save();
+        }
+      });
+    },
+
     save: function() {
       var blocks = [];
       $('.block-form').each(function(){ 
         var block = {};
         var data = {};
-        $(this).find('input,textarea').each( function() { 
+        $(this).find('input,textarea').not('.fake').each( function() { 
           data[$(this).attr("name")] = $(this).val();
         });
           
@@ -121,7 +142,6 @@ $(function() {
           }
         } 
       });
-      return false;
     },
 
     show_errors: function(response) {

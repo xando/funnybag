@@ -1,7 +1,7 @@
 {% load i18n %}
 <script id="record-new-template" type="text/template">
-  <form id="record-new-form" enctype="multipart/form-data" method="post">
-    
+  <form id="record-new-form" action="/upload/" enctype="multipart/form-data" method="post">
+    {% csrf_token %}
     {{ record_form.title.label_tag }}
     {{ record_form.title }}
 
@@ -21,15 +21,25 @@
     </div>
     
   </form>
+
+  <form id="artificial_upload_form" enctype="multipart/form-data" method="post">
+  </form>
+
 </script>
 
 {% for block_form in block_form_list %}
 <script id="{{ block_form.type }}-block-new-template" type="text/template">
   <div class="{{ block_form.type }} block-form ui-state-default" name="{{ block_form.type }}">
-    {% for field in block_form %}
+    
+    {% for hidden in block_form.hidden_fields %}
+    {{ hidden }}
+    {% endfor %}
+    
+    {% for field in block_form.visible_fields %}
     {{ field.label_tag }}
     {{ field }}
     {% endfor %}
+    
   </div>
 </script>
 {% endfor %}

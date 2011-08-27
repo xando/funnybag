@@ -111,6 +111,11 @@ class Image(models.Model):
     type = "image"
     image = models.ImageField(upload_to="blocks/images")
 
+    def __init__(self, *args, **kwargs):
+        kwargs.pop('remote_file', None)
+        kwargs['image'] = kwargs.pop('local_file', None)
+        super(Image, self).__init__(*args, **kwargs)
+
     def render(self):
         return render_to_string('core/blocks/image.html', {'image': self.image})
 

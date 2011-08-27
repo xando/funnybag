@@ -47,8 +47,11 @@ class TextForm(ContentNodeForm):
 
 
 class ImageForm(ContentNodeForm):
-    image = forms.FileField(required=False, label="Image file")
-    url = forms.URLField(required=False, label="Image url")
+    image = forms.FileField(required=False, label="Image file",
+                            widget=forms.FileInput(attrs={'class':'fake'}))
+    local_file = forms.FileField(required=False, label="Image file 2",
+                                 widget=forms.HiddenInput())
+    remote_file = forms.URLField(required=False, label="Image url")
 
     class Meta(ContentNodeForm.Meta):
         model = Image
