@@ -51,7 +51,7 @@ $(function() {
 
     tagName:  "div",
     id: "record-details",
-    className: "grid_12",
+    className: "grid_12, view",
     
     template: _.template($('#record-details-template').html()),
 
