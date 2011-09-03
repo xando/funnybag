@@ -247,11 +247,7 @@ label {
     display: block;
 }
 
-#login,
-#registration,
-#record-details,
-#record-list,
-#record-new {
+#main-view div.view {
     margin-top: 100px;
 }
 

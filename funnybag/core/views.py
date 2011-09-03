@@ -29,7 +29,8 @@ def upload(request):
 
 def index(request):
     return direct_to_template(request, 'index.html',
-                              {"record_form": forms.RecordForm(),
+                              {"login_form": AuthenticationForm(),
+                               "record_form": forms.RecordForm(),
                                "block_form_list": [forms.TextForm(), forms.ImageForm()]})
 
 

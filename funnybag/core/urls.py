@@ -6,6 +6,7 @@ from funnybag.core import resources
 urlpatterns = patterns('funnybag.core.views',
                        url(r'^api/record/$', resources.RecordList.as_view()),
                        url(r'^api/record/(?P<pk>[^/]+)/$', resources.RecordDetail.as_view()),
+                       url(r'^api/user/authorization/$', resources.UserAuthorization.as_view()),
                        url(r'^upload/$', 'upload'),
 
                        (r'^$', 'main'),

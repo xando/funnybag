@@ -1,3 +1,4 @@
+
 $(function() {
   
   Record = Backbone.Model.extend({
@@ -22,7 +23,7 @@ $(function() {
 
     tagName:  "div",
     id: "record-list",
-    className: "grid_12",
+    className: "grid_12, view",
     
     template: _.template($('#record-list-template').html()),
     model: new RecordList(),
@@ -77,7 +78,7 @@ $(function() {
 
     tagName:  "div",
     id: "record-new",
-    className: "grid_12",
+    className: "grid_12, view",
     
     template: _.template($('#record-new-template').html()),
 
@@ -169,7 +170,61 @@ $(function() {
     },
     
   });
+
   
+  UserAuthorization = Backbone.Model.extend({
+    url: function() {
+      return '/api/user/authorization/'
+    },
+
+    is_authorized: function() {
+      return this.get('id') ? true : false
+    }
+  });
+
+  userAuthorization = new UserAuthorization();
+  
+  
+  UserAuthorizationView = Backbone.View.extend({
+    tagName:  "div",
+    id: "user-authorization",
+    className: "grid_12, view",
+
+    template: _.template($('#user-authorization-template').html()),
+
+    events: {
+      "submit form": "submit",
+    },
+
+    submit: function(e) {
+      e.preventDefault();
+      
+      userAuthorization.save({
+        username: this.$('[name=username]').val(),
+        password: this.$('[name=password]').val() 
+      }, {
+        success: this.success
+      });
+      
+    },
+
+    initialize: function(options) {
+      this.render();
+    },
+
+    render: function() {
+      $("#main-view").html( 
+        $(this.el).html(this.template()) 
+      );
+    },
+    
+    success: function(model, response) {
+      if( userAuthorization.is_authorized() ) {
+        window.location.hash = "";
+      }
+    }
+  });
+
 
   Router =  Backbone.Router.extend({
 
@@ -177,6 +232,7 @@ $(function() {
       "":                     "list",
       ":hash/:slug/":         "details",
       "new/":                 "create",
+      "login/":               "login",
     },
     
     list: function() {
@@ -189,6 +245,10 @@ $(function() {
 
     create: function() {
       new RecordNewView();
+    },
+
+    login: function() {
+      new UserAuthorizationView();
     }
     
   });

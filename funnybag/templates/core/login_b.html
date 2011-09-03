@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<script id="user-authorization-template" type="text/template">
+  
+  <h1>Login</h1>
+
+  <form class="form" action="/api/user/authorization/" method="post">
+    {{ login_form.username.label_tag }}
+    <div>{{ login_form.username }}</div>
+    {{ login_form.password.label_tag }}
+    <div>{{ login_form.password }}</div>
+    
+    <div style="text-align:right">
+      <input type="submit" value="login" />
+    </div>
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+
+</script>
