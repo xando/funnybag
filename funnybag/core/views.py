@@ -5,21 +5,25 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from django.contrib.auth import models as auth_models
-from django.http import HttpResponseRedirect
+from django.core.files.storage import FileSystemStorage
+from django.utils import simplejson as json
 from django.http import HttpResponse
 
-from registration import forms as registration_forms
 from funnybag.core.utils import success, failed
-from funnybag.core import models
-from funnybag.core import forms
+from funnybag.core import models, forms
 
 
 def upload(request):
-    from django.core.files.storage import default_storage
+    LOCATION =  "blocks/images"
+    fs = FileSystemStorage(location=LOCATION)
+
     file_paths = []
     for uploaded_file in request.FILES.getlist("image"):
-        file_paths.append(default_storage.save(uploaded_file.name, uploaded_file))
-    from django.utils import simplejson as json
+        file_paths.append("%s/%s" % (LOCATION,
+                                     fs.save(uploaded_file.name, uploaded_file)))
+
+
+
     return HttpResponse(json.dumps(file_paths))
 
 

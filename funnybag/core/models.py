@@ -113,7 +113,9 @@ class Image(models.Model):
 
     def __init__(self, *args, **kwargs):
         kwargs.pop('remote_file', None)
-        kwargs['image'] = kwargs.pop('local_file', None)
+        local_file = kwargs.pop('local_file', None)
+        if local_file:
+            kwargs['image'] = local_file
         super(Image, self).__init__(*args, **kwargs)
 
     def render(self):
