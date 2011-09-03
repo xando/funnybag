@@ -1,5 +1,8 @@
 {% load i18n %}
 <script id="record-new-template" type="text/template">
+  
+  <h1>New</h1>
+
   <form id="record-new-form" action="/upload/" enctype="multipart/form-data" method="post">
     {% csrf_token %}
     {{ record_form.title.label_tag }}
