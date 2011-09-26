@@ -53,6 +53,14 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_ROOT, "templates"),
 )
 
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.yahoo.YahooBackend',
+    'social_auth.backends.google.GoogleBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -73,11 +81,16 @@ INSTALLED_APPS = (
     "mptt",
     "gravatar",
     "djangorestframework",
-    "django_extensions"
+    "django_extensions",
+    'social_auth'
 )
 
 ACCOUNT_ACTIVATION_DAYS = 7
-LOGIN_REDIRECT_URL = "/"
+
+LOGIN_URL          = '/login-form/'
+LOGIN_REDIRECT_URL = '/index/'
+LOGIN_ERROR_URL    = '/login-error/'
+
 
 EMAIL_SUBJECT_PREFIX = "FunnyBag"
 

@@ -1,0 +1,68 @@
+{% load i18n %}
+<script id="user-registration-template" type="text/template">
+  
+  <div id="accordion">
+        
+    <h1><a href="#login/">Login</a></h1>
+    <div>
+      <form method="post" action="/api/user/registration/">
+
+        <label>Username</label>
+        <div><input name="username" type="text"/></div>
+        
+        <label>Email</label>
+        <div><input name="username" type="text"/></div>
+
+        <label>Password</label>
+        <div><input name="password" type="text"/></div>
+
+        <label>Retype password</label>
+        <div><input name="password2" type="text"/></div>
+
+        <div style="text-align:right">
+          <input type="submit" value="login" />
+        </div>
+      </form>
+    </div>
+    
+    <h1><a href="#registration/">Registration</a></h1>
+    <div>
+      <form method="post" action="/api/user/registration/">
+
+        <label>Username</label>
+        <div><input name="username" type="text"/></div>
+        
+        <label>Email</label>
+        <div><input name="username" type="text"/></div>
+
+        <label>Password</label>
+        <div><input name="password" type="text"/></div>
+
+        <label>Retype password</label>
+        <div><input name="password2" type="text"/></div>
+
+        <div style="text-align:right">
+          <input type="submit" value="register" />
+        </div>
+        
+      </form>
+    </div>
+    <h1><a href="#social/">Social</a></h1>
+    <div>
+      <div id="social-box" class="grid_12">
+        <ul>
+          <li><a href="/login/google/">Google</a></li>
+          <li><a href="/login/facebook/">Facebook</a></li>
+          <li><a href="/login/twitter/">Twitter</a></li>
+        </ul>
+        <ul>
+          <li><a href="/login/yahoo/">Yahoo</a></li>
+          <li><a href="/login/linkedin/">LinkedIn</a></li>
+          <li><a href="/login/github/">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    
+  </div>
+
+</div>

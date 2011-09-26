@@ -1,4 +1,3 @@
-
 $(function() {
   
   Record = Backbone.Model.extend({
@@ -226,13 +225,38 @@ $(function() {
   });
 
 
+  UserRegistrationView = Backbone.View.extend({
+    tagName:  "div",
+    id: "user-registartion",
+    className: "grid_12, view",
+
+    template: _.template($('#user-registration-template').html()),
+    
+    initialize: function(options) {
+      this.render();
+      
+      this.$( "#accordion" ).accordion({
+        navigation: true,
+      });
+    },
+
+    render: function() {
+      $("#main-view").html( 
+        $(this.el).html(this.template()) 
+      );
+    }
+
+  });
+
   Router =  Backbone.Router.extend({
 
     routes: {
       "":                     "list",
       ":hash/:slug/":         "details",
       "new/":                 "create",
-      "login/":               "login",
+      "registration/":        "account",
+      "login/":               "account",
+      "social/":              "account",
     },
     
     list: function() {
@@ -249,6 +273,10 @@ $(function() {
 
     login: function() {
       new UserAuthorizationView();
+    },
+
+    account: function() {
+      new UserRegistrationView();
     }
     
   });

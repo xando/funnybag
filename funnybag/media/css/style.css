@@ -25,15 +25,18 @@ h1 img {
     margin-right: 6px
 }
 
+h1 .sub {
+    font-size: 14px; 
+    color: #999999; 
+}
+
 #view-name {
     display:none;
 }
 
 h2 { 
-    padding-left: 125px; 
-    font-size: 66px; 
-    color: #ff5400; 
-    height: 105px; 
+    font-size: 14px; 
+    color: #999999; 
 }
 
 h2 span.sub { 
@@ -162,6 +165,7 @@ input[type=password],
 input[type=file],
 textarea {
     width: 100%;
+    display: block;
 }
 
 input, textarea {
@@ -364,4 +368,50 @@ label {
     padding: 0 80px 3px;
     border-radius: 3px;
     display: none;
+}
+
+#social-box ul {
+    list-style: none outside none;
+    float:left;
+    margin-right: 10px;
+}
+
+#social-box li {
+    border: 1px solid;
+    height: 50px;
+    width: 200px;
+    margin-bottom: 5px;
+}
+
+#social-box li a { 
+    display: block;
+    height: 50px;
+    padding: 15px 0 0 0;
+    width: 100%;
+    text-align: center;
+}
+
+
+/* jQueryUI */
+h1.ui-state-active {
+    font-weight: bold;
+    border-top: 3px solid rgba(122, 192, 0, 0.15);
+    border-left: 3px solid rgba(122, 192, 0, 0.15);
+    border-right: 3px solid rgba(122, 192, 0, 0.15);
+    border-radius: 5px 5px 0 0;
+}
+
+.ui-accordion-content {
+    border-left: 3px solid rgba(122, 192, 0, 0.15);
+    border-right: 3px solid  rgba(122, 192, 0, 0.15);
+    border-bottom: 3px solid rgba(122, 192, 0, 0.15);
+    border-radius: 0 0 5px 5px;
+}
+
+h1.ui-state-active {
+    margin-bottom: 0;
+}
+
+#accordion > div {
+    padding: 10px 10px 15px 10px;
 }
