@@ -65,6 +65,10 @@ class RecordList(View):
 
     @transaction.commit_manually
     def post(self, request, *args, **kwargs):
+        if not self.request.user.is_authenticated():
+            transaction.rollback()
+            raise ErrorResponse(status.HTTP_401_UNAUTHORIZED, "User unauthorized")
+
         from django.db.models import get_model
         from django.core.exceptions import ValidationError
 
