@@ -192,7 +192,9 @@ $(function() {
     template: _.template($('#user-authorization-template').html()),
 
     events: {
-      "submit form": "submit",
+      "submit form.login"                      : "submit",
+      "keyup form.login input[name=username]"  : "update",
+      "keyup form.login input[name=password]"  : "update"
     },
 
     submit: function(e) {
@@ -202,36 +204,19 @@ $(function() {
         username: this.$('[name=username]').val(),
         password: this.$('[name=password]').val() 
       }, {
-        success: this.success
+        success: this.login_success,
+        error: this.login_error
       });
-      
     },
 
-    initialize: function(options) {
-      this.render();
-    },
-
-    render: function() {
-      $("#main-view").html( 
-        $(this.el).html(this.template()) 
-      );
-    },
-    
-    success: function(model, response) {
-      if( userAuthorization.is_authorized() ) {
-        window.location.hash = "";
+    update: function() {
+      if(this.$('[name=username]').val() && this.$('[name=password]').val()) {
+        this.$('form.login input[type=submit]').removeClass("disabled");
+      } else {
+        this.$('form.login input[type=submit]').addClass("disabled");
       }
-    }
-  });
+    },
 
-
-  UserRegistrationView = Backbone.View.extend({
-    tagName:  "div",
-    id: "user-registartion",
-    className: "grid_12, view",
-
-    template: _.template($('#user-registration-template').html()),
-    
     initialize: function(options) {
       this.render();
       
@@ -244,8 +229,20 @@ $(function() {
       $("#main-view").html( 
         $(this.el).html(this.template()) 
       );
+    },
+    
+    login_success: function(model, data, response) {
+      if(response.status != 200) {
+        alert("user and password didn't match")
+      }
+      if( userAuthorization.is_authorized() ) {
+        window.location.hash = "";
+      }
+    },
+    
+    login_error: function() {
+      alert("login_error");
     }
-
   });
 
   Router =  Backbone.Router.extend({
@@ -254,9 +251,10 @@ $(function() {
       "":                     "list",
       ":hash/:slug/":         "details",
       "new/":                 "create",
-      "registration/":        "account",
-      "login/":               "account",
-      "social/":              "account",
+      "registration/":        "user_authorization",
+      "login/":               "user_authorization",
+      "social/":              "user_authorization",
+      "logout/":              "logout",
     },
     
     list: function() {
@@ -271,12 +269,12 @@ $(function() {
       new RecordNewView();
     },
 
-    login: function() {
-      new UserAuthorizationView();
+    logout: function() {
+      userAuthorization.destroy();
     },
 
-    account: function() {
-      new UserRegistrationView();
+    user_authorization: function() {
+      new UserAuthorizationView();
     }
     
   });

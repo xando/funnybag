@@ -1,6 +1,6 @@
 from django.db import transaction
 from django.utils.text import get_text_list
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 from djangorestframework.views import View
 from djangorestframework.resources import Resource
@@ -13,7 +13,6 @@ from funnybag.core.models import Record, RecordBlock
 class UserAuthorization(View):
 
     def post(self, request, *args, **kwargs):
-
         username = self.CONTENT.get('username')
         password = self.CONTENT.get('password')
         user = authenticate(username=username, password=password)
@@ -21,10 +20,14 @@ class UserAuthorization(View):
             login(request, user)
             return Response(status.HTTP_200_OK, user)
 
-        raise ErrorResponse(status.HTTP_203_NON_AUTHORITATIVE_INFORMATION, None)
+        return Response(status.HTTP_203_NON_AUTHORITATIVE_INFORMATION)
 
     def put(self, *args, **kwargs):
         return self.post(*args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        logout(request)
+        return Response(status.HTTP_200_OK)
 
 
 class User(Resource):

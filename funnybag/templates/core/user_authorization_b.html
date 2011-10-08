@@ -1,11 +1,11 @@
 {% load i18n %}
-<script id="user-registration-template" type="text/template">
+<script id="user-authorization-template" type="text/template">
   
   <div id="accordion">
         
     <h1><a href="#login/">Login</a></h1>
     <div>
-      <form method="post" action="/api/user/registration/">
+      <form class="login" method="post" action="/api/user/authorization/">
 
         <label>Username</label>
         <div><input name="username" type="text"/></div>
@@ -14,7 +14,7 @@
         <div><input name="password" type="text"/></div>
 
         <div style="text-align:right">
-          <input type="submit" value="login" />
+          <input class="disabled" type="submit" value="login" />
         </div>
       </form>
     </div>
