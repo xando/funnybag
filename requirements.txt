@@ -9,9 +9,7 @@ django-compressor==0.7.1
 django-extensions==0.6
 django-gravatar==0.1.0
 -e git://github.com/django-mptt/django-mptt.git@0af02a95877041b2fd6d458bd95413dc1666c321#egg=django_mptt-dev
-django-pagination==1.0.7
-django-registration==0.7
-django-social-auth==0.5.7
+django-social-auth==0.5.13
 django-tagging==0.3.1
 djangorestframework==0.2.3
 easy-thumbnails==1.0-alpha-17
