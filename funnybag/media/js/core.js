@@ -219,10 +219,6 @@ $(function() {
 
     initialize: function(options) {
       this.render();
-      
-      this.$( "#accordion" ).accordion({
-        navigation: true,
-      });
     },
 
     render: function() {
