@@ -16,26 +16,21 @@
     
     {% compress css %}
     <link href="{{ MEDIA_URL }}css/blocks.css" rel="stylesheet" type="text/css" />
-    <!-- <link href="{{ MEDIA_URL }}css/grid.css" rel="stylesheet" type="text/css" /> -->
     <link href="{{ MEDIA_URL }}css/improvedDropdown.css" rel="stylesheet" type="text/css" />
     <link href="{{ MEDIA_URL }}css/style.css" rel="stylesheet" type="text/css" />
     {% endcompress %}
 
     {% compress js %}
     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-1.6.min.js"></script> 
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-ui-1.8.13.js"></script> 
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/improvedDropDown.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery-ui-1.8.16.js"></script> 
     <script type="text/javascript" src="{{ MEDIA_URL }}js/underscore-1.1.7.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/backbone-0.5.3.js"></script>
-    <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.form-2.67.js"></script>
+    <script type="text/javascript" src="{{ MEDIA_URL }}js/improvedDropDown.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.elastic-1.6.5.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/jquery.blockUI.js"></script>
-    <!-- <script type="text/javascript" src="{{ MEDIA_URL }}js/main.js"></script> -->
     <script type="text/javascript" src="{{ MEDIA_URL }}js/core.js"></script>
     <script type="text/javascript" src="{{ MEDIA_URL }}js/adapt.js"></script>
     {% endcompress %}
-
-    {% block js-include %}{% endblock %}
 
     <!--[if IE 7]><link rel="stylesheet" href="css/ie/ie7.css" type="text/css" media="screen"><![endif]-->
     <!--[if lt IE 7]><link rel="stylesheet" href="css/ie/ie6.css" type="text/css" media="screen"><![endif]-->

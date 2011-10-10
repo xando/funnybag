@@ -38,7 +38,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
-    'pagination.middleware.PaginationMiddleware',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = ("django.contrib.auth.context_processors.auth",
@@ -73,8 +72,6 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'funnybag.core',
-    'registration',
-    'pagination',
     'easy_thumbnails',
     'tagging',
     "compressor",
