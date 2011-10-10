@@ -1,24 +1,48 @@
 {% load i18n %}
 <script id="user-authorization-template" type="text/template">
-  
-  <h1><a href="#login/">Login</a></h1>
-  <div>
-    <form class="login" method="post" action="/api/user/authorization/">
 
-      <label>Username</label>
-      <div><input name="username" type="text"/></div>
+  <div class="grid_12">
+    <h1>Login</h1>
+    <div class="grid_6 alpha clearfix">
+      <form class="login" method="post" action="/api/user/authorization/">
 
-      <label>Password</label>
-      <div><input name="password" type="text"/></div>
+        <label>Username</label>
+        <div><input name="username" type="text"/></div>
 
-      <div style="text-align:right">
-        <input class="disabled" type="submit" value="login" />
+        <label>Password</label>
+        <div><input name="password" type="text"/></div>
+
+        <div style="text-align:right">
+          <input class="disabled" type="submit" value="login" />
+        </div>
+      </form>
+    </div>
+    
+    <div class="grid_1 omega clearfix">
+      <div class="or">
+        or
       </div>
-    </form>
+    </div>
+    
+    <div class="grid_5 omega clearfix">
+      
+      <div id="social-box">
+        <ul>
+          <li><a href="/login/google/">Google</a></li>
+          <li><a href="/login/facebook/">Facebook</a></li>
+          <li><a href="/login/twitter/">Twitter</a></li>
+        </ul>
+        <ul>
+          <li><a href="/login/yahoo/">Yahoo</a></li>
+          <li><a href="/login/linkedin/">LinkedIn</a></li>
+          <li><a href="/login/github/">GitHub</a></li>
+        </ul>
+      </div>
+    </div>
   </div>
-  
-  <h1><a href="#registration/">Registration</a></h1>
-  <div>
+
+  <div class="grid_12">
+    <h1>Registration</h1>
     <form method="post" action="/api/user/registration/">
 
       <label>Username</label>
@@ -38,21 +62,6 @@
       </div>
       
     </form>
-  </div>
-  <h1><a href="#social/">Social</a></h1>
-  <div>
-    <div id="social-box" class="grid_12">
-      <ul>
-        <li><a href="/login/google/">Google</a></li>
-        <li><a href="/login/facebook/">Facebook</a></li>
-        <li><a href="/login/twitter/">Twitter</a></li>
-      </ul>
-      <ul>
-        <li><a href="/login/yahoo/">Yahoo</a></li>
-        <li><a href="/login/linkedin/">LinkedIn</a></li>
-        <li><a href="/login/github/">GitHub</a></li>
-      </ul>
-    </div>
   </div>
   
 </div>

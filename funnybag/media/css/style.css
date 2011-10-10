@@ -379,6 +379,20 @@ label {
     display: none;
 }
 
+#social-box {
+    display: inline-block;
+    margin: 0 auto;
+    padding-top: 8px;
+}
+
+.or {
+    color: #CCCCCC;
+    font-size: 42px;
+    padding-top: 50px;
+    text-align: center;
+    text-shadow: 4px 2px 2px #EEEEEE;
+}
+
 #social-box ul {
     list-style: none outside none;
     float:left;
@@ -388,7 +402,7 @@ label {
 #social-box li {
     border: 1px solid;
     height: 50px;
-    width: 200px;
+    width: 150px;
     margin-bottom: 5px;
 }
 
