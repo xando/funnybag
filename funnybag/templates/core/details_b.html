@@ -17,7 +17,9 @@
   <% }); %>
 
   <div class="grid_6 alpha">
-    <%= created_time %> by
+    <span class="time-stamp"><%= created_time_simple %></span>
+    <span class="time-stamp hidden"><%= created_time %></span>
+    by
     <a href="#a/<%= created_by.username %>"><%= created_by.username %></a>
   </div>
   <div class="grid_6 omega" style="text-align:right">

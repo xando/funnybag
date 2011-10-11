@@ -27,6 +27,14 @@ $(function() {
     template: _.template($('#record-list-template').html()),
     model: new RecordList(),
 
+    events: {
+      "click .time-stamp": "switch_timestamp_format"
+    },
+    
+    switch_timestamp_format: function(e) {
+      $(e.target).parent().find('.time-stamp').toggleClass('hidden');
+    },
+
     initialize: function() {
       
       self = this;
@@ -51,9 +59,17 @@ $(function() {
     tagName:  "div",
     id: "record-details",
     className: "grid_12, view",
-    
+
     template: _.template($('#record-details-template').html()),
 
+    events: {
+      "click .time-stamp": "switch_timestamp_format"
+    },
+    
+    switch_timestamp_format: function(e) {
+      $(this.el).find('.time-stamp').toggleClass('hidden');
+    },
+    
     initialize: function(options) {
       self = this;
       model = new Record({id:options.hash})

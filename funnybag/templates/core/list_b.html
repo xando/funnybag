@@ -7,7 +7,9 @@
       <a href="#<%= record.id %>/<%= record.slug %>/"><%= record.title %></a>
     </h1>
     <div class="grid_6 alpha">
-      <%= record.created_time %> by
+      <span class="time-stamp"><%= record.created_time_simple %></span>
+      <span class="time-stamp hidden"><%= record.created_time %></span>
+      by
       <a href="#a/<%= record.created_by.username %>"><%= record.created_by.username %></a>
     </div>
     <div class="grid_6 omega" style="text-align:right">

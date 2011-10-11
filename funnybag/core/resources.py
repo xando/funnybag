@@ -53,7 +53,8 @@ class BlockResource(Resource):
 
 
 class RecordResource(Resource):
-    fields = ("id", "title", "slug", "tags", "created_time", "modified_time", "blocks",
+    fields = ("id", "title", "slug", "tags", "created_time",
+              "created_time_simple", "modified_time", "blocks",
               ("created_by","User"), ("parent", ["id"]), ("blocks", "BlockResource"))
 
 

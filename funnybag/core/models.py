@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pygments.lexers import get_all_lexers, get_lexer_by_name
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
@@ -12,7 +14,7 @@ from django.utils.safestring import mark_safe
 from django.core.exceptions import ValidationError
 from django.template import Context, loader
 from django.template.loader import render_to_string
-from django.template.defaultfilters import slugify
+from django.template.defaultfilters import slugify, pluralize
 
 
 class Record(MPTTModel):
@@ -29,6 +31,26 @@ class Record(MPTTModel):
 
     class Meta:
         ordering = ['-created_time']
+
+    @property
+    def created_time_simple(self):
+        delta = datetime.now() - self.created_time
+
+        days = delta.days
+        hours = delta.seconds / 60 / 60
+        minutes = delta.seconds / 60
+        seconds = delta.seconds
+
+        if days:
+            delta_units = (days, "day")
+        elif hours:
+            delta_units = (hours, "hour")
+        elif minutes:
+            delta_units = (minutes, "minute")
+        else:
+            delta_units = (seconds, "second")
+
+        return "%s %s%s ago" % (delta_units[0], delta_units[1], pluralize(delta_units[0]))
 
     def get_absolute_url(self):
         return "#%s/%s/" % (self.slug, self.id)
