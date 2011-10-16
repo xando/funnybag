@@ -3,45 +3,46 @@
 
   <div class="grid_12">
     <h1>Login</h1>
-    <div class="grid_6 alpha clearfix">
-      <form class="login" method="post" action="/api/user/authorization/">
+    <form class="login" method="post" action="/api/user/authorization/">
 
-        <label>Username</label>
-        <div><input name="username" type="text"/></div>
+      <label>Username</label>
+      <div><input name="username" type="text"/></div>
 
-        <label>Password</label>
-        <div><input name="password" type="text"/></div>
+      <label>Password</label>
+      <div><input name="password" type="text"/></div>
 
-        <div style="text-align:right">
-          <input class="disabled" type="submit" value="login" />
-        </div>
-      </form>
-    </div>
-    
-    <div class="grid_1 omega clearfix">
-      <div class="or">
-        or
+      <div style="text-align:right">
+        <span style="font-size: 17px">
+          Don't have an user account? Go to 
+          <a class="scroll_to_registration" href="#register/">registration!</a>
+        </span>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <input class="disabled" type="submit" value="login" />
       </div>
+    </form>
+  </div>
+  
+  <div class="grid_12">
+    <div class="or">
+      or
     </div>
+  </div>
     
-    <div class="grid_5 omega clearfix">
-      
-      <div id="social-box">
-        <ul>
-          <li><a href="/login/google/">Google</a></li>
-          <li><a href="/login/facebook/">Facebook</a></li>
-          <li><a href="/login/twitter/">Twitter</a></li>
-        </ul>
-        <ul>
-          <li><a href="/login/yahoo/">Yahoo</a></li>
-          <li><a href="/login/linkedin/">LinkedIn</a></li>
-          <li><a href="/login/github/">GitHub</a></li>
-        </ul>
-      </div>
+  <div class="grid_12" style="text-align:center;">
+    <div id="social-box">
+      <div class="background"></div>
+      <ul>
+        <li class="google"><a href="/login/google/">&nbsp;</a></li>
+        <li class="facebook"><a href="/login/facebook/">&nbsp;</a></li>
+      </ul>
+      <ul>
+        <li class="twitter"><a href="/login/yahoo/">&nbsp;</a></li>
+        <li class="twitter"><a href="/login/twitter/">&nbsp;</a></li>
+      </ul>
     </div>
   </div>
 
-  <div class="grid_12">
+  <div class="grid_12 register">
     <h1>Registration</h1>
     <form method="post" action="/api/user/registration/">
 

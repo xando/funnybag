@@ -387,18 +387,31 @@ label {
     display: none;
 }
 
+.or {
+    color: #CCCCCC;
+    font-size: 42px;
+    padding: 5px 0 15px 0;
+    text-align: center;
+    text-shadow: 4px 2px 2px #EEEEEE;
+}
+
 #social-box {
     display: inline-block;
     margin: 0 auto;
     padding-top: 8px;
+    position: relative;
+    margin-bottom: 400px;
 }
 
-.or {
-    color: #CCCCCC;
-    font-size: 42px;
-    padding-top: 50px;
-    text-align: center;
-    text-shadow: 4px 2px 2px #EEEEEE;
+#social-box .background {
+    background: url("../images/social_buttons/openid-large.png") no-repeat scroll 0 0 transparent;
+    height: 213px;
+    left: -221px;
+    opacity: 0.4;
+    position: absolute;
+    top: -14px;
+    width: 289px;
+    z-index: -1;
 }
 
 #social-box ul {
@@ -408,10 +421,24 @@ label {
 }
 
 #social-box li {
-    border: 1px solid;
-    height: 50px;
-    width: 150px;
+    /* border: 1px solid; */
+    height: 85px;
+    width: 238px;
     margin-bottom: 5px;
+
+}
+
+#social-box li.google { 
+    /* z-index: 100; */
+    background: url("../images/social_buttons/256/googlebuzz.png") -11px -19px;
+}
+
+#social-box li.facebook { 
+    background: url("../images/social_buttons/256/facebook.png") -11px -19px;
+}
+
+#social-box li.twitter { 
+    background: url("../images/social_buttons/256/twitter.png") -11px -19px;
 }
 
 #social-box li a { 
@@ -422,6 +449,9 @@ label {
     text-align: center;
 }
 
+.register {
+    margin-bottom:460px
+}
 
 /* jQueryUI */
 h1.ui-state-active {

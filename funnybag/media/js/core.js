@@ -36,7 +36,7 @@ $(function() {
     },
 
     initialize: function() {
-      
+      $('body').css("overflow-y", "auto");
       self = this;
       this.model.fetch({
         success: function() {
@@ -210,7 +210,12 @@ $(function() {
     events: {
       "submit form.login"                      : "submit",
       "keyup form.login input[name=username]"  : "update",
-      "keyup form.login input[name=password]"  : "update"
+      "keyup form.login input[name=password]"  : "update",
+      "click .scroll_to_registration"          : "scroll_to_registration"
+    },
+
+    scroll_to_registration: function(e) {
+      $.scrollTo('.register', 600, {offset:-100});
     },
 
     submit: function(e) {
@@ -233,8 +238,15 @@ $(function() {
       }
     },
 
-    initialize: function(options) {
+    initialize: function(sub_view) {
       this.render();
+      $('body').css("overflow-y", "hidden");
+      if (sub_view == "register" ) {
+        $.scrollTo('.register', 0, {offset:-100});
+      }
+      if (sub_view == "login" ) {
+        $.scrollTo(0, 0);
+      }
     },
 
     render: function() {
@@ -263,9 +275,8 @@ $(function() {
       "":                     "list",
       ":hash/:slug/":         "details",
       "new/":                 "create",
-      "registration/":        "user_authorization",
-      "login/":               "user_authorization",
-      "social/":              "user_authorization",
+      "register/":            "register",
+      "login/":               "login",
       "logout/":              "logout",
     },
     
@@ -285,10 +296,14 @@ $(function() {
       userAuthorization.destroy();
     },
 
-    user_authorization: function() {
-      new UserAuthorizationView();
-    }
+    login: function() {
+      new UserAuthorizationView("login");
+    },
     
+    register: function() {
+      new UserAuthorizationView("register");
+    }
+
   });
   new Router();
   
