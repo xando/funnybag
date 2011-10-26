@@ -10,7 +10,12 @@ try:
 except KeyError:
     virtualenv = os.path.join(os.path.dirname(__file__),
                                           "../.virtualenv/bin/activate_this.py")
-    execfile(virtualenv, dict(__file__=virtualenv))
+
+    try:
+        execfile(virtualenv, dict(__file__=virtualenv))
+    except IOError:
+        print "Hmm ... I guess that you forgot about virtualenv. Its is so sad."
+        sys.exit()
 
 
 from django.core.management import execute_manager
