@@ -398,7 +398,7 @@ label {
 #social-box {
     display: inline-block;
     margin: 0 auto;
-    padding-top: 8px;
+    padding-top: 20px;
     position: relative;
     margin-bottom: 400px;
 }
@@ -406,7 +406,7 @@ label {
 #social-box .background {
     background: url("../images/social_buttons/openid-large.png") no-repeat scroll 0 0 transparent;
     height: 213px;
-    left: -221px;
+    left: 175px;
     opacity: 0.4;
     position: absolute;
     top: -14px;
@@ -417,37 +417,55 @@ label {
 #social-box ul {
     list-style: none outside none;
     float:left;
-    margin-right: 10px;
+    margin: 0 42px 0 29px;
 }
 
 #social-box li {
-    /* border: 1px solid; */
-    height: 85px;
-    width: 238px;
-    margin-bottom: 5px;
-
+    height: 52px;
+    width: 220px;
+    margin-bottom: 35px;
 }
 
-#social-box li.google { 
-    /* z-index: 100; */
-    background: url("../images/social_buttons/256/googlebuzz.png") -11px -19px;
+#social-box .icon {
+    height: 52px;
+    width: 52px;
+    float: left;
 }
 
-#social-box li.facebook { 
-    background: url("../images/social_buttons/256/facebook.png") -11px -19px;
+#social-box .text {
+    font-size: 25px;
+    padding: 10px 65px;
 }
 
-#social-box li.twitter { 
-    background: url("../images/social_buttons/256/twitter.png") -11px -19px;
+#social-box .google .icon { 
+    background: url("../images/openid.jpg") 222px -95px;
+}
+
+#social-box .facebook .icon {
+    background: url("../images/openid.jpg") -93px -20px;
+}
+
+#social-box .twitter .icon { 
+    background: url("../images/openid.jpg") -18px -21px;
+}
+
+#social-box .yahoo .icon { 
+    background: url("../images/openid.jpg") 147px -95px;
 }
 
 #social-box li a { 
     display: block;
     height: 50px;
-    padding: 15px 0 0 0;
     width: 100%;
-    text-align: center;
+    border-radius: 7px;
+    border: 3px solid rgba(122, 192, 0, 0.15);
+    padding: 4px;
 }
+
+#social-box li a:hover { 
+    opacity: 0.7;
+}
+
 
 .register {
     margin-bottom:460px
