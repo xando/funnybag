@@ -54,11 +54,27 @@ $(function() {
     });
 
 
+
+    RecordResponsesView = Backbone.View.extend({
+
+	tagName: "div",
+	id: "record-responses",
+
+	template: _.template($('#record-responses-template').html()),
+
+	render: function() {
+	    $(this.el).html(this.template());
+	    return this;
+	}
+
+    });
+
+
     RecordDetailsView = Backbone.View.extend({
 
 	tagName:  "div",
 	id: "record-details",
-	className: "grid_12, view",
+	className: "grid_12 view",
 
 	template: _.template($('#record-details-template').html()),
 
@@ -84,9 +100,13 @@ $(function() {
 	    $("#main-view").html(
 		$(this.el).html(this.template(model.toJSON()))
 	    );
+
+	    var responses_view = new RecordResponsesView();
+	    $(this.el).after(responses_view.render().el);
 	},
 
     });
+
 
 
     RecordNewView = Backbone.View.extend({
