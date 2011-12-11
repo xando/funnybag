@@ -1,345 +1,332 @@
-$(function(){
+$(function() {
 
-  var Notyfication = Backbone.View.extend({
-    el: $("#notyfication"),
-    
-    initialize: function() {
-    },
-    
-    show: function(text, time) {
-      var $self = $(this.el);
-      $self
-        .text(text)
-        .position({
-          of: $("#header"),
-          my: "center top",
-          at: "center bottom",
-          offset: "0px 12px",
-        }).show();
-      setTimeout(function() {
-        $self.hide("slide", { direction: "up" }, 500);
-      }, 6000);
-    },
-  });
-  notyfication = new Notyfication();
-
-  $(".back-button").live("click", function(){
-    window.history.go(-1);
-    return false;
-  })
-
-  $(".block-form input, .block-form textarea")
-    .live("focus", function() {
-      $(this).parents(".block-form").addClass("focus");
-    })
-    .live("blur", function() {
-      $(this).parents(".block-form").removeClass("focus");
+    Record = Backbone.Model.extend({
+	url : function(){
+	    if( this.get('id') ) {
+		return '/api/record/' + this.get('id') + '/';
+	    }
+	    return '/api/record/';
+	}
     });
 
-  _.templateSettings = {
-    interpolate : /\_\_(.+?)\_\_/g
-  };
-    
-  var NewView = Backbone.View.extend({
-    el: $(".main-view"),
 
-    events: {
-      "click .add-link": "add_block",
-      "click .block-form .remove": "remove_block"
-    },
-    
+    RecordList = Backbone.Collection.extend({
+	model: Record,
+	url : function(){
+	    return '/api/record/'
+	}
+    });
 
-    add_block: function(e) {
-      var type = $(e.target).attr('name');
-      var template = _.template($('#'+ type + '-template').html());
-      $('.block-panel').append( template({'prefix' : $('.block-form.'+ type).length }) );
-      $('label[for$=DELETE],input[id$=DELETE]').hide();
-      $('#id_'+ type +'-TOTAL_FORMS').val( $('.block-form.'+ type).length );
-      $('input[name$=sequence]').each( function(i) {
-        $(this).val(i);
-      });
 
-      $('.block-form textarea').elastic();
-      
-      $('.block-form.code select[name$="language"]').each(function() {
-        if( $("#"+$(this).attr("id")+"_iddtext").length < 1) {
-          $(this).improveDropDown();
-          $('.idd_textbox').focus(function() {
-            $(this).val("");
-          });
-        }
-      });
+    RecordListView = Backbone.View.extend({
 
-      $('.block-panel').sortable({
-        placeholder: "block-form-placeholder",
-        start: function(event, ui) {
-          ui.placeholder.height( ui.item.height() );
-          ui.item.toggleClass("block-form-onmove");
-        },
-        stop: function(event, ui) {
-          ui.item.toggleClass("block-form-onmove");
-          $('input[name$=sequence]').each( function(i) {
-            $(this).val(i);
-          });
-        }
-      });
-    },
-    
-    remove_block: function(e) {
-      var type = $(e.target).parent().attr('name');
-      $('#id_'+ type +'-TOTAL_FORMS').val( $('.block-form.'+ type).length - 1 );
-      $(e.target).parent('.block-form').find('input[name$=DELETE]').attr("checked", true);
-      $(e.target).parent('.block-form').hide(300).remove();
-      $('input[name$=sequence]').each( function(i) {
-        $(this).val(i);
-      });
-      
-      $('.block-form.'+type).each( function(i) {
-        $(this).find('[id^=id_]').map( function() {
-          $(this).attr("name", $(this).attr("name").replace(/\d+/, i));
-          $(this).attr("id", $(this).attr("id").replace(/\d+/, i));
-        });
-      });
-    },
-    
-    render: function() {
-      $(this.el)
-        .hide()
-        .load('/ajax/new/', function(response) {
-          $(this).fadeIn();
-          $('#logo-view').text($('#view-name').text()+"@");
-          try {
-            var response = jQuery.parseJSON(response);
-            if (!response.success) {
-              document.location.hash = "#login/new";
-              return false;
-            }
-          } catch(error) {}
-          
-          $('#new-record-form').ajaxForm({
-            iframe: true,
-            beforeSubmit: function() {
-              block = true;
-              setTimeout(function() { 
-                if (block) {
-                  $.blockUI({ css: { 
-                    border: 'none', 
-                    padding: '15px', 
-                    backgroundColor: '#000', 
-                    '-webkit-border-radius': '10px', 
-                    '-moz-border-radius': '10px', 
-                    opacity: .5, 
-                    color: '#fff' 
-                  } });
-                }
-              }, 500); 
-            },
-            success: function(response, statusText, xhr, $form)  { 
-              block = false;
-              $.unblockUI();
-              var response = jQuery.parseJSON(response);
-              $("#new-record-form")
-                .find(".errors").remove().end()
-                .find("input[type!=submit],textarea").css("background", "white").end()
+	tagName:  "div",
+	id: "record-list",
+	className: "grid_12, view",
 
-              
-              if(response.success) {
-                document.location.hash = "#";
-              } else {
-                $.each(response.data, function(name, message) {
-                  if( /__all__$/.test(name)) {
-                    $("#"+name.replace("-__all__", ""))
-                      .css("border", "3px solid #FF9933")
-                      .prepend("<div style='text-align: center' class='errors'>"+message+"</span>");
-                  } else {
-                    $("#id_"+name).css("background", "#ffddaa");
-                    $("label[for=id_"+name+"]").append(" <span class='errors'>"+message+"</span>");
-                  }
-                });
-              }
-            },
-          }); 
-          
-          $(this).fadeIn();
-        })
-        
-      return this;
-    }
-  });    
+	template: _.template($('#record-list-template').html()),
+	model: new RecordList(),
 
-  var DetailsView = Backbone.View.extend({
-    el: $(".main-view"),
-    
-    render: function(hash) {
-      $(this.el)
-        .hide()
-        .load('/ajax/details/'+ hash +'/', function() {
-          $(this).fadeIn();
+	events: {
+	    "click .time-stamp": "switch_timestamp_format"
+	},
 
-          $("#record-responses").load('/ajax/responses/'+ hash +'/');
+	switch_timestamp_format: function(e) {
+	    $(e.target).parent().find('.time-stamp').toggleClass('hidden');
+	},
 
-          $("#response-form").ajaxForm({
-            success: function(response, statusText, xhr, $form)  { 
-              console.log(response);
-              response = jQuery.parseJSON(response);
-              if (response.success) {
-                $("#record-responses").load('/ajax/responses/'+ hash +'/');
-              }
-            }
-          });
-        });
-    }
-  });
-  
-  var LoginView = Backbone.View.extend({
-    el: $(".main-view"),
-    next: "#",
-    
-    initialize: function(next) {
-      if (next) {
-        this.next = "#"+next;
-      }
-    },
+	initialize: function() {
+	    $('body').css("overflow-y", "auto");
+	    self = this;
+	    this.model.fetch({
+		success: function() {
+		    self.render();
+		}
+	    });
+	},
 
-    render: function() {
-      var next = this.next;
-      $('.main-view').hide().load('/ajax/login/', function() { 
-        $(this).fadeIn();
+	render: function() {
+	    $("#main-view").html(
+		$(this.el).html(this.template({record_list :this.model.toJSON()}))
+	    );
+	},
 
-        $('#logo-view').text($('#view-name').text()+"@");
-        $('#id_username').focus();
-        
-        $("#login-form").ajaxForm({
-          success: function(response, statusText, xhr, $form)  { 
-            response = jQuery.parseJSON(response);
-            $("#login-form").find(".errors").remove();
-            $("#login-form").find("input[type!=submit]").css("background", "white"); 
-            if (response.success) {
-              if ( next == "#") {
-                document.location.hash = "#a/" + response.data.username;
-              } else {
-                document.location.hash = next;
-              }
-              $( "#username").text(response.data.username);
-              $( ".userprofile").show("slide", { direction: "up" }, 700);
-            } else {
-              $.each(response.data, function(name, message) {
-                if(name == "__all__") {
-                  $("#login-form fieldset").prepend("<span class='errors'>"+message+"</span>");
-                } else {
-                  $("#id_"+name).css("background", "#ffddaa");
-                  $("label[for=id_"+name+"]").append(" <span class='errors'>"+message+"</span>");
-                }
-              });
-            }
-          },
-        }); 
-      });
-    }
-  });
+    });
 
-  var RegistrationView = Backbone.View.extend({
-    el: $(".main-view"),
-    
-    render: function() {
-      $(".main-view").hide().load('/ajax/registration/', function() {
-        $(this).fadeIn();
-        
-        $('#logo-view').text($('#view-name').text()+"@");
-        
-        $("#registration-form").ajaxForm({
-          success: function(response, statusText, xhr, $form)  { 
-            response = jQuery.parseJSON(response);
-            $("#registration-form").find(".errors").remove();
-            $("#registration-form").find("input[type!=submit]").css("background", "white"); 
-            if (response.success) {
-              document.location.hash = "#login";
-              notyfication.show("You account was just created. Please login.");
-            } else {
-              $.each(response.data, function(name, message) {
-                if(name == "__all__") {
-                  $("#login-form fieldset").prepend(" <span class='errors'>"+message+"</span>");
-                } else {
-                  $("#id_"+name).css("background", "#ffddaa");
-                  $("label[for=id_"+name+"]").append(" <span class='errors'>"+message+"</span>");
-                }
-              });
-            }
-            
-          },
-        }); 
-      });
-    }
-    
-  });
-    
-  Workspace = Backbone.Controller.extend({
 
-    routes: {
-      "": "list",
-      "t/:tag" : "tag",
-      "a/:author" : "author",
-      "new/:type" : "new",
-      "new" : "new",
-      "login" : "login",
-      "login/*next" : "login",
-      "logout" : "logout",
-      "registration" : "registration",
-      ":title/:hash/" : "details",
-      ":hash/" : "details",
-    },
 
-    list: function() {
-      $('.main-view').hide()
-        .load('/ajax/list/', function() { 
-          $(this).fadeIn(); 
-          $('#logo-view').text($('#view-name').text()+"@");
-        });
-    },
-    
-    tag: function(tag) {
-      $('.main-view').hide()
-        .load('/ajax/list/tag/'+tag, function() { 
-          $(this).fadeIn(); 
-          $('#logo-view').text($('#view-name').text()+"@");
-        });
-    },
+    RecordResponsesView = Backbone.View.extend({
 
-    author: function(author) {
-      $('.main-view').hide()
-        .load('/ajax/list/author/'+author, function() { 
-          $(this).fadeIn(); 
-          $('#logo-view').text($('#view-name').text()+"@");
-        });
-    },
+	tagName: "div",
+	id: "record-responses",
 
-    new: function() {
-      new NewView().render();
-    },
+	template: _.template($('#record-responses-template').html()),
 
-    login: function(next) {
-      new LoginView(next).render();
-    },
+	render: function() {
+	    $(this.el).html(this.template());
+	    return this;
+	}
 
-    logout: function() {
-      $.get('ajax/logout/', function(response) {
-        document.location.hash = "#";
-        $(".userprofile").hide("slide", { direction: "up" }, 700);
-        $("#username").text("");
-      });
-    },
-    
-    registration: function() {
-      new RegistrationView().render();
-    },
-    
-    details: function(first, second){
-      hash = second ? second : first;
-      new DetailsView().render(hash);
-    },
+    });
 
-  });
-  
-  new Workspace();
-  Backbone.history.start();
-});
+
+    RecordDetailsView = Backbone.View.extend({
+
+	tagName:  "div",
+	id: "record-details",
+	className: "grid_12 view",
+
+	template: _.template($('#record-details-template').html()),
+
+	events: {
+	    "click .time-stamp": "switch_timestamp_format"
+	},
+
+	switch_timestamp_format: function(e) {
+	    $(this.el).find('.time-stamp').toggleClass('hidden');
+	},
+
+	initialize: function(options) {
+	    self = this;
+	    model = new Record({id:options.hash})
+	    model.fetch({
+		success: function() {
+		    self.render();
+		}
+	    });
+	},
+
+	render: function() {
+	    $("#main-view").html(
+		$(this.el).html(this.template(model.toJSON()))
+	    );
+
+	    var responses_view = new RecordResponsesView();
+	    $(this.el).after(responses_view.render().el);
+	},
+
+    });
+
+
+
+    RecordNewView = Backbone.View.extend({
+
+	tagName:  "div",
+	id: "record-new",
+	className: "grid_12, view",
+
+	template: _.template($('#record-new-template').html()),
+
+	events: {
+	    "submit form": "submit",
+	    "click .add-block-button": "add_block"
+	},
+
+	initialize: function(options) {
+	    this.render();
+	},
+
+	submit: function(e) {
+	    var self = this;
+	    e.preventDefault();
+	    $('#record-new-form').ajaxForm({
+		beforeSubmit: function(arr, $form, options) {
+		    arr = _.filter(arr, function(element) {
+			return element.name == 'image' || element.name == 'csrfmiddlewaretoken';
+		    });
+		},
+		success: function(response, statusText, xhr, jQ) {
+		    var local_files = jQuery.parseJSON(response);
+		    $(self.el).find("input[name=local_file]").each(
+			function(i) {
+			    $(this).val(local_files[i]);
+			}
+		    );
+		    self.save();
+		}
+	    });
+	},
+
+	save: function() {
+	    var blocks = [];
+	    $('.block-form').each(function(){
+		var block = {};
+		var data = {};
+		$(this).find('input,textarea').not('.fake').each( function() {
+		    data[$(this).attr("name")] = $(this).val();
+		});
+
+		block["type"] = $(this).attr("name");
+		block["data"] = data;
+		blocks.push(block);
+	    });
+
+	    var new_model = new Record({
+		title: $(this.el).find("input[name=title]").val(),
+		tags: $(this.el).find("input[name=tags]").val(),
+		blocks: blocks
+	    });
+
+	    var self = this;
+	    new_model.save(null, {
+		success: function(model, response, xhr){
+		    self.hide_errors();
+		    if (model.isNew()) {
+			self.show_errors(response);
+		    } else {
+			window.location = "#" + model.get("id") + "/" + model.get("slug") + "/";
+		    }
+		}
+	    });
+	},
+
+	show_errors: function(response) {
+	    _.each(response[0], function(errors, field) {
+		$("input[name="+ field  +"]").css("border", "3px solid #FF9933");
+		$("label[for=id_"+ field +"]").append("<span class='errors'>: " + errors + "</span>");
+	    });
+	},
+
+	hide_errors: function() {
+	    $("input").css("border", "3px solid rgba(122, 192, 0, 0.15)");
+	    $("label .errors").remove();
+	},
+
+	add_block: function(e) {
+	    var block_name = $(e.target).attr("name");
+	    var block_template = _.template($("#" + block_name + "-block-new-template").html());
+	    $('.add-block').before(block_template());
+	},
+
+	render: function() {
+	    $("#main-view").html(
+		$(this.el).html(this.template())
+	    );
+	},
+
+    });
+
+
+    UserAuthorization = Backbone.Model.extend({
+	url: function() {
+	    return '/api/user/authorization/'
+	},
+
+	is_authorized: function() {
+	    return this.get('id') ? true : false
+	}
+    });
+
+    userAuthorization = new UserAuthorization();
+
+
+    UserAuthorizationView = Backbone.View.extend({
+	tagName:  "div",
+	id: "user-authorization",
+	className: "grid_12, view",
+
+	template: _.template($('#user-authorization-template').html()),
+
+	events: {
+	    "submit form.login"                      : "submit",
+	    "keyup form.login input[name=username]"  : "update",
+	    "keyup form.login input[name=password]"  : "update",
+	    "click .scroll_to_registration"          : "scroll_to_registration"
+	},
+
+	scroll_to_registration: function(e) {
+	    $.scrollTo('.register', 600, {offset:-100});
+	},
+
+	submit: function(e) {
+	    e.preventDefault();
+
+	    userAuthorization.save({
+		username: this.$('[name=username]').val(),
+		password: this.$('[name=password]').val()
+	    }, {
+		success: this.login_success,
+		error: this.login_error
+	    });
+	},
+
+	update: function() {
+	    if(this.$('[name=username]').val() && this.$('[name=password]').val()) {
+		this.$('form.login input[type=submit]').removeClass("disabled");
+	    } else {
+		this.$('form.login input[type=submit]').addClass("disabled");
+	    }
+	},
+
+	initialize: function(sub_view) {
+	    this.render();
+	    $('body').css("overflow-y", "hidden");
+	    if (sub_view == "register" ) {
+		$.scrollTo('.register', 0, {offset:-100});
+	    }
+	    if (sub_view == "login" ) {
+		$.scrollTo(0, 0);
+	    }
+	},
+
+	render: function() {
+	    $("#main-view").html(
+		$(this.el).html(this.template())
+	    );
+	},
+
+	login_success: function(model, data, response) {
+	    if(response.status != 200) {
+		alert("user and password didn't match")
+	    }
+	    if( userAuthorization.is_authorized() ) {
+		window.location.hash = "";
+	    }
+	},
+
+	login_error: function() {
+	    alert("login_error");
+	}
+    });
+
+    Router =  Backbone.Router.extend({
+
+	routes: {
+	    "":                     "list",
+	    ":hash/:slug/":         "details",
+	    "new/":                 "create",
+	    "register/":            "register",
+	    "login/":               "login",
+	    "logout/":              "logout",
+	},
+
+	list: function() {
+	    new RecordListView();
+	},
+
+	details: function(hash, slug) {
+	    new RecordDetailsView({hash: hash});
+	},
+
+	create: function() {
+	    new RecordNewView();
+	},
+
+	logout: function() {
+	    userAuthorization.destroy();
+	},
+
+	login: function() {
+	    new UserAuthorizationView("login");
+	},
+
+	register: function() {
+	    new UserAuthorizationView("register");
+	}
+
+    });
+    new Router();
+
+    Backbone.history.start();
+
+})
