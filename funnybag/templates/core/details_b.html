@@ -1,13 +1,13 @@
 <script id="record-details-template" type="text/template">
   <h1>
-    <img width="40" height="40" 
+    <img width="40" height="40"
          src="http://www.gravatar.com/avatar/<%= created_by.gravatar %>/?default=&amp;amp;s=40">
     <%= title %>
   </h1>
-  
-  <% _.each(blocks, function(block) { 
-     block_template = _.template($('#' + block.type + '-block-template').html()); %> 
-  
+
+  <% _.each(blocks, function(block) {
+     block_template = _.template($('#' + block.type + '-block-template').html()); %>
+
   <div class="grid_12 alpha omega details clearfix">
     <div class="<%= block.type %> block">
       <%= block_template({data: block.data}) %>
@@ -34,4 +34,10 @@
 
 <script id="text-block-template" type="text/template">
   <%= data.text %>
+</script>
+
+<script id="record-responses-template" type="text/template">
+  <div class="grid_12">
+    Responses
+  </div>
 </script>
